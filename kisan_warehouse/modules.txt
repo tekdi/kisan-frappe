@@ -1,1 +1,10 @@
 Kisan Warehouse
+company
+products
+warehouses
+customers
+brokers
+vehicles
+saudas
+inwards
+settings
