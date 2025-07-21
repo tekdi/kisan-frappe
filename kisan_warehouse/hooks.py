@@ -5,6 +5,16 @@ app_description = "KisanMitra Warehouse Management System"
 app_email = "deepak_p@tekditechnologies.com"
 app_license = "mit"
 
+# Export Fixtures
+fixtures = [
+    {
+        "dt": "DocType", 
+        "filters": [
+            ["name", "in", ["Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", "Sauda", "Inward", "Inward Deduction", "App Settings", "Settings Deduction Type"]]
+        ]
+    }
+]
+
 # Apps
 # ------------------
 
