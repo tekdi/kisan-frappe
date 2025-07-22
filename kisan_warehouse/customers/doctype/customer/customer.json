@@ -137,6 +137,7 @@
    "label": "Aadhar Verified?"
   },
   {
+   "default": "Today",
    "fieldname": "aadhar_verified_date",
    "fieldtype": "Date",
    "label": "Aadhar Verified On"
@@ -153,6 +154,7 @@
    "label": "GSTIN Verified?"
   },
   {
+   "default": "Today",
    "fieldname": "gstin_verified_date",
    "fieldtype": "Date",
    "label": "GSTIN Verified On"
@@ -204,7 +206,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 13:15:55.868736",
+ "modified": "2025-07-22 14:56:55.933364",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",

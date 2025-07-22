@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-07-22 14:07:21.579293",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ydx1",
+  "amended_from",
+  "naming_series",
+  "booking_date",
+  "customer",
+  "product",
+  "warehouse",
+  "broker",
+  "expected_quantity",
+  "rate_per_ton",
+  "total_amount",
+  "booking_amount",
+  "delivery_duration",
+  "payment_duration",
+  "delivery_end_date",
+  "payment_end_date",
+  "cash_discount",
+  "notes",
+  "sauda_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ydx1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sauda",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "bold": 1,
+   "default": "SAUDA-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "SAUDA-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "default": "Today",
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Booking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "broker",
+   "fieldtype": "Link",
+   "label": "Broker",
+   "options": "Broker"
+  },
+  {
+   "fieldname": "expected_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Expected Quantity (in Tons)",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate_per_ton",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate (per Ton)",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "booking_amount",
+   "fieldtype": "Currency",
+   "label": "Booking Amount",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "delivery_duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Delivery Duration",
+   "non_negative": 1,
+   "placeholder": "No. of days to complete the Sauda/booking",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Payment Duration",
+   "non_negative": 1,
+   "placeholder": "No. of days to complete the Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Sauda End Date",
+   "placeholder": "Delivery end date based on delivery durations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payment End Date",
+   "placeholder": "Payment end date based on payment durations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cash_discount",
+   "fieldtype": "Float",
+   "label": "CD (Cash Discount %)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes",
+   "placeholder": "Additional Internal Notes"
+  },
+  {
+   "bold": 1,
+   "default": "Confirmed",
+   "fieldname": "sauda_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nConfirmed\nCancelled\nCompleted",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-07-22 14:44:08.555915",
+ "modified_by": "Administrator",
+ "module": "saudas",
+ "name": "Sauda",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
