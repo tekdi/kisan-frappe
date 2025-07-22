@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-22 14:07:21.579293",
+ "creation": "2025-07-22 15:12:41.460622",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -25,7 +25,8 @@
   "payment_end_date",
   "cash_discount",
   "notes",
-  "sauda_status"
+  "sauda_status",
+  "amended_from"
  ],
  "fields": [
   {
@@ -187,13 +188,23 @@
    "label": "Status",
    "options": "Pending\nConfirmed\nCancelled\nCompleted",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sauda",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-22 14:44:08.555915",
+ "modified": "2025-07-22 15:12:41.497295",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
