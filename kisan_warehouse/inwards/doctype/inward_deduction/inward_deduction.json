@@ -1,23 +1,22 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-07-22 18:22:53.338840",
+ "creation": "2025-07-22 18:22:53.780215",
  "custom": 1,
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "deduction_name",
+  "deduction_type",
   "description",
-  "default_amount",
-  "is_active"
+  "amount"
  ],
  "fields": [
   {
-   "fieldname": "deduction_name",
-   "fieldtype": "Data",
+   "fieldname": "deduction_type",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Deduction Name",
+   "label": "Deduction Type",
    "reqd": 1
   },
   {
@@ -26,26 +25,23 @@
    "label": "Description"
   },
   {
-   "fieldname": "default_amount",
+   "fieldname": "amount",
    "fieldtype": "Currency",
-   "label": "Default Amount",
-   "non_negative": 1
-  },
-  {
-   "default": "1",
-   "fieldname": "is_active",
-   "fieldtype": "Check",
-   "label": "Is Active?"
+   "in_list_view": 1,
+   "label": "Amount",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-07-22 18:22:53.362217",
+ "modified": "2025-07-22 18:22:53.800790",
  "modified_by": "Administrator",
- "module": "settings",
- "name": "Settings Deduction Type",
+ "module": "inwards",
+ "name": "Inward Deduction",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",
