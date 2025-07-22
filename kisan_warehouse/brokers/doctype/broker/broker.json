@@ -1,0 +1,239 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-07-22 13:28:17.115578",
+ "custom": 1,
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "broker_type",
+  "first_name",
+  "middle_name",
+  "last_name",
+  "address",
+  "city",
+  "state",
+  "zip",
+  "mobile",
+  "alternate_mobile",
+  "email",
+  "commission_rate",
+  "aadhar_number",
+  "pan",
+  "aadhar_verified",
+  "aadhar_verified_date",
+  "gstin",
+  "gstin_verified",
+  "gstin_verified_date",
+  "bank_account_name",
+  "bank_account_no",
+  "ifsc_code",
+  "bank_name",
+  "cancel_cheque",
+  "small_text_nobm",
+  "broker_status"
+ ],
+ "fields": [
+  {
+   "default": "BR-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "BR-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "broker_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Broker Type",
+   "options": "\nIndividual\nCompany",
+   "reqd": 1
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Last Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "zip",
+   "fieldtype": "Data",
+   "label": "Zip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alternate_mobile",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Float",
+   "label": "Commission Rate (%)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "aadhar_number",
+   "fieldtype": "Data",
+   "label": "Aadhar Number"
+  },
+  {
+   "fieldname": "pan",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "default": "0",
+   "fieldname": "aadhar_verified",
+   "fieldtype": "Check",
+   "label": "Aadhar Verified?"
+  },
+  {
+   "fieldname": "aadhar_verified_date",
+   "fieldtype": "Date",
+   "label": "Aadhar Verified On"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "default": "0",
+   "fieldname": "gstin_verified",
+   "fieldtype": "Check",
+   "label": "GSTIN Verified?"
+  },
+  {
+   "fieldname": "gstin_verified_date",
+   "fieldtype": "Date",
+   "label": "GSTIN Verified On"
+  },
+  {
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cancel_cheque",
+   "fieldtype": "Attach Image",
+   "label": "Upload Cancelled Cheque",
+   "reqd": 1
+  },
+  {
+   "fieldname": "small_text_nobm",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "broker_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-22 13:35:56.039904",
+ "modified_by": "Administrator",
+ "module": "brokers",
+ "name": "Broker",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
