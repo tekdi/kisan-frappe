@@ -5,15 +5,84 @@ app_description = "KisanMitra Warehouse Management System"
 app_email = "deepak_p@tekditechnologies.com"
 app_license = "mit"
 
-# Export Fixtures
+# Export Enhanced fixtures
 fixtures = [
+    # Core DocTypes
     {
         "dt": "DocType", 
         "filters": [
-            ["name", "in", ["Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", "Sauda", "Inward", "Inward Deduction", "App Settings", "Settings Deduction Type"]]
+            ["name", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings", "Settings Deduction Type"
+            ]]
         ]
-    }
+    },
+    
+    # Module Definitions
+    {
+        "dt": "Module Def",
+        "filters": [
+            ["name", "in", [
+                "company", "customers", "products", "brokers", "warehouses", 
+                "vehicles", "saudas", "inwards", "settings"
+            ]]
+        ]
+    },
+    
+    # Workspace
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "=", "Kisan Warehouse"]
+        ]
+    },
+    
+    # Client Scripts (JavaScript that runs in browser)
+    {
+        "dt": "Client Script",
+        "filters": [
+            ["dt", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings"
+            ]]
+        ]
+    },
+    
+    # Custom Fields (if any)
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "App Settings"
+            ]]
+        ]
+    },
+    
+    # Property Setter (for field customizations)
+    {
+        "dt": "Property Setter",
+        "filters": [
+            ["doc_type", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "App Settings"
+            ]]
+        ]
+    },
+    
+  # Print format   
+{
+    "dt": "Print Format",
+	"filters": [
+		    ["doc_type", "in", [
+		        "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+		        "Sauda", "Inward", "App Settings"
+		    ]]
+		]
+	}
+    
 ]
+
 
 # Apps
 # ------------------

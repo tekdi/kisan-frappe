@@ -1,20 +1,150 @@
-__pycache__/
+# ==============================================
+# Frappe / ERPNext / Bench - Standard Ignores
+# ==============================================
+
+# Python
 *.pyc
+__pycache__/
 *.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Virtual Environment
+env/
+env.bak/
+venv/
+venv.bak/
+ENV/
+env.bak/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm/
+pnpm-lock.yaml
+
+# Frappe Build Artifacts
+public/js/build/
+public/js/map/
+public/css/
+
+# Database & Cache
+*.sqlite3
+*.db
+*.sql
+sites/*/db_bench.sqlite
+sites/*/locks
+
+# Site-specific files (NEVER commit these!)
+sites/common_site_config.json
+sites/*/site_config.json
+sites/*/installed_apps.txt
+sites/*/apps.txt
+
+# Private & Temporary files
+sites/*/private/backups/
+sites/*/private/files/
+sites/*/private/tmp/
+sites/*/public/backups/
+sites/*/public/files/
+sites/*/public/tmp/
+sites/*/error-snapshots
+*.tmp
+*.bak
 *.swp
 *.swo
-*.db
-*.log
-*.sqlite
-.env
-node_modules/
+
+# Compressed files
 *.tar.gz
-*.egg-info/
-*.bak
-*.DS_Store
-*.idea/
-*.vscode/
-patches.txt
-.env/
-public/js/*-bundle.js
-public/js/*-bundle.css
+*.gz
+*.zip
+*.tar
+
+# IDE & Editor files
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.orig
+*.sublime-workspace
+.env
+
+# System files
+*.pid
+Thumbs.db
+
+# ==============================================
+# IMPORTANT: Keep Your App Tracked!
+# ==============================================
+
+# Ensure your entire app directory is tracked
+!apps/kisan_warehouse/
+
+# Specifically ensure these critical files are tracked (redundant but explicit)
+!apps/kisan_warehouse/kisan_warehouse/
+!apps/kisan_warehouse/kisan_warehouse/**/
+!apps/kisan_warehouse/kisan_warehouse/**/*.json
+!apps/kisan_warehouse/kisan_warehouse/**/*.py
+!apps/kisan_warehouse/kisan_warehouse/**/*.js
+!apps/kisan_warehouse/kisan_warehouse/**/*.html
+!apps/kisan_warehouse/kisan_warehouse/**/*.css
+
+# Ensure fixtures are tracked
+!apps/kisan_warehouse/kisan_warehouse/fixtures/
+!apps/kisan_warehouse/kisan_warehouse/**/fixtures/
+!apps/kisan_warehouse/kisan_warehouse/**/fixtures/*.json
+
+# ==============================================
+# App-specific Public Assets (Keep these!)
+# ==============================================
+
+# Your app's public assets (CSS, JS, images, etc.)
+!apps/kisan_warehouse/kisan_warehouse/public/
+!apps/kisan_warehouse/kisan_warehouse/public/**/*
+
+# Specifically ensure these asset types are tracked
+!apps/kisan_warehouse/kisan_warehouse/public/css/**/*.css
+!apps/kisan_warehouse/kisan_warehouse/public/js/**/*.js
+!apps/kisan_warehouse/kisan_warehouse/public/images/**/*
+!apps/kisan_warehouse/kisan_warehouse/public/scss/**/*.scss
+
+# Templates and other web assets
+!apps/kisan_warehouse/kisan_warehouse/templates/
+!apps/kisan_warehouse/kisan_warehouse/templates/**/*
+!apps/kisan_warehouse/kisan_warehouse/www/
+!apps/kisan_warehouse/kisan_warehouse/www/**/*
+
+# ==============================================
+# Other Apps (Exclude all except kisan_warehouse)
+# ==============================================
+
+# Ignore all other apps except yours
+apps/*
+!apps/kisan_warehouse/
+
+# Standard Frappe apps (if present)
+apps/frappe/
+apps/erpnext/
+apps/hrms/
+apps/payments/

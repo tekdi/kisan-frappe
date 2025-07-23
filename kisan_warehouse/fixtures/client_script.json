@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Inward",
+  "enabled": 1,
+  "modified": "2025-07-22 17:43:03.548423",
+  "module": "inwards",
+  "name": "Inward Deduction - Populate Deduction Types",
+  "script": "frappe.ui.form.on('Inward', {\n    refresh: function(frm) {\n        setup_deduction_types(frm);\n    }\n});\n\nfrappe.ui.form.on('Inward Deduction', {\n    deductions_add: function(frm, cdt, cdn) {\n        setup_deduction_types(frm);\n    },\n    \n    deduction_type: function(frm, cdt, cdn) {\n        let row = locals[cdt][cdn];\n        if (row.deduction_type) {\n            frappe.call({\n                method: 'frappe.desk.form.load.getdoc',\n                args: {\n                    doctype: 'App Settings',\n                    name: 'App Settings'\n                },\n                callback: function(r) {\n                    if (r.docs && r.docs[0] && r.docs[0].default_deduction_types) {\n                        r.docs[0].default_deduction_types.forEach(function(settings_row) {\n                            if (settings_row.deduction_name === row.deduction_type && settings_row.is_active) {\n                                frappe.model.set_value(cdt, cdn, 'amount', settings_row.default_amount || 0);\n                                frappe.model.set_value(cdt, cdn, 'description', settings_row.description || '');\n                            }\n                        });\n                    }\n                }\n            });\n        }\n    }\n});\n\nfunction setup_deduction_types(frm) {\n    frappe.call({\n        method: 'frappe.desk.form.load.getdoc',\n        args: {\n            doctype: 'App Settings',\n            name: 'App Settings'\n        },\n        callback: function(r) {\n            if (r.docs && r.docs[0] && r.docs[0].default_deduction_types) {\n                let options = [];\n                r.docs[0].default_deduction_types.forEach(function(row) {\n                    if (row.is_active) {\n                        options.push(row.deduction_name);\n                    }\n                });\n                \n                if (options.length > 0) {\n                    frm.fields_dict.deductions.grid.update_docfield_property('deduction_type', 'options', options.join('\\n'));\n                    frm.fields_dict.deductions.grid.refresh();\n                }\n            }\n        }\n    });\n}",
+  "view": "Form"
+ }
+]
