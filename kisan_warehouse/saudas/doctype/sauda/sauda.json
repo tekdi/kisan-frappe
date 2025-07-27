@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-24 16:10:17.289140",
+ "creation": "2025-07-26 16:48:23.946860",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -18,6 +18,8 @@
   "expected_quantity",
   "rate_per_ton",
   "total_amount",
+  "pending_quantity",
+  "pending_total_amount",
   "booking_amount",
   "delivery_duration",
   "payment_duration",
@@ -26,6 +28,8 @@
   "cash_discount",
   "notes",
   "sauda_status",
+  "amended_from",
+  "amended_from",
   "amended_from"
  ],
  "fields": [
@@ -125,6 +129,21 @@
    "reqd": 1
   },
   {
+   "fieldname": "pending_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Pending Quantity (in Tons)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "pending_total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Pending Total Amount",
+   "non_negative": 1
+  },
+  {
    "fieldname": "booking_amount",
    "fieldtype": "Currency",
    "label": "Booking Amount",
@@ -198,13 +217,33 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sauda",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Sauda",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-24 16:10:17.323707",
+ "modified": "2025-07-26 16:48:23.999741",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
