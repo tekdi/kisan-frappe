@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-28 18:36:40.009518",
+ "custom": 1,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_gross_weight",
+  "bags",
+  "item_arrival_weight",
+  "item_rate",
+  "item_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight (kg)",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bags",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "No. of Bags",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "item_arrival_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Arr. Weight (kg)",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate (per Quintal)",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-28 20:37:18.581590",
+ "modified_by": "Administrator",
+ "module": "inwards",
+ "name": "Inward Item Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

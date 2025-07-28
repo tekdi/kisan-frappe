@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-22 18:22:53.877089",
+ "creation": "2025-07-26 16:58:46.090321",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,8 +10,10 @@
   "basic_information",
   "amended_from",
   "naming_series",
-  "inward_date",
+  "bill_date",
   "column_break_sawr",
+  "arrival_date",
+  "column_break_qygd",
   "inward_status",
   "reference_information",
   "sauda",
@@ -22,34 +24,45 @@
   "column_break_xitv",
   "product",
   "broker",
-  "weight_information",
-  "gross_weight",
-  "column_break_abrs",
-  "vehicle_weight",
-  "column_break_akxk",
-  "net_weight",
-  "financial_information",
-  "rate_per_ton",
+  "item_details",
+  "inward_items",
+  "weight_information_section",
+  "total_gross_weight",
+  "column_break_emaq",
+  "total_bags",
+  "column_break_dwid",
+  "total_arrival_weight",
+  "column_break_ngsq",
   "total_amount",
+  "deductions_section",
   "deductions",
   "total_deductions",
-  "net_amount",
+  "financial_section",
+  "sub_total",
   "tax_information",
   "cgst_percent",
-  "igst_percent",
-  "tcs_percent",
-  "tds_percent",
-  "final_amount",
   "column_break_npbq",
   "sgst_percent",
+  "column_break_hgwa",
+  "igst_percent",
+  "column_break_vnye",
   "gst_amount",
+  "section_break_xoae",
+  "tcs_percent",
+  "column_break_lkmz",
   "tcs_amount",
+  "column_break_lihi",
+  "tds_percent",
+  "column_break_ptrr",
   "tds_amount",
+  "final_amount_section",
+  "net_amount",
   "additional_information",
   "broker_commission_percent",
+  "column_break_fxfh",
   "broker_commission_amount",
-  "notes",
-  "amended_from"
+  "section_break_ixqa",
+  "notes"
  ],
  "fields": [
   {
@@ -80,14 +93,28 @@
   {
    "bold": 1,
    "default": "now",
-   "fieldname": "inward_date",
+   "fieldname": "bill_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
-   "label": "Inward Date",
+   "label": "Bill Date",
    "reqd": 1
   },
   {
    "fieldname": "column_break_sawr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "now",
+   "fieldname": "arrival_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Arr. Date",
+   "options": "now",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qygd",
    "fieldtype": "Column Break"
   },
   {
@@ -129,7 +156,7 @@
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
-   "options": "Sauda",
+   "options": "Customer",
    "reqd": 1
   },
   {
@@ -157,55 +184,56 @@
    "options": "Broker"
   },
   {
-   "fieldname": "weight_information",
+   "fieldname": "item_details",
+   "fieldtype": "Section Break",
+   "label": "Item Details"
+  },
+  {
+   "fieldname": "inward_items",
+   "fieldtype": "Table",
+   "label": "Inward Item Details",
+   "options": "Inward Item Detail",
+   "reqd": 1
+  },
+  {
+   "fieldname": "weight_information_section",
    "fieldtype": "Section Break",
    "label": "Weight Information"
   },
   {
-   "fieldname": "gross_weight",
+   "fieldname": "total_gross_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight (Ton)",
+   "label": "Total Gross Weight (kg)",
    "non_negative": 1,
    "precision": "2",
    "reqd": 1
   },
   {
-   "fieldname": "column_break_abrs",
+   "fieldname": "column_break_emaq",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "vehicle_weight",
-   "fieldtype": "Float",
-   "label": "Vehicle Weight (Ton)",
-   "non_negative": 1,
-   "precision": "2",
-   "reqd": 1
+   "fieldname": "total_bags",
+   "fieldtype": "Int",
+   "label": "Total Bags",
+   "non_negative": 1
   },
   {
-   "fieldname": "column_break_akxk",
+   "fieldname": "column_break_dwid",
    "fieldtype": "Column Break"
   },
   {
    "bold": 1,
-   "fieldname": "net_weight",
+   "fieldname": "total_arrival_weight",
    "fieldtype": "Float",
-   "label": "Net Weight (Ton)",
+   "label": "Total Arr. Weight (kg)",
    "non_negative": 1,
    "precision": "2",
    "reqd": 1
   },
   {
-   "fieldname": "financial_information",
-   "fieldtype": "Section Break",
-   "label": "Financial Information"
-  },
-  {
-   "fieldname": "rate_per_ton",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Rate (per Ton)",
-   "non_negative": 1,
-   "reqd": 1
+   "fieldname": "column_break_ngsq",
+   "fieldtype": "Column Break"
   },
   {
    "bold": 1,
@@ -214,6 +242,11 @@
    "label": "Total Amount",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "deductions_section",
+   "fieldtype": "Section Break",
+   "label": "Deductions"
   },
   {
    "fieldname": "deductions",
@@ -230,11 +263,16 @@
    "reqd": 1
   },
   {
+   "fieldname": "financial_section",
+   "fieldtype": "Section Break",
+   "label": "Financial Information"
+  },
+  {
    "bold": 1,
-   "fieldname": "net_amount",
+   "fieldname": "sub_total",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Net Amount",
+   "label": "Sub Total",
    "non_negative": 1,
    "reqd": 1
   },
@@ -249,30 +287,6 @@
    "label": "CGST (%)"
   },
   {
-   "fieldname": "igst_percent",
-   "fieldtype": "Percent",
-   "label": "IGST (%)"
-  },
-  {
-   "fieldname": "tcs_percent",
-   "fieldtype": "Percent",
-   "label": "TCS (%)"
-  },
-  {
-   "fieldname": "tds_percent",
-   "fieldtype": "Percent",
-   "label": "TDS (%)"
-  },
-  {
-   "bold": 1,
-   "fieldname": "final_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Final Payable Amount",
-   "non_negative": 1,
-   "reqd": 1
-  },
-  {
    "fieldname": "column_break_npbq",
    "fieldtype": "Column Break"
   },
@@ -282,11 +296,37 @@
    "label": "SGST (%)"
   },
   {
+   "fieldname": "column_break_hgwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "igst_percent",
+   "fieldtype": "Percent",
+   "label": "IGST (%)"
+  },
+  {
+   "fieldname": "column_break_vnye",
+   "fieldtype": "Column Break"
+  },
+  {
    "bold": 1,
    "fieldname": "gst_amount",
    "fieldtype": "Currency",
    "label": "GST Amount",
    "non_negative": 1
+  },
+  {
+   "fieldname": "section_break_xoae",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tcs_percent",
+   "fieldtype": "Percent",
+   "label": "TCS (%)"
+  },
+  {
+   "fieldname": "column_break_lkmz",
+   "fieldtype": "Column Break"
   },
   {
    "bold": 1,
@@ -296,11 +336,37 @@
    "non_negative": 1
   },
   {
+   "fieldname": "column_break_lihi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tds_percent",
+   "fieldtype": "Percent",
+   "label": "TDS (%)"
+  },
+  {
+   "fieldname": "column_break_ptrr",
+   "fieldtype": "Column Break"
+  },
+  {
    "bold": 1,
    "fieldname": "tds_amount",
    "fieldtype": "Currency",
    "label": "TDS Amount",
    "non_negative": 1
+  },
+  {
+   "fieldname": "final_amount_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Total",
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "additional_information",
@@ -313,32 +379,30 @@
    "label": "Broker Commission (%)"
   },
   {
+   "fieldname": "column_break_fxfh",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "broker_commission_amount",
    "fieldtype": "Currency",
    "label": "Broker Commission Amount",
    "non_negative": 1
   },
   {
+   "fieldname": "section_break_ixqa",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-22 18:22:53.928744",
+ "modified": "2025-07-28 21:08:21.626576",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",

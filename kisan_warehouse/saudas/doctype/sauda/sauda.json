@@ -2,40 +2,51 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-26 16:48:23.946860",
+ "creation": "2025-07-26 16:58:53.604640",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_ydx1",
+  "basic_info_section",
   "amended_from",
   "naming_series",
   "booking_date",
+  "column_break_kwiv",
+  "sauda_status",
+  "party_info_section",
   "customer",
-  "product",
+  "column_break_xetv",
   "warehouse",
+  "column_break_wmob",
   "broker",
+  "product_section",
+  "product",
+  "column_break_vgnj",
   "expected_quantity",
+  "column_break_yvip",
   "rate_per_ton",
+  "financial_section",
   "total_amount",
   "pending_quantity",
-  "pending_total_amount",
+  "column_break_dueg",
   "booking_amount",
-  "delivery_duration",
-  "payment_duration",
-  "delivery_end_date",
-  "payment_end_date",
+  "pending_total_amount",
+  "column_break_fodh",
   "cash_discount",
-  "notes",
-  "sauda_status",
-  "amended_from",
-  "amended_from",
-  "amended_from"
+  "duration_timeline_section",
+  "delivery_duration",
+  "delivery_end_date",
+  "column_break_apgj",
+  "payment_duration",
+  "payment_end_date",
+  "notes_section",
+  "notes"
  ],
  "fields": [
   {
-   "fieldname": "section_break_ydx1",
-   "fieldtype": "Section Break"
+   "fieldname": "basic_info_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Booking Information"
   },
   {
    "fieldname": "amended_from",
@@ -52,6 +63,7 @@
    "default": "SAUDA-.YYYY.-.####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Naming Series",
    "options": "SAUDA-.YYYY.-.####",
    "reqd": 1
@@ -68,6 +80,27 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_kwiv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "Pending",
+   "fieldname": "sauda_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nConfirmed\nCancelled\nCompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party_info_section",
+   "fieldtype": "Section Break",
+   "label": "Party Information"
+  },
+  {
    "fieldname": "customer",
    "fieldtype": "Link",
    "in_filter": 1,
@@ -78,14 +111,8 @@
    "reqd": 1
   },
   {
-   "fieldname": "product",
-   "fieldtype": "Link",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Product",
-   "options": "Product",
-   "reqd": 1
+   "fieldname": "column_break_xetv",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "warehouse",
@@ -98,27 +125,59 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_wmob",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "broker",
    "fieldtype": "Link",
    "label": "Broker",
    "options": "Broker"
   },
   {
+   "fieldname": "product_section",
+   "fieldtype": "Section Break",
+   "label": "Product & Quantity Details"
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vgnj",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "expected_quantity",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Expected Quantity (in Tons)",
+   "label": "Expected Quantity (kg)",
    "non_negative": 1,
    "precision": "2",
    "reqd": 1
   },
   {
+   "fieldname": "column_break_yvip",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "rate_per_ton",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Rate (per Ton)",
+   "label": "Rate (per Quintal)",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "financial_section",
+   "fieldtype": "Section Break",
+   "label": "Financial Details"
   },
   {
    "fieldname": "total_amount",
@@ -137,11 +196,8 @@
    "precision": "2"
   },
   {
-   "fieldname": "pending_total_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Pending Total Amount",
-   "non_negative": 1
+   "fieldname": "column_break_dueg",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "booking_amount",
@@ -150,29 +206,56 @@
    "non_negative": 1
   },
   {
+   "fieldname": "pending_total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Pending Total Amount",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_fodh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cash_discount",
+   "fieldtype": "Float",
+   "label": "CD (Cash Discount %)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "duration_timeline_section",
+   "fieldtype": "Section Break",
+   "label": "Duration & Timeline"
+  },
+  {
    "fieldname": "delivery_duration",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Delivery Duration",
+   "label": "Delivery Duration (Days)",
    "non_negative": 1,
    "placeholder": "No. of days to complete the Sauda/booking",
-   "reqd": 1
-  },
-  {
-   "fieldname": "payment_duration",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Payment Duration",
-   "non_negative": 1,
-   "placeholder": "No. of days to complete the Payment",
    "reqd": 1
   },
   {
    "fieldname": "delivery_end_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Sauda End Date",
+   "label": "Delivery End Date",
    "placeholder": "Delivery end date based on delivery durations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_apgj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Payment Duration (Days)",
+   "non_negative": 1,
+   "placeholder": "No. of days to complete the Payment",
    "reqd": 1
   },
   {
@@ -184,66 +267,21 @@
    "reqd": 1
   },
   {
-   "fieldname": "cash_discount",
-   "fieldtype": "Float",
-   "label": "CD (Cash Discount %)",
-   "non_negative": 1,
-   "precision": "2"
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes",
    "placeholder": "Additional Internal Notes"
-  },
-  {
-   "bold": 1,
-   "default": "Confirmed",
-   "fieldname": "sauda_status",
-   "fieldtype": "Select",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Status",
-   "options": "Pending\nConfirmed\nCancelled\nCompleted",
-   "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-26 16:48:23.999741",
+ "modified": "2025-07-28 21:35:57.530372",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
