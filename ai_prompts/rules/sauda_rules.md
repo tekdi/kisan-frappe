@@ -74,11 +74,11 @@ bench restart
 Perform automatic calculations and real-time field updates for booking agreements.
 
 ### **Fields Involved**
-- **Input Fields:** expected_quantity, rate_per_ton, booking_date, delivery_duration, payment_duration
+- **Input Fields:** expected_quantity, sauda_rate, booking_date, delivery_duration, payment_duration
 - **Calculated Fields:** total_amount, delivery_end_date, payment_end_date, pending_quantity, pending_total_amount
 
 ### **Calculations to Implement**
-1. **total_amount = expected_quantity × rate_per_ton**
+1. **total_amount = expected_quantity × sauda_rate**
 2. **delivery_end_date = booking_date + delivery_duration (days)**
 3. **payment_end_date = booking_date + payment_duration (days)**
 4. **Default pending values:**
