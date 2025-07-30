@@ -1,15 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-07-30 14:17:04.534170",
+ "creation": "2025-07-30 21:06:31.406853",
  "custom": 1,
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "deduction_type",
-  "description",
-  "amount"
+  "bags",
+  "required_value",
+  "actual_value",
+  "difference_value",
+  "charges_per_unit",
+  "deduction_amount"
  ],
  "fields": [
   {
@@ -20,25 +24,53 @@
    "reqd": 1
   },
   {
-   "fieldname": "description",
-   "fieldtype": "Data",
-   "label": "Description"
+   "fieldname": "bags",
+   "fieldtype": "Int",
+   "label": "Bags",
+   "non_negative": 1
   },
   {
-   "fieldname": "amount",
+   "fieldname": "required_value",
+   "fieldtype": "Float",
+   "label": "Required",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "actual_value",
+   "fieldtype": "Float",
+   "label": "Actual",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "difference_value",
+   "fieldtype": "Float",
+   "label": "Difference",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "charges_per_unit",
+   "fieldtype": "Currency",
+   "label": "Charges",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "deduction_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Amount",
    "non_negative": 1,
-   "precision": "2",
-   "reqd": 1
+   "precision": "2"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-07-30 14:17:04.559708",
+ "modified": "2025-07-30 21:06:31.431263",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Deduction",
