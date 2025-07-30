@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-30 15:29:12.951764",
+ "creation": "2025-07-30 21:06:31.642689",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -63,6 +63,9 @@
   "broker_commission_amount",
   "section_break_ixqa",
   "notes",
+  "amended_from",
+  "amended_from",
+  "amended_from",
   "amended_from"
  ],
  "fields": [
@@ -407,13 +410,43 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Inward",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Inward",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Inward",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-30 15:29:13.022858",
+ "modified": "2025-07-30 21:06:31.695159",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
