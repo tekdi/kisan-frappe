@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-30 21:06:31.642689",
+ "creation": "2025-08-01 11:52:18.920041",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -63,9 +63,8 @@
   "broker_commission_amount",
   "section_break_ixqa",
   "notes",
-  "amended_from",
-  "amended_from",
-  "amended_from",
+  "payment_details",
+  "inward_payments",
   "amended_from"
  ],
  "fields": [
@@ -402,34 +401,15 @@
    "label": "Notes"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
+   "fieldname": "payment_details",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
+   "columns": 11,
+   "fieldname": "inward_payments",
+   "fieldtype": "Table",
+   "options": "Inward Payment"
   },
   {
    "fieldname": "amended_from",
@@ -446,7 +426,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-30 21:06:31.695159",
+ "modified": "2025-08-01 11:52:18.982803",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
