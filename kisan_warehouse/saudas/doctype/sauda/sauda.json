@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-30 15:29:12.845768",
+ "creation": "2025-08-03 22:25:39.155209",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,6 +11,8 @@
   "amended_from",
   "naming_series",
   "booking_date",
+  "column_break_epuy",
+  "company",
   "column_break_kwiv",
   "sauda_status",
   "party_info_section",
@@ -40,14 +42,7 @@
   "payment_duration",
   "payment_end_date",
   "notes_section",
-  "notes",
-  "amended_from",
-  "amended_from",
-  "amended_from",
-  "amended_from",
-  "amended_from",
-  "amended_from",
-  "amended_from"
+  "notes"
  ],
  "fields": [
   {
@@ -84,6 +79,20 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Booking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_epuy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
    "reqd": 1
   },
   {
@@ -198,7 +207,7 @@
    "fieldname": "pending_quantity",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Pending Quantity (in Tons)",
+   "label": "Pending Quantity (kg)",
    "non_negative": 1,
    "precision": "2"
   },
@@ -282,83 +291,13 @@
    "fieldtype": "Small Text",
    "label": "Notes",
    "placeholder": "Additional Internal Notes"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sauda",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-07-30 15:29:12.883734",
+ "modified": "2025-08-03 22:36:22.562375",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
