@@ -24,7 +24,7 @@ I need to implement client and server scripts for the Inward DocType in our Kisa
 
 **Reference:** Use the working Sauda implementation as template.
 ```
-## **Reference**
+## **Project Reference**
 Use project context from `ai_prompts/kisan_warehouse_project_overview.md`
 
 ## **COMPLETE COMMAND CHECKLIST**
@@ -71,66 +71,96 @@ bench restart
 ## **BUSINESS LOGIC REQUIREMENTS**
 
 ### **Objective**
-Perform automatic calculations and real-time field updates for inward receipt of agricultural produce.
+Perform automatic calculations and real-time field updates for multi-item inward receipt of agricultural produce with KG/Quintal units.
 
 ### **Fields Involved**
-- **Input Fields:** gross_weight, vehicle_weight, rate_per_ton, cgst_percent, sgst_percent, igst_percent, tcs_percent, tds_percent, broker_commission_percent
-- **Calculated Fields:** net_weight, total_amount, total_deductions, net_amount, gst_amount, tcs_amount, tds_amount, broker_commission_amount, final_amount
+
+#### **Parent DocType Fields:**
+- **Input Fields:** vehicle_weight, cgst_percent, sgst_percent, igst_percent, tcs_percent, tds_percent, broker_commission_percent
 - **Auto-populated Fields:** customer, warehouse, product, broker (from selected Sauda)
-- **Child Table:** deductions (Inward Deduction records)
+- **Calculated Fields:** total_gross_weight, total_bags, total_arrival_weight, total_amount, total_deductions, sub_total, total_gst_amount, tcs_amount, tds_amount, broker_commission_amount, net_total
+- **Child Tables:** inward_items (Inward Item Detail), deductions (Inward Deduction)
+
+#### **Child Table Fields (Inward Item Detail):**
+- **Input Fields:** item_gross_weight, bags, item_arrival_weight, item_rate
+- **Calculated Fields:** item_amount
 
 ### **Calculations to Implement**
 
-#### **1. Weight Calculations**
-1. **net_weight = gross_weight - vehicle_weight**
+#### **1. Child Table Calculations (Inward Item Detail)**
+1. **item_amount = (item_arrival_weight / 100) × item_rate** (KG to Quintal conversion)
 
-#### **2. Financial Calculations**
-2. **total_amount = (net_weight / 1000) × rate_per_ton** (convert kg to tons)
-3. **total_deductions = sum of all amounts in deductions child table**
-4. **net_amount = total_amount - total_deductions**
+#### **2. Parent Total Calculations (Auto-sum from Child Table)**
+2. **total_gross_weight = SUM(item_gross_weight)** from all child rows
+3. **total_bags = SUM(bags)** from all child rows
+4. **total_arrival_weight = SUM(item_arrival_weight)** from all child rows
+5. **total_amount = SUM(item_amount)** from all child rows
 
-#### **3. Tax Calculations**
-5. **gst_amount = net_amount × (cgst_percent + sgst_percent + igst_percent) / 100**
-6. **tcs_amount = net_amount × tcs_percent / 100**
-7. **tds_amount = net_amount × tds_percent / 100**
-8. **broker_commission_amount = net_amount × broker_commission_percent / 100**
+#### **3. Deduction Calculations**
+6. **total_deductions = SUM(amount)** from deductions child table
 
-#### **4. Final Calculation**
-9. **final_amount = net_amount + gst_amount + tcs_amount - tds_amount**
+#### **4. Financial Calculations**
+7. **sub_total = total_amount - total_deductions**
 
-#### **5. Auto-population from Sauda**
-- When sauda is selected, auto-fill: customer, warehouse, product, broker, rate_per_ton
+#### **5. Tax Calculations**
+8. **total_gst_amount = sub_total × (cgst_percent + sgst_percent + igst_percent) / 100**
+9. **tcs_amount = sub_total × tcs_percent / 100**
+10. **tds_amount = sub_total × tds_percent / 100**
+11. **broker_commission_amount = sub_total × broker_commission_percent / 100**
+
+#### **6. Final Calculation**
+12. **net_total = sub_total + total_gst_amount + tcs_amount - tds_amount**
+
+#### **7. Auto-population from Sauda**
+- When sauda is selected, auto-fill: customer, warehouse, product, broker
+- Optionally pre-populate inward_items child table with expected data from Sauda
 
 ### **Requirements**
 - **Client-side:** Real-time updates when input fields change
 - **Server-side:** Minimal validation only (positive values)
-- **Validation:** All weights and percentages must be >= 0
+- **Validation:** All weights, rates, and percentages must be >= 0
 - **Zero Handling:** Calculations should work with zero values
-- **Child Table:** Auto-calculate total_deductions when deductions table changes
+- **Child Table Support:** Auto-calculate when child tables are modified
+- **Multi-Item Support:** Handle multiple items in inward_items child table
 - **Sauda Integration:** Auto-populate fields when Sauda is selected
 - **Draft State:** All calculated values should update in draft mode
 
 ### **Field Triggers Required**
-- **gross_weight, vehicle_weight** → Calculate net_weight
-- **net_weight, rate_per_ton** → Calculate total_amount
-- **deductions child table** → Calculate total_deductions
-- **total_amount, total_deductions** → Calculate net_amount
-- **net_amount, cgst_percent, sgst_percent, igst_percent** → Calculate gst_amount
-- **net_amount, tcs_percent** → Calculate tcs_amount
-- **net_amount, tds_percent** → Calculate tds_amount
-- **net_amount, broker_commission_percent** → Calculate broker_commission_amount
-- **sauda** → Auto-populate customer, warehouse, product, broker, rate_per_ton
+
+#### **Child Table Triggers (Inward Item Detail):**
+- **item_arrival_weight, item_rate** → Calculate item_amount
+- **Any child table modification** → Recalculate all parent totals
+
+#### **Parent Field Triggers:**
+- **inward_items child table changes** → Calculate total_gross_weight, total_bags, total_arrival_weight, total_amount
+- **deductions child table changes** → Calculate total_deductions
+- **total_amount, total_deductions** → Calculate sub_total
+- **sub_total, cgst_percent, sgst_percent, igst_percent** → Calculate total_gst_amount
+- **sub_total, tcs_percent** → Calculate tcs_amount
+- **sub_total, tds_percent** → Calculate tds_amount
+- **sub_total, broker_commission_percent** → Calculate broker_commission_amount
+- **sub_total, total_gst_amount, tcs_amount, tds_amount** → Calculate net_total
+- **sauda** → Auto-populate customer, warehouse, product, broker
+
+### **Key Implementation Notes**
+- **KG/Quintal Conversion:** item_amount = (item_arrival_weight ÷ 100) × item_rate
+- **Multi-Item Support:** Each row in inward_items has individual calculations
+- **Parent Totals:** All parent totals are SUM of respective child table fields
+- **Validation:** item_arrival_weight should be ≤ item_gross_weight for each item
+- **Auto-calculation:** All parent totals update when child tables are modified
 
 ## **SUCCESS METRICS**
 
 ### **Working Implementation Should:**
-- Calculate net_weight in real-time when weights change
-- Calculate total_amount when weight or rate changes
-- Auto-calculate total_deductions when child table is modified
+- Calculate item_amount in real-time for each child row
+- Auto-sum all totals when child tables are modified
+- Calculate sub_total when amounts or deductions change
 - Calculate all tax amounts when percentages change
-- Calculate final_amount incorporating all components
+- Calculate net_total incorporating all components
 - Auto-populate fields when Sauda is selected
 - Handle zero values without errors
+- Support multiple items in single inward transaction
+- Validate item weights (arrival ≤ gross for each item)
 - Submit forms without hanging/timeout
 - Work on both new and edit forms
 - Export properly to fixtures

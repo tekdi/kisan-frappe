@@ -22,7 +22,7 @@ I need to implement client and server scripts for the Sauda DocType in our Kisan
 4. Use bench console for Client Script creation
 5. Keep server script minimal to avoid timeout issues
 
-**Reference:** Use the working Sauda implementation as template.
+**Reference:** Use the working Inward implementation as template.
 ```
 ## **Reference**
 Use project context from `ai_prompts/kisan_warehouse_project_overview.md`
@@ -74,11 +74,11 @@ bench restart
 Perform automatic calculations and real-time field updates for booking agreements.
 
 ### **Fields Involved**
-- **Input Fields:** expected_quantity, sauda_rate, booking_date, delivery_duration, payment_duration
+- **Input Fields:** expected_quantity (kg), sauda_rate, booking_date, delivery_duration, payment_duration
 - **Calculated Fields:** total_amount, delivery_end_date, payment_end_date, pending_quantity, pending_total_amount
 
 ### **Calculations to Implement**
-1. **total_amount = expected_quantity × sauda_rate**
+1. **total_amount = (expected_quantity / 100) × sauda_rate** (KG to Quintal conversion)
 2. **delivery_end_date = booking_date + delivery_duration (days)**
 3. **payment_end_date = booking_date + payment_duration (days)**
 4. **Default pending values:**
@@ -86,19 +86,24 @@ Perform automatic calculations and real-time field updates for booking agreement
    - pending_total_amount = total_amount
 
 ### **Requirements**
-- **Client-side:** Real-time updates when input fields change
-- **Server-side:** Minimal validation only (positive values)
-- **Validation:** Positive values for quantity, rate, and durations
-- **Zero Handling:** Calculations should work with zero values (>= 0)
-- **Draft State:** Pending values should populate for draft documents
+- Client-side: Real-time updates when input fields change
+- Server-side: Minimal validation only (positive values)
+- Validation: All quantities, rates, and durations must be >= 0
+- Zero Handling: Calculations should work with zero values
+- Draft State: Pending values should auto-populate for draft documents
+- Date Validation: End dates should be valid and not in the past
+- KG-Ton System: All weights in KG, rates per Ton (1000 KG)
 
 ## **SUCCESS METRICS**
 
 ### **Working Implementation Should:**
-- Calculate total_amount in real-time
-- Calculate dates when duration fields change
-- Populate pending values for draft documents
+- Calculate total_amount in real-time using KG-Ton conversion
+- Calculate delivery and payment end dates when durations change
+- Auto-populate pending values for draft/new documents
 - Handle zero values without errors
+- Validate positive values for critical fields
+- Support booking amount and cash discount calculations
 - Submit forms without hanging/timeout
 - Work on both new and edit forms
 - Export properly to fixtures
+- Maintain data consistency with linked Inward transactions
