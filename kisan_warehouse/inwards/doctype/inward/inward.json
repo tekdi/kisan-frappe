@@ -2,12 +2,14 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-01 11:52:18.920041",
+ "creation": "2025-08-04 14:06:21.517846",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "basic_information",
+  "sauda",
+  "column_break_tfki",
   "amended_from",
   "naming_series",
   "bill_date",
@@ -16,13 +18,13 @@
   "column_break_qygd",
   "inward_status",
   "reference_information",
-  "sauda",
-  "warehouse",
-  "column_break_wizr",
   "customer",
   "vehicle",
-  "column_break_xitv",
+  "column_break_wizr",
   "product",
+  "company",
+  "column_break_xitv",
+  "warehouse",
   "broker",
   "item_details",
   "inward_items",
@@ -64,6 +66,15 @@
   "section_break_ixqa",
   "notes",
   "payment_details",
+  "payment_due_date",
+  "last_payment_date",
+  "column_break_srkf",
+  "total_amount_paid",
+  "column_break_baqr",
+  "total_amount_pending",
+  "column_break_bbhm",
+  "inward_payment_status",
+  "section_break_lilp",
   "inward_payments",
   "amended_from"
  ],
@@ -72,6 +83,17 @@
    "fieldname": "basic_information",
    "fieldtype": "Section Break",
    "label": "Basic Information"
+  },
+  {
+   "fieldname": "sauda",
+   "fieldtype": "Link",
+   "label": "Sauda",
+   "options": "Sauda",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tfki",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "amended_from",
@@ -88,7 +110,6 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "hidden": 1,
-   "in_list_view": 1,
    "label": "Series",
    "options": "INW-.YYYY.-.####",
    "reqd": 1
@@ -122,38 +143,20 @@
   },
   {
    "bold": 1,
-   "default": "Pending",
+   "default": "pending",
    "fieldname": "inward_status",
    "fieldtype": "Select",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Pending\nReceived\nApproved\nStored",
+   "options": "pending\nreceived\napproved\nstored",
    "reqd": 1
   },
   {
    "fieldname": "reference_information",
    "fieldtype": "Section Break",
    "label": "Reference Information"
-  },
-  {
-   "fieldname": "sauda",
-   "fieldtype": "Link",
-   "label": "Sauda",
-   "options": "Sauda",
-   "reqd": 1
-  },
-  {
-   "fieldname": "warehouse",
-   "fieldtype": "Link",
-   "label": "Warehouse",
-   "options": "Warehouse",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_wizr",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "customer",
@@ -170,7 +173,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_xitv",
+   "fieldname": "column_break_wizr",
    "fieldtype": "Column Break"
   },
   {
@@ -178,6 +181,24 @@
    "fieldtype": "Link",
    "label": "Product",
    "options": "Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xitv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse",
    "reqd": 1
   },
   {
@@ -274,7 +295,7 @@
    "bold": 1,
    "fieldname": "sub_total",
    "fieldtype": "Currency",
-   "in_list_view": 1,
+   "in_preview": 1,
    "label": "Sub Total",
    "non_negative": 1,
    "reqd": 1
@@ -406,6 +427,53 @@
    "label": "Payment Details"
   },
   {
+   "fieldname": "payment_due_date",
+   "fieldtype": "Date",
+   "label": "Payment Due Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_payment_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Last Payment Date"
+  },
+  {
+   "fieldname": "column_break_srkf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_paid",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount Paid"
+  },
+  {
+   "fieldname": "column_break_baqr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_pending",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount Pending"
+  },
+  {
+   "fieldname": "column_break_bbhm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "pending",
+   "fieldname": "inward_payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "pending\nprocessing\nsuccess\nfailed"
+  },
+  {
+   "fieldname": "section_break_lilp",
+   "fieldtype": "Section Break"
+  },
+  {
    "columns": 11,
    "fieldname": "inward_payments",
    "fieldtype": "Table",
@@ -426,7 +494,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-08-01 11:52:18.982803",
+ "modified": "2025-08-04 14:06:21.567326",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
