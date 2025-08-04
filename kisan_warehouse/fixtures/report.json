@@ -1,0 +1,52 @@
+[
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-04 14:30:00",
+  "module": "Saudas",
+  "name": "Pending Saudas",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Sauda",
+  "reference_report": null,
+  "report_name": "Pending Saudas",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Operator"
+   }
+  ],
+  "timeout": 0
+ }
+]

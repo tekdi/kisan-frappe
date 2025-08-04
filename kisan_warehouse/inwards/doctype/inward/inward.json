@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-04 14:06:21.517846",
+ "creation": "2025-08-04 22:23:17.094522",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -10,7 +10,6 @@
   "basic_information",
   "sauda",
   "column_break_tfki",
-  "amended_from",
   "naming_series",
   "bill_date",
   "column_break_sawr",
@@ -75,8 +74,7 @@
   "column_break_bbhm",
   "inward_payment_status",
   "section_break_lilp",
-  "inward_payments",
-  "amended_from"
+  "inward_payments"
  ],
  "fields": [
   {
@@ -94,16 +92,6 @@
   {
    "fieldname": "column_break_tfki",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   },
   {
    "default": "INW-.YYYY.-.####",
@@ -478,23 +466,12 @@
    "fieldname": "inward_payments",
    "fieldtype": "Table",
    "options": "Inward Payment"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2025-08-04 14:06:21.567326",
+ "modified": "2025-08-04 22:23:17.155782",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
@@ -511,13 +488,14 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
-   "submit": 1,
    "write": 1
   }
  ],
  "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "sauda",
  "track_changes": 1
 }

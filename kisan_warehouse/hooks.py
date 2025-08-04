@@ -79,7 +79,10 @@ fixtures = [
 		        "Sauda", "Inward", "App Settings"
 		    ]]
 		]
-	}
+	},
+
+    # Reports
+    {"dt": "Report", "filters": [["module", "in", ["Saudas"]]]}
     
 ]
 
