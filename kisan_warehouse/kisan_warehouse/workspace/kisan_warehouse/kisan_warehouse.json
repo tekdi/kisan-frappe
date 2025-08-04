@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"_BLls8dWkV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"mxwzmCxqrP\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"OT4ukUAigo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"ijgtAJbe9Q\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jSbUnU3Ot-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"WxxLppC14a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"KBap9YyYR5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"App Settings\",\"col\":4}},{\"id\":\"4bYXelIkDk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"xPbuz7Lbe8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"id\":\"KYsxcv55uI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inwards\",\"col\":4}},{\"id\":\"GkrRJV3F0Q\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}}]",
- "creation": "2025-07-23 15:19:06.652366",
+ "content": "[{\"id\":\"_BLls8dWkV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"mxwzmCxqrP\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"OT4ukUAigo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"ijgtAJbe9Q\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jSbUnU3Ot-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"WxxLppC14a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"KBap9YyYR5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"App Settings\",\"col\":4}},{\"id\":\"4bYXelIkDk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"xPbuz7Lbe8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"id\":\"KYsxcv55uI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inwards\",\"col\":4}},{\"id\":\"GkrRJV3F0Q\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}},{\"id\":\"WhdJxGy6TP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gmG3WDqyUo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"GSoUu4FGCk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pending Saudas\",\"col\":3}}]",
+ "creation": "2025-08-04 17:42:31.981742",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -32,54 +32,14 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "description": "List of Vehicles",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Vehicles",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Vehicles",
-   "link_count": 0,
-   "link_to": "Vehicle",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "description": "List of all Saudas/Deal Bookings",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Sauda/Deal Booking",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Sauda",
-   "link_count": 0,
-   "link_to": "Sauda",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   }
  ],
- "modified": "2025-07-23 18:03:01.164452",
+ "modified": "2025-08-04 17:48:18.890105",
  "modified_by": "Administrator",
  "module": "Kisan Warehouse",
  "name": "Kisan Warehouse",
  "number_cards": [],
- "owner": "deepak_p@tekditechnologies.com",
+ "owner": "Administrator",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
@@ -93,6 +53,14 @@
    "link_to": "Company",
    "stats_filter": "[]",
    "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Pending Saudas",
+   "link_to": "Pending Saudas",
+   "report_ref_doctype": "Sauda",
+   "type": "Report"
   },
   {
    "color": "Green",
