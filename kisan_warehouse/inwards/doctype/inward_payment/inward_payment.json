@@ -13,8 +13,8 @@
   "payment_method",
   "payment_status",
   "payment_reference",
-  "notes",
-  "created_by"
+  "payment_note",
+  "received_by"
  ],
  "fields": [
   {
@@ -41,13 +41,14 @@
    "fieldname": "payment_method",
    "fieldtype": "Select",
    "label": "Payment Method",
-   "options": "Cheque\nCash\nUPI\nBank Transfer\nOnline\nOthers"
+   "options": "Select Method\nCheque\nCash\nUPI\nBank Transfer\nOnline\nOthers"
   },
   {
+   "default": "pending",
    "fieldname": "payment_status",
    "fieldtype": "Select",
    "label": "Payment Status",
-   "options": "Pending\nCompleted\nFailed"
+   "options": "pending\nprocessing\nsuccess\nfailed"
   },
   {
    "fieldname": "payment_reference",
@@ -56,13 +57,13 @@
    "placeholder": "e.g., Cheque no, UPI ref, UTR, etc."
   },
   {
-   "fieldname": "notes",
+   "fieldname": "payment_note",
    "fieldtype": "Small Text",
    "label": "Notes",
    "placeholder": "Optional notes for internal use"
   },
   {
-   "fieldname": "created_by",
+   "fieldname": "received_by",
    "fieldtype": "Link",
    "label": "CreatedBy",
    "options": "User"
@@ -72,7 +73,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-01 10:48:04.795778",
+ "modified": "2025-08-04 14:06:18.802384",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Payment",
