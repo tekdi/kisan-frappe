@@ -82,7 +82,7 @@ fixtures = [
 	},
 
     # Reports
-    {"dt": "Report", "filters": [["module", "in", ["Saudas", "Inwards", "Products"]]]}
+    {"dt": "Report", "filters": [["module", "in", ["Saudas", "Inwards", "Products", "Warehouses"]]]}
     
 ]
 
