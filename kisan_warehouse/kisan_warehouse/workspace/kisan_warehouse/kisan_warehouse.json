@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"_BLls8dWkV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"mxwzmCxqrP\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"OT4ukUAigo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"ijgtAJbe9Q\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jSbUnU3Ot-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"WxxLppC14a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"KBap9YyYR5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"App Settings\",\"col\":4}},{\"id\":\"4bYXelIkDk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"xPbuz7Lbe8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"id\":\"KYsxcv55uI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inwards\",\"col\":4}},{\"id\":\"GkrRJV3F0Q\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}},{\"id\":\"WhdJxGy6TP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gmG3WDqyUo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"GSoUu4FGCk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pending Saudas\",\"col\":3}},{\"id\":\"WNJ1tG-jbe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Pending Inwards\",\"col\":4}}]",
- "creation": "2025-08-05 13:26:49.599985",
+ "content": "[{\"id\":\"_BLls8dWkV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"mxwzmCxqrP\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"OT4ukUAigo\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"ijgtAJbe9Q\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"jSbUnU3Ot-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"WxxLppC14a\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"KBap9YyYR5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"App Settings\",\"col\":4}},{\"id\":\"4bYXelIkDk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"xPbuz7Lbe8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"id\":\"KYsxcv55uI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inwards\",\"col\":4}},{\"id\":\"GkrRJV3F0Q\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}},{\"id\":\"WhdJxGy6TP\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"gmG3WDqyUo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"GSoUu4FGCk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pending Saudas\",\"col\":3}},{\"id\":\"WNJ1tG-jbe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Pending Inwards\",\"col\":4}},{\"id\":\"aHAfKKemjx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock by Product\",\"col\":3}}]",
+ "creation": "2025-08-05 15:19:42.900306",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -34,7 +34,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-08-05 13:28:01.794020",
+ "modified": "2025-08-05 15:20:35.718771",
  "modified_by": "Administrator",
  "module": "Kisan Warehouse",
  "name": "Kisan Warehouse",
@@ -53,6 +53,14 @@
    "link_to": "Company",
    "stats_filter": "[]",
    "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Stock by Product",
+   "link_to": "Stock by Product",
+   "report_ref_doctype": "Inward Item Detail",
+   "type": "Report"
   },
   {
    "color": "Grey",
