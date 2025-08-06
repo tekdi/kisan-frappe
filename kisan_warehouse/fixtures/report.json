@@ -1,5 +1,49 @@
 [
  {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-05 14:30:00",
+  "module": "Inwards",
+  "name": "Tally Inward Report",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward",
+  "reference_report": null,
+  "report_name": "Tally Inward Report",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   },
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Operator"
+   }
+  ],
+  "timeout": 0
+ },
+ {
   "add_total_row": 1,
   "add_translate_data": 0,
   "columns": [],
@@ -111,56 +155,6 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-05 17:30:00",
-  "module": "Warehouses",
-  "name": "Stock by Warehouse",
-  "prepared_report": 0,
-  "query": "",
-  "ref_doctype": "Inward Item Detail",
-  "reference_report": null,
-  "report_name": "Stock by Warehouse",
-  "report_script": null,
-  "report_type": "Script Report",
-  "roles": [
-   {
-    "parent": "Stock by Warehouse",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "System Manager"
-   },
-   {
-    "parent": "Stock by Warehouse",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Administrator"
-   },
-   {
-    "parent": "Stock by Warehouse",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Accountant"
-   },
-   {
-    "parent": "Stock by Warehouse",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Operator"
-   }
-  ],
-  "timeout": 0
- },
- {
-  "add_total_row": 1,
-  "add_translate_data": 0,
-  "columns": [],
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "Yes",
-  "javascript": null,
-  "json": null,
-  "letter_head": "",
   "modified": "2025-08-04 14:30:00",
   "module": "Saudas",
   "name": "Pending Saudas",
@@ -192,6 +186,56 @@
    },
    {
     "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Operator"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-05 17:30:00",
+  "module": "Warehouses",
+  "name": "Stock by Warehouse",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward Item Detail",
+  "reference_report": null,
+  "report_name": "Stock by Warehouse",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   },
+   {
+    "parent": "Stock by Warehouse",
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "Operator"
