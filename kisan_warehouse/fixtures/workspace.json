@@ -49,7 +49,7 @@
     "type": "Link"
    }
   ],
-  "modified": "2025-08-05 20:14:09.131451",
+  "modified": "2025-08-07 13:47:47.617970",
   "module": "Kisan Warehouse",
   "name": "Kisan Warehouse",
   "number_cards": [],
@@ -57,7 +57,14 @@
   "public": 1,
   "quick_lists": [],
   "restrict_to_domain": null,
-  "roles": [],
+  "roles": [
+   {
+    "parent": "Kisan Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "Operator"
+   }
+  ],
   "sequence_id": 28.0,
   "shortcuts": [
    {
