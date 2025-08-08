@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-07-22 18:22:53.678838",
+ "creation": "2025-08-08 17:59:49.687726",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -81,7 +81,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 18:22:53.702842",
+ "modified": "2025-08-08 18:02:16.525889",
  "modified_by": "Administrator",
  "module": "company",
  "name": "Company",

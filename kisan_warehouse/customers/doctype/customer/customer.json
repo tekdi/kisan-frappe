@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-22 18:22:53.558783",
+ "creation": "2025-08-08 17:59:49.507731",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -207,7 +207,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 18:22:53.590238",
+ "modified": "2025-08-08 17:59:49.550932",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
@@ -228,7 +228,9 @@
   }
  ],
  "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "first_name"
 }
