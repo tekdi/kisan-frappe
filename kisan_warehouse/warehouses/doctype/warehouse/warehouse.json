@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-22 18:22:53.442343",
+ "creation": "2025-08-08 17:59:49.291215",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -76,7 +76,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 18:22:53.462598",
+ "modified": "2025-08-08 18:02:54.454576",
  "modified_by": "Administrator",
  "module": "warehouses",
  "name": "Warehouse",
@@ -97,7 +97,9 @@
   }
  ],
  "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "warehouse_name"
 }
