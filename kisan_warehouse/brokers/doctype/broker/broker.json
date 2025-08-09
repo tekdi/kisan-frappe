@@ -2,45 +2,83 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-07-22 13:28:17.115578",
+ "creation": "2025-08-08 18:15:49.543480",
  "custom": 1,
  "default_view": "List",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "basic_info_section",
   "naming_series",
   "broker_type",
+  "column_break_wwnc",
+  "broker_status",
+  "section_break_bvei",
   "first_name",
+  "column_break_eyyn",
   "middle_name",
+  "column_break_ubkv",
   "last_name",
+  "address_info",
   "address",
+  "section_break_kqry",
   "city",
+  "column_break_ykfb",
   "state",
+  "column_break_yfzb",
   "zip",
+  "contact_info",
   "mobile",
+  "column_break_orgi",
   "alternate_mobile",
+  "column_break_baxj",
   "email",
-  "commission_rate",
+  "identiy_individual_section",
   "aadhar_number",
-  "pan",
+  "column_break_pcio",
   "aadhar_verified",
+  "column_break_mhva",
   "aadhar_verified_date",
-  "gstin",
+  "section_break_hypr",
+  "pan_number",
+  "column_break_ousr",
+  "pan_verified",
+  "column_break_dirx",
+  "pan_verified_on",
+  "identity_company_section",
+  "gstin_number",
+  "column_break_dryx",
   "gstin_verified",
+  "column_break_hbdz",
   "gstin_verified_date",
+  "bank_info_section",
   "bank_account_name",
-  "bank_account_no",
   "ifsc_code",
+  "column_break_drgj",
+  "bank_account_no",
   "bank_name",
+  "upload_doc_section",
+  "aadhar_card",
+  "column_break_kqes",
+  "pan_card",
+  "column_break_flqe",
   "cancel_cheque",
+  "additional_info_section",
+  "commission_rate",
   "small_text_nobm",
-  "broker_status"
+  "broker_consent"
  ],
  "fields": [
+  {
+   "fieldname": "basic_info_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
   {
    "default": "BR-.YYYY.-.####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Naming Series",
    "options": "BR-.YYYY.-.####",
    "reqd": 1
@@ -55,6 +93,23 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_wwnc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "broker_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_bvei",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "first_name",
    "fieldtype": "Data",
    "in_filter": 1,
@@ -65,9 +120,17 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_eyyn",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "middle_name",
    "fieldtype": "Data",
    "label": "Middle Name"
+  },
+  {
+   "fieldname": "column_break_ubkv",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "last_name",
@@ -80,10 +143,19 @@
    "reqd": 1
   },
   {
+   "fieldname": "address_info",
+   "fieldtype": "Section Break",
+   "label": "Address Information"
+  },
+  {
    "fieldname": "address",
    "fieldtype": "Small Text",
    "label": "Address",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_kqry",
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "city",
@@ -95,10 +167,18 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_ykfb",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "state",
    "fieldtype": "Data",
    "label": "State",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yfzb",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "zip",
@@ -107,10 +187,19 @@
    "reqd": 1
   },
   {
+   "fieldname": "contact_info",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
    "fieldname": "mobile",
    "fieldtype": "Data",
    "label": "Mobile",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_orgi",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "alternate_mobile",
@@ -118,15 +207,18 @@
    "label": "Alternate Mobile"
   },
   {
+   "fieldname": "column_break_baxj",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email"
   },
   {
-   "fieldname": "commission_rate",
-   "fieldtype": "Float",
-   "label": "Commission Rate (%)",
-   "non_negative": 1
+   "fieldname": "identiy_individual_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Individual)"
   },
   {
    "fieldname": "aadhar_number",
@@ -134,9 +226,8 @@
    "label": "Aadhar Number"
   },
   {
-   "fieldname": "pan",
-   "fieldtype": "Data",
-   "label": "PAN Number"
+   "fieldname": "column_break_pcio",
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
@@ -145,14 +236,55 @@
    "label": "Aadhar Verified?"
   },
   {
+   "fieldname": "column_break_mhva",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "aadhar_verified_date",
    "fieldtype": "Date",
    "label": "Aadhar Verified On"
   },
   {
-   "fieldname": "gstin",
+   "fieldname": "section_break_hypr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "fieldname": "column_break_ousr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "pan_verified",
+   "fieldtype": "Check",
+   "label": "PAN Verified?"
+  },
+  {
+   "fieldname": "column_break_dirx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pan_verified_on",
+   "fieldtype": "Date",
+   "label": "PAN Verified On"
+  },
+  {
+   "fieldname": "identity_company_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Company)"
+  },
+  {
+   "fieldname": "gstin_number",
    "fieldtype": "Data",
    "label": "GSTIN"
+  },
+  {
+   "fieldname": "column_break_dryx",
+   "fieldtype": "Column Break"
   },
   {
    "default": "0",
@@ -161,20 +293,23 @@
    "label": "GSTIN Verified?"
   },
   {
+   "fieldname": "column_break_hbdz",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "gstin_verified_date",
    "fieldtype": "Date",
    "label": "GSTIN Verified On"
   },
   {
+   "fieldname": "bank_info_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Account Information"
+  },
+  {
    "fieldname": "bank_account_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "bank_account_no",
-   "fieldtype": "Data",
-   "label": "Account Number",
    "reqd": 1
   },
   {
@@ -184,10 +319,45 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_drgj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "reqd": 1
+  },
+  {
    "fieldname": "bank_name",
    "fieldtype": "Data",
    "label": "Bank Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "upload_doc_section",
+   "fieldtype": "Section Break",
+   "label": "Upload Documents"
+  },
+  {
+   "fieldname": "aadhar_card",
+   "fieldtype": "Attach Image",
+   "label": "Aadhar Card",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kqes",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pan_card",
+   "fieldtype": "Attach Image",
+   "label": "PAN Card",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_flqe",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "cancel_cheque",
@@ -196,23 +366,31 @@
    "reqd": 1
   },
   {
+   "fieldname": "additional_info_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Float",
+   "label": "Commission Rate (%)",
+   "non_negative": 1
+  },
+  {
    "fieldname": "small_text_nobm",
    "fieldtype": "Small Text"
   },
   {
-   "fieldname": "broker_status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Status",
-   "options": "Active\nInactive",
-   "reqd": 1
+   "default": "0",
+   "fieldname": "broker_consent",
+   "fieldtype": "Check",
+   "label": "I confirm that the customer has provided consent to store and use their details for transactions as per applicable laws."
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-22 13:35:56.039904",
+ "modified": "2025-08-09 15:25:52.387747",
  "modified_by": "Administrator",
  "module": "brokers",
  "name": "Broker",
@@ -233,7 +411,9 @@
   }
  ],
  "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "first_name"
 }

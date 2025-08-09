@@ -2,19 +2,20 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:vehicle_number",
- "creation": "2025-08-08 17:59:49.360049",
+ "creation": "2025-08-08 18:15:49.302035",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "vehicle_number",
   "driver_name",
-  "driver_mobile",
   "driver_license",
-  "vehicle_capacity",
   "owner_name",
-  "owner_mobile",
-  "vehicle_status"
+  "column_break_rrjq",
+  "vehicle_status",
+  "driver_mobile",
+  "vehicle_capacity",
+  "owner_mobile"
  ],
  "fields": [
   {
@@ -32,19 +33,9 @@
    "label": "Driver Name"
   },
   {
-   "fieldname": "driver_mobile",
-   "fieldtype": "Data",
-   "label": "Driver Mobile"
-  },
-  {
    "fieldname": "driver_license",
    "fieldtype": "Data",
    "label": "Driver License"
-  },
-  {
-   "fieldname": "vehicle_capacity",
-   "fieldtype": "Float",
-   "label": "Vehicle Capacity"
   },
   {
    "fieldname": "owner_name",
@@ -52,9 +43,8 @@
    "label": "Owner Name"
   },
   {
-   "fieldname": "owner_mobile",
-   "fieldtype": "Data",
-   "label": "Owner Mobile"
+   "fieldname": "column_break_rrjq",
+   "fieldtype": "Column Break"
   },
   {
    "default": "Active",
@@ -64,12 +54,27 @@
    "label": "Status",
    "options": "Active\nInactive",
    "reqd": 1
+  },
+  {
+   "fieldname": "driver_mobile",
+   "fieldtype": "Data",
+   "label": "Driver Mobile"
+  },
+  {
+   "fieldname": "vehicle_capacity",
+   "fieldtype": "Float",
+   "label": "Vehicle Capacity"
+  },
+  {
+   "fieldname": "owner_mobile",
+   "fieldtype": "Data",
+   "label": "Owner Mobile"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-08 17:59:49.444748",
+ "modified": "2025-08-09 15:10:50.762239",
  "modified_by": "Administrator",
  "module": "vehicles",
  "name": "Vehicle",
