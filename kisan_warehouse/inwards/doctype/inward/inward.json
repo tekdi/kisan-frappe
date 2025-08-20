@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-09 15:30:26.727564",
+ "creation": "2025-08-20 14:38:02.308728",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -75,7 +75,9 @@
   "column_break_bbhm",
   "inward_payment_status",
   "section_break_lilp",
-  "inward_payments"
+  "inward_payments",
+  "section_break_9gxz",
+  "upload_documents"
  ],
  "fields": [
   {
@@ -475,12 +477,22 @@
    "fieldname": "inward_payments",
    "fieldtype": "Table",
    "options": "Inward Payment"
+  },
+  {
+   "fieldname": "section_break_9gxz",
+   "fieldtype": "Section Break",
+   "label": "Upload Documents"
+  },
+  {
+   "fieldname": "upload_documents",
+   "fieldtype": "Table",
+   "options": "Upload Documents"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-19 13:58:43.786651",
+ "modified": "2025-08-20 15:00:26.252519",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
