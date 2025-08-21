@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-09 15:30:26.626128",
+ "creation": "2025-08-20 16:15:07.881621",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -19,6 +19,7 @@
   "sauda_status",
   "party_info_section",
   "customer",
+  "customer_email",
   "column_break_xetv",
   "warehouse",
   "column_break_wmob",
@@ -140,6 +141,17 @@
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
+  },
+  {
+   "fieldname": "customer_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer Email",
+   "options": "Email",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_xetv",
@@ -311,7 +323,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-19 13:54:42.362643",
+ "modified": "2025-08-21 16:16:58.884858",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
