@@ -4,7 +4,7 @@ app_publisher = "Deepak Patil"
 app_description = "KisanMitra Warehouse Management System"
 app_email = "deepak_p@tekditechnologies.com"
 app_license = "mit"
-email_account_email = "gafasox424@baxidy.com"
+
 # Export Enhanced fixtures
 fixtures = [
     # Core DocTypes
@@ -88,12 +88,6 @@ fixtures = [
     {
         "dt": "Notification",
         "filters": [["name", "in", ["Sauda Saved"]]]
-    },
-
-    # Email Accounts
-    {
-        "dt": "Email Account",
-        "filters": [["email_id", "in", [email_account_email]]]
     }
     
 ]
