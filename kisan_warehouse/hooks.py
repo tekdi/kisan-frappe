@@ -88,6 +88,25 @@ fixtures = [
     {
         "dt": "Notification",
         "filters": [["name", "in", ["Sauda Saved"]]]
+    },
+
+    "Workflow",
+    "Workflow State", 
+    "Workflow Document State",
+    "Workflow Action",
+    "Workflow Transition",
+    "Workflow Action Master",
+    
+    # Custom Roles
+    {
+        "dt": "Role",
+        "filters": [
+            ["name", "in", [
+                "Kisan Admin", 
+                "Kisan Accountant", 
+                "Kisan Operator"
+            ]]
+        ]
     }
     
 ]
