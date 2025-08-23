@@ -12,7 +12,7 @@
   "is_hidden": 0,
   "label": "Kisan Warehouse",
   "links": [],
-  "modified": "2025-08-08 17:59:32.217040",
+  "modified": "2025-08-22 19:43:16",
   "module": "Kisan Warehouse",
   "name": "Kisan Warehouse",
   "number_cards": [],
@@ -20,7 +20,32 @@
   "public": 1,
   "quick_lists": [],
   "restrict_to_domain": null,
-  "roles": [],
+  "roles": [
+   {
+    "parent": "Kisan Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Kisan Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Kisan Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Kisan Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Workspace",
+    "role": "Kisan Operator"
+   }
+  ],
   "sequence_id": 29.0,
   "shortcuts": [
    {
