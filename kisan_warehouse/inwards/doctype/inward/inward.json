@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-20 14:38:02.308728",
+ "creation": "2025-08-23 19:19:05.797973",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -107,7 +107,6 @@
   },
   {
    "bold": 1,
-   "default": "now",
    "fieldname": "bill_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
@@ -120,12 +119,10 @@
   },
   {
    "bold": 1,
-   "default": "now",
    "fieldname": "arrival_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Arr. Date",
-   "options": "now",
    "reqd": 1
   },
   {
@@ -397,6 +394,7 @@
    "label": "Additional Information"
   },
   {
+   "fetch_from": "broker.commission_rate",
    "fieldname": "broker_commission_percent",
    "fieldtype": "Percent",
    "label": "Broker Commission (%)"
@@ -492,7 +490,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-20 15:00:26.252519",
+ "modified": "2025-08-25 14:28:52.755569",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
@@ -508,6 +506,39 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
    "share": 1,
    "write": 1
   }

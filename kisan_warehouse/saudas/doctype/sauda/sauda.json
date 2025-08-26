@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-20 16:15:07.881621",
+ "creation": "2025-08-23 19:19:05.693447",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -86,7 +86,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Booking Type",
-   "options": "\nInward\nOutward",
+   "options": "\nInward / Purchase\nOutward / Sales",
    "reqd": 1
   },
   {
@@ -99,7 +99,7 @@
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Company",
+   "label": "Our Company",
    "options": "Company",
    "reqd": 1
   },
@@ -323,7 +323,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-21 16:16:58.884858",
+ "modified": "2025-08-25 13:49:56.251104",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
@@ -339,6 +339,39 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
    "share": 1,
    "write": 1
   }
