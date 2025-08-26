@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-20 14:38:00.982422",
+ "creation": "2025-08-23 19:19:05.411410",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -57,6 +57,7 @@
   "column_break_lffq",
   "bank_account_no",
   "bank_name",
+  "branch_name",
   "document_section",
   "upload_documents",
   "additional_section",
@@ -84,7 +85,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Customer Type",
-   "options": "\nIndividual\nCompany",
+   "options": "\nIndividual / Farmer\nCompany / Trader",
    "reqd": 1
   },
   {
@@ -215,6 +216,7 @@
    "label": "Email"
   },
   {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
    "fieldname": "identity_verification_section",
    "fieldtype": "Section Break",
    "label": "Identity Verification (For Individual)"
@@ -272,6 +274,7 @@
    "label": "PAN Verified On"
   },
   {
+   "depends_on": "eval:doc.customer_type==\"Company / Trader\"",
    "fieldname": "indentity_verify_comp_section",
    "fieldtype": "Section Break",
    "label": "Identity Verification (For Company)"
@@ -335,6 +338,11 @@
    "reqd": 1
   },
   {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
    "fieldname": "document_section",
    "fieldtype": "Section Break",
    "label": "Upload Documents"
@@ -365,7 +373,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-20 15:00:26.250609",
+ "modified": "2025-08-25 14:37:19.294191",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
@@ -381,6 +389,39 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
    "share": 1,
    "write": 1
   }
