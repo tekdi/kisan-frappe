@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:vehicle_number",
- "creation": "2025-08-08 18:15:49.302035",
+ "creation": "2025-08-26 12:32:56.359732",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -74,7 +74,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-09 15:10:50.762239",
+ "modified": "2025-08-26 12:32:56.481642",
  "modified_by": "Administrator",
  "module": "vehicles",
  "name": "Vehicle",
@@ -90,6 +90,39 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
    "share": 1,
    "write": 1
   }
