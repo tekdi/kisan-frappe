@@ -81,7 +81,13 @@
   "section_break_lilp",
   "inward_payments",
   "section_break_9gxz",
-  "upload_documents"
+  "upload_documents",
+  "section_break_owjw",
+  "average_weight_per_bag_kg_column",
+  "no_of_bags",
+  "average_weight_per_bag",
+  "section_break_qped",
+  "bags"
  ],
  "fields": [
   {
@@ -509,12 +515,41 @@
    "fieldname": "upload_documents",
    "fieldtype": "Table",
    "options": "Upload Documents"
+  },
+  {
+   "fieldname": "section_break_owjw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "average_weight_per_bag_kg_column",
+   "fieldtype": "Column Break",
+   "label": "Average Weight Per Bag (kg)"
+  },
+  {
+   "fieldname": "no_of_bags",
+   "fieldtype": "Data",
+   "label": "No of Bags"
+  },
+  {
+   "fieldname": "average_weight_per_bag",
+   "fieldtype": "Float",
+   "label": "Average Weight Per Bag (kg)"
+  },
+  {
+   "fieldname": "section_break_qped",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bags",
+   "fieldtype": "Table",
+   "label": "Bags",
+   "options": "Bags"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-28 11:14:07.348778",
+ "modified": "2025-09-01 17:24:37.434707",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
