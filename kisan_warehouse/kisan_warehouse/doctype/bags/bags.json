@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-28 16:13:43.742717",
+ "custom": 1,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_noub",
+  "bag_type",
+  "no_of_bags",
+  "charge",
+  "gross_weight",
+  "deduct_weight",
+  "arrival_weight"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_noub",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bag_type",
+   "fieldtype": "Select",
+   "label": "Bag Type",
+   "options": "Plastic\nJute"
+  },
+  {
+   "fieldname": "no_of_bags",
+   "fieldtype": "Data",
+   "label": "No of Bags"
+  },
+  {
+   "fieldname": "charge",
+   "fieldtype": "Data",
+   "label": "Charge"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Data",
+   "label": "Gross Weight (Kg)"
+  },
+  {
+   "fieldname": "deduct_weight",
+   "fieldtype": "Data",
+   "label": "Deduct weight (Kg)"
+  },
+  {
+   "fieldname": "arrival_weight",
+   "fieldtype": "Data",
+   "label": "Arrival Weight"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-01 17:24:37.383102",
+ "modified_by": "Administrator",
+ "module": "Kisan Warehouse",
+ "name": "Bags",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
