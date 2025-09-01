@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-23 19:19:05.411410",
+ "creation": "2025-08-26 12:32:56.643607",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -213,7 +213,8 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "options": "Email"
   },
   {
    "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
@@ -373,7 +374,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-25 14:37:19.294191",
+ "modified": "2025-08-26 15:04:28.493318",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",

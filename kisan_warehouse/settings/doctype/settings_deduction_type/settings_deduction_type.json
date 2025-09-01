@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-08 17:59:49.142041",
+ "creation": "2025-08-26 12:32:55.770455",
  "custom": 1,
  "doctype": "DocType",
  "editable_grid": 1,
@@ -51,7 +51,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-08 17:59:49.181522",
+ "modified": "2025-08-26 12:32:55.860531",
  "modified_by": "Administrator",
  "module": "settings",
  "name": "Settings Deduction Type",

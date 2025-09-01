@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-08 17:59:49.093879",
+ "creation": "2025-08-26 12:32:55.613246",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -20,7 +20,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-08 17:59:49.126307",
+ "modified": "2025-08-26 12:32:55.708717",
  "modified_by": "Administrator",
  "module": "settings",
  "name": "App Settings",
