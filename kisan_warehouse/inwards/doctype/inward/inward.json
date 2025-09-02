@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-08-26 12:32:58.044539",
+ "creation": "2025-09-02 07:50:15.941102",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -26,6 +26,20 @@
   "column_break_xitv",
   "warehouse",
   "broker",
+  "vendor_information_section",
+  "vendor_doc_no",
+  "vendor_date",
+  "column_break_ewjd",
+  "invoice_no",
+  "vehicle_no",
+  "column_break_f44t",
+  "vendor_amount",
+  "inward_total_bags",
+  "column_break_e6bm",
+  "gross_weight",
+  "rate_per_quintal",
+  "column_break_4ute",
+  "our_gstin",
   "item_details",
   "inward_items",
   "weight_information_section",
@@ -81,13 +95,7 @@
   "section_break_lilp",
   "inward_payments",
   "section_break_9gxz",
-  "upload_documents",
-  "section_break_owjw",
-  "average_weight_per_bag_kg_column",
-  "no_of_bags",
-  "average_weight_per_bag",
-  "section_break_qped",
-  "bags"
+  "upload_documents"
  ],
  "fields": [
   {
@@ -212,6 +220,76 @@
    "fieldtype": "Link",
    "label": "Broker",
    "options": "Broker"
+  },
+  {
+   "fieldname": "vendor_information_section",
+   "fieldtype": "Section Break",
+   "label": "Vendor Information"
+  },
+  {
+   "fieldname": "vendor_doc_no",
+   "fieldtype": "Int",
+   "label": "Vendor Doc No"
+  },
+  {
+   "fieldname": "vendor_date",
+   "fieldtype": "Date",
+   "label": "Vendor Date"
+  },
+  {
+   "fieldname": "column_break_ewjd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Int",
+   "label": "Invoice No"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No"
+  },
+  {
+   "fieldname": "column_break_f44t",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_amount",
+   "fieldtype": "Float",
+   "label": "Vendor Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "inward_total_bags",
+   "fieldtype": "Int",
+   "label": "Total Bags"
+  },
+  {
+   "fieldname": "column_break_e6bm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "label": "Gross Weight",
+   "precision": "2"
+  },
+  {
+   "fieldname": "rate_per_quintal",
+   "fieldtype": "Float",
+   "label": "Rate (per Quintal)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_4ute",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "our_gstin",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Our GSTIN"
   },
   {
    "fieldname": "item_details",
@@ -515,41 +593,12 @@
    "fieldname": "upload_documents",
    "fieldtype": "Table",
    "options": "Upload Documents"
-  },
-  {
-   "fieldname": "section_break_owjw",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "average_weight_per_bag_kg_column",
-   "fieldtype": "Column Break",
-   "label": "Average Weight Per Bag (kg)"
-  },
-  {
-   "fieldname": "no_of_bags",
-   "fieldtype": "Data",
-   "label": "No of Bags"
-  },
-  {
-   "fieldname": "average_weight_per_bag",
-   "fieldtype": "Float",
-   "label": "Average Weight Per Bag (kg)"
-  },
-  {
-   "fieldname": "section_break_qped",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "bags",
-   "fieldtype": "Table",
-   "label": "Bags",
-   "options": "Bags"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-01 17:24:37.434707",
+ "modified": "2025-09-02 15:34:01.339814",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",

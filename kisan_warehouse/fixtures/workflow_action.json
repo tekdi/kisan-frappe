@@ -4,6 +4,330 @@
   "completed_by_role": "Kisan Admin",
   "docstatus": 0,
   "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:26:01.004458",
+  "name": "l3akh6nohs",
+  "permitted_roles": [
+   {
+    "parent": "l3akh6nohs",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "l3akh6nohs",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "l3akh6nohs",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Customer",
+  "reference_name": "CUST-2025-0001",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Kisan Accountant",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:27:37.532831",
+  "name": "m1f6ludff0",
+  "permitted_roles": [
+   {
+    "parent": "m1f6ludff0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "m1f6ludff0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "m1f6ludff0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Customer",
+  "reference_name": "CUST-2025-0002",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "kisanaccountant@gmail.com",
+  "completed_by_role": "Kisan Accountant",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:29:21.446489",
+  "name": "n1utsnk5ek",
+  "permitted_roles": [
+   {
+    "parent": "n1utsnk5ek",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "n1utsnk5ek",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "n1utsnk5ek",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Broker",
+  "reference_name": "BR-2025-0001",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "kisanoperator@gmail.com",
+  "completed_by_role": "Kisan Operator",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:30:00.408112",
+  "name": "ne4tev85fv",
+  "permitted_roles": [
+   {
+    "parent": "ne4tev85fv",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "ne4tev85fv",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "ne4tev85fv",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Warehouse",
+  "reference_name": "WH-2025-0001",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "kisanaccountant@gmail.com",
+  "completed_by_role": "Kisan Accountant",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:30:03.352708",
+  "name": "nf1q4artgu",
+  "permitted_roles": [
+   {
+    "parent": "nf1q4artgu",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "nf1q4artgu",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Warehouse",
+  "reference_name": "WH-2025-0001",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Pending"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:31:26.044561",
+  "name": "o8sl1559me",
+  "permitted_roles": [
+   {
+    "parent": "o8sl1559me",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "o8sl1559me",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "o8sl1559me",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Company",
+  "reference_name": "o8s4eta9er",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:32:10.356234",
+  "name": "omn8e3mljl",
+  "permitted_roles": [
+   {
+    "parent": "omn8e3mljl",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "omn8e3mljl",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "omn8e3mljl",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Product",
+  "reference_name": "PROD-2025-0001",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-23 19:48:33.481933",
+  "name": "29u7jc9jr7",
+  "permitted_roles": [
+   {
+    "parent": "29u7jc9jr7",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "29u7jc9jr7",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "29u7jc9jr7",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Vehicle",
+  "reference_name": "vehvicle",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Kisan Accountant",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-25 14:22:49.722657",
+  "name": "quh6gpfttg",
+  "permitted_roles": [
+   {
+    "parent": "quh6gpfttg",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "quh6gpfttg",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "quh6gpfttg",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   }
+  ],
+  "reference_doctype": "Broker",
+  "reference_name": "BR-2025-0002",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Kisan Accountant",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-08-28 16:10:08.972186",
+  "name": "t2peme7msp",
+  "permitted_roles": [
+   {
+    "parent": "t2peme7msp",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "t2peme7msp",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "t2peme7msp",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Sauda",
+  "reference_name": "SAUDA-2025-0002",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "kisanadmin@gmail.com",
+  "completed_by_role": "Kisan Admin",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
   "modified": "2025-08-22 11:06:42.908471",
   "name": "4pdstvuqgg",
   "permitted_roles": [
@@ -924,8 +1248,8 @@
   "workflow_state": "Pending"
  },
  {
-  "completed_by": null,
-  "completed_by_role": null,
+  "completed_by": "Administrator",
+  "completed_by_role": "Kisan Accountant",
   "docstatus": 0,
   "doctype": "Workflow Action",
   "modified": "2025-08-22 18:39:29.465472",
@@ -946,7 +1270,7 @@
   ],
   "reference_doctype": "Sauda",
   "reference_name": "SAUDA-2025-0001",
-  "status": "Open",
+  "status": "Completed",
   "user": null,
   "workflow_state": "Pending"
  },
@@ -1135,5 +1459,38 @@
   "status": "Completed",
   "user": null,
   "workflow_state": "Pending"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-02 15:43:36.079971",
+  "name": "890smkj03q",
+  "permitted_roles": [
+   {
+    "parent": "890smkj03q",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "890smkj03q",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "890smkj03q",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Inward",
+  "reference_name": "INW-2025-0003",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
  }
 ]
