@@ -1,12 +1,13 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-26 12:32:55.613246",
+ "creation": "2025-09-02 07:50:13.371549",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "default_deduction_types"
+  "default_deduction_types",
+  "default_bag_types"
  ],
  "fields": [
   {
@@ -14,13 +15,19 @@
    "fieldtype": "Table",
    "label": "Default Deduction Types",
    "options": "Settings Deduction Type"
+  },
+  {
+   "fieldname": "default_bag_types",
+   "fieldtype": "Table",
+   "label": "Default Bag Types",
+   "options": "Settings Bag Type"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-26 12:32:55.708717",
+ "modified": "2025-09-02 09:12:01.104767",
  "modified_by": "Administrator",
  "module": "settings",
  "name": "App Settings",

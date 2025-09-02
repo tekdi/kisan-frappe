@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-08-26 12:32:57.430834",
+ "creation": "2025-09-02 07:50:15.312597",
  "custom": 1,
  "doctype": "DocType",
  "editable_grid": 1,
@@ -70,7 +70,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-26 12:32:57.513872",
+ "modified": "2025-09-02 07:50:15.412692",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Deduction",
