@@ -1492,5 +1492,38 @@
   "status": "Open",
   "user": null,
   "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-03 13:33:01.207651",
+  "name": "7gk43b5km0",
+  "permitted_roles": [
+   {
+    "parent": "7gk43b5km0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "7gk43b5km0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "7gk43b5km0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   }
+  ],
+  "reference_doctype": "Sauda",
+  "reference_name": "SAUDA-2025-0003",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
  }
 ]
