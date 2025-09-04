@@ -13,7 +13,8 @@
   "actual_value",
   "difference_value",
   "charges_per_unit",
-  "deduction_amount"
+  "deduction_amount",
+  "deduction_category"
  ],
  "fields": [
   {
@@ -64,13 +65,19 @@
    "label": "Amount",
    "non_negative": 1,
    "precision": "2"
+  },
+  {
+   "fieldname": "deduction_category",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Deduction Category"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-02 07:50:15.412692",
+ "modified": "2025-09-04 13:15:49.109115",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Deduction",
