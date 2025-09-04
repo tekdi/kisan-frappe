@@ -1525,5 +1525,104 @@
   "status": "Open",
   "user": null,
   "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-03 17:20:02.954997",
+  "name": "chdml2htjj",
+  "permitted_roles": [
+   {
+    "parent": "chdml2htjj",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "chdml2htjj",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "chdml2htjj",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   }
+  ],
+  "reference_doctype": "Inward",
+  "reference_name": "INW-2025-0004",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-03 18:52:52.164008",
+  "name": "2tpoqms02j",
+  "permitted_roles": [
+   {
+    "parent": "2tpoqms02j",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "2tpoqms02j",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "2tpoqms02j",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   }
+  ],
+  "reference_doctype": "Sauda",
+  "reference_name": "SAUDA-2025-0004",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-04 13:09:08.863147",
+  "name": "590jjnese6",
+  "permitted_roles": [
+   {
+    "parent": "590jjnese6",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "590jjnese6",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Operator"
+   },
+   {
+    "parent": "590jjnese6",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Kisan Admin"
+   }
+  ],
+  "reference_doctype": "Inward",
+  "reference_name": "INW-2025-0006",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
  }
 ]
