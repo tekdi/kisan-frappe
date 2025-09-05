@@ -48,16 +48,18 @@
    "label": "Description"
   },
   {
+   "default": "single",
    "fieldname": "deduction_category",
-   "fieldtype": "Small Text",
-   "label": "Deduction Category"
+   "fieldtype": "Select",
+   "label": "Deduction Category",
+   "options": "single\nmultiple"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-02 19:32:48.261707",
+ "modified": "2025-09-04 16:53:59.887537",
  "modified_by": "Administrator",
  "module": "settings",
  "name": "Settings Deduction Type",

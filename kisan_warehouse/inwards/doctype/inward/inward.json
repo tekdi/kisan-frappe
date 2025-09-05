@@ -19,12 +19,11 @@
   "inward_status",
   "reference_information",
   "customer",
-  "vehicle",
-  "column_break_wizr",
   "product",
+  "column_break_wizr",
   "company",
-  "column_break_xitv",
   "warehouse",
+  "column_break_xitv",
   "broker",
   "vendor_information_section",
   "vendor_doc_no",
@@ -39,18 +38,18 @@
   "gross_weight",
   "rate_per_quintal",
   "column_break_4ute",
-  "our_gstin",
+  "vendor_gstin",
   "item_details",
   "inward_items",
   "weight_information_section",
   "total_gross_weight",
-  "column_break_emaq",
-  "total_bags",
-  "bag_type_count",
   "column_break_dwid",
   "total_arrival_weight",
   "column_break_ngsq",
   "total_amount",
+  "column_break_emaq",
+  "total_bags",
+  "bag_type_count",
   "deductions_section",
   "deductions",
   "total_deductions",
@@ -181,22 +180,15 @@
    "reqd": 1
   },
   {
-   "fieldname": "vehicle",
-   "fieldtype": "Link",
-   "label": "Vehicle",
-   "options": "Vehicle",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_wizr",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "product",
    "fieldtype": "Link",
    "label": "Product",
    "options": "Product",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wizr",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "company",
@@ -206,15 +198,15 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_xitv",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "warehouse",
    "fieldtype": "Link",
    "label": "Warehouse",
    "options": "Warehouse",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xitv",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "broker",
@@ -249,7 +241,8 @@
   {
    "fieldname": "vehicle_no",
    "fieldtype": "Data",
-   "label": "Vehicle No"
+   "label": "Vehicle No",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_f44t",
@@ -264,7 +257,8 @@
   {
    "fieldname": "inward_total_bags",
    "fieldtype": "Int",
-   "label": "Total Bags"
+   "label": "Total Bags",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_e6bm",
@@ -287,7 +281,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "our_gstin",
+   "fieldname": "vendor_gstin",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Our GSTIN"
@@ -315,23 +309,8 @@
    "label": "Total Gross Weight (kg)",
    "non_negative": 1,
    "precision": "2",
+   "read_only": 1,
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_emaq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "total_bags",
-   "fieldtype": "Int",
-   "label": "Total Bags",
-   "non_negative": 1
-  },
-  {
-   "fieldname": "bag_type_count",
-   "fieldtype": "Int",
-   "hidden": 1,
-   "label": "Bag Type Count"
   },
   {
    "fieldname": "column_break_dwid",
@@ -344,6 +323,7 @@
    "label": "Total Arr. Weight (kg)",
    "non_negative": 1,
    "precision": "2",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -356,7 +336,27 @@
    "fieldtype": "Currency",
    "label": "Total Amount",
    "non_negative": 1,
+   "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_emaq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_bags",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Total Bags",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "bag_type_count",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Bag Type Count",
+   "read_only": 1
   },
   {
    "fieldname": "deductions_section",
@@ -605,7 +605,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-04 13:15:49.298037",
+ "modified": "2025-09-04 18:17:35.776282",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
