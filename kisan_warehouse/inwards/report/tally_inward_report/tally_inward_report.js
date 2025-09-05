@@ -46,28 +46,45 @@ frappe.query_reports["Tally Inward Report"] = {
         }
     ],
 
-    "formatter": function (value, row, column, data, default_formatter) {
-        value = default_formatter(value, row, column, data);
+"formatter": function (value, row, column, data, default_formatter) {
+    value = default_formatter(value, row, column, data);
 
-        if (column.fieldname == "voucher_no" && value) {
-            // Make inward ID clickable
-            value = `<a href="/app/inward/${data[column.colIndex]}" target="_blank">${value}</a>`;
-        }
+    if (column.fieldname == "voucher_no" && value) {
+        // Make inward ID clickable
+        value = `<a href="/app/inward/${data[column.colIndex]}" target="_blank">${value}</a>`;
+    }
 
-        // Add color coding for amounts
-        if (column.fieldname == "amount" && parseFloat(value) > 0) {
-            value = `<span style="color: #28a745; font-weight: bold;">${value}</span>`;
-        }
-        
-        // Format GST percentages
-        if (column.fieldname.includes('gst') && column.fieldtype == 'Percent') {
-            value = value + '%';
-        }
+    // Add color coding for amounts
+    if (column.fieldname == "amount" && parseFloat(value || 0) > 0) {
+        value = `<span style="color: #28a745; font-weight: bold;">${value}</span>`;
+    }
+    
+    // Remove the GST percentage formatting - let Frappe handle it naturally
 
-        return value;
-    },
+    return value;
+},
 
     onload: function(report) {
+        // Add Reset Filters button
+        report.page.add_inner_button(__("Reset Filters"), function() {
+            // Reset all filters to default values
+            report.set_filter_value('from_date', frappe.datetime.add_months(frappe.datetime.get_today(), -1));
+            report.set_filter_value('to_date', frappe.datetime.get_today());
+            report.set_filter_value('customer', '');
+            report.set_filter_value('warehouse', '');
+            report.set_filter_value('product', '');
+            report.set_filter_value('broker', '');
+            report.set_filter_value('inward_status', '');
+            
+            // Refresh the report
+            report.refresh();
+            
+            frappe.show_alert({
+                message: __('Filters reset to default values'),
+                indicator: 'blue'
+            });
+        });
+
         // Add Export to Tally button
         report.page.add_inner_button(__("Export to Tally"), function() {
             let filters = report.get_filter_values();
@@ -81,8 +98,8 @@ frappe.query_reports["Tally Inward Report"] = {
                 indicator: 'blue'
             });
 
-            frappe.call({			
-				method: "kisan_warehouse.inwards.report.tally_inward_report.tally_inward_report.export_to_tally",			
+            frappe.call({
+                method: "kisan_warehouse.inwards.report.tally_inward_report.tally_inward_report.export_to_tally",
                 args: {
                     filters: filters
                 },
@@ -101,6 +118,7 @@ frappe.query_reports["Tally Inward Report"] = {
                     }
                 },
                 error: function(r) {
+                    console.log("Export Error:", r);
                     frappe.msgprint(__('Error generating Tally export. Please try again.'));
                 }
             });
@@ -114,10 +132,14 @@ frappe.query_reports["Tally Inward Report"] = {
 
     get_datatable_options(options) {
         return Object.assign({}, options, {
-            checkboxColumn: true
+            checkboxColumn: true,
+            events: {
+                onCheckRow: function(data) {
+                    console.log("Row selected:", data);
+                }
+            }
         });
-    }	
-
+    }
 };
 
 function show_summary_dialog(report) {
@@ -138,11 +160,11 @@ function show_summary_dialog(report) {
     };
 
     data.forEach(row => {
-        summary.total_quantity += parseFloat(row[7]) || 0; // Quantity column
-        summary.total_amount += parseFloat(row[9]) || 0;   // Amount column
-        summary.total_cgst += parseFloat(row[11]) || 0;    // CGST Amount
-        summary.total_sgst += parseFloat(row[13]) || 0;    // SGST Amount
-        summary.total_igst += parseFloat(row[15]) || 0;    // IGST Amount
+        summary.total_quantity += parseFloat(row[7]) || 0;  // Quantity column
+        summary.total_amount += parseFloat(row[9]) || 0;    // Amount column
+        summary.total_cgst += parseFloat(row[11]) || 0;     // CGST Amount
+        summary.total_sgst += parseFloat(row[13]) || 0;     // SGST Amount
+        summary.total_igst += parseFloat(row[15]) || 0;     // IGST Amount
     });
 
     // Create summary HTML
