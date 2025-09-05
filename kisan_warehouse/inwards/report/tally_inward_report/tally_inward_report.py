@@ -19,7 +19,7 @@ def execute(filters=None):
     return columns, data
 
 def get_columns():
-    """Define report columns with proper widths"""
+    """Define report columns with proper widths - EXACT Excel format"""
     return [
         {
             "label": _("Supplier A/c"),
@@ -34,10 +34,10 @@ def get_columns():
             "width": 180
         },
         {
-            "label": _("State"),
+            "label": _("State Name"),
             "fieldname": "state",
             "fieldtype": "Data", 
-            "width": 60
+            "width": 80
         },
         {
             "label": _("GSTIN"),
@@ -85,42 +85,42 @@ def get_columns():
             "precision": 2
         },
         {
-            "label": _("CGST"),
-            "fieldname": "cgst",
+            "label": _("CGST %"),
+            "fieldname": "cgst_percent",
             "fieldtype": "Percent",
-            "width": 60,
-            "precision": 1
+            "width": 70,
+            "precision": 2
         },
         {
-            "label": _("CGST Amt"),
+            "label": _("CGST"),
             "fieldname": "cgst_amount",
             "fieldtype": "Currency", 
             "width": 90,
             "precision": 2
         },
         {
-            "label": _("SGST"),
-            "fieldname": "sgst",
+            "label": _("SGST %"),
+            "fieldname": "sgst_percent",
             "fieldtype": "Percent",
-            "width": 60,
-            "precision": 1
+            "width": 70,
+            "precision": 2
         },
         {
-            "label": _("SGST Amt"),
+            "label": _("SGST"),
             "fieldname": "sgst_amount",
             "fieldtype": "Currency",
             "width": 90,
             "precision": 2
         },
         {
-            "label": _("IGST"),
-            "fieldname": "igst", 
+            "label": _("IGST %"),
+            "fieldname": "igst_percent", 
             "fieldtype": "Percent",
-            "width": 60,
-            "precision": 1
+            "width": 70,
+            "precision": 2
         },
         {
-            "label": _("IGST Amt"),
+            "label": _("IGST"),
             "fieldname": "igst_amount",
             "fieldtype": "Currency",
             "width": 90,
@@ -140,7 +140,7 @@ def get_columns():
             "width": 80
         },
         {
-            "label": _("UOM"),
+            "label": _("UNIT"),
             "fieldname": "uom",
             "fieldtype": "Data",
             "width": 60
@@ -181,28 +181,28 @@ def get_data(filters):
     
     where_clause = " AND ".join(conditions)
     
-    # SQL Query with proper COALESCE and formatting
+    # SQL Query with proper COALESCE and formatting - Using actual GST amount fields
     query = f"""
         SELECT 
             COALESCE(CONCAT(c.first_name, ' ', COALESCE(c.last_name, '')), c.first_name, '') as supplier_account,
             COALESCE(CONCAT(c.first_name, ' ', COALESCE(c.middle_name, ''), ' ', COALESCE(c.last_name, '')), '') as supplier_name,
-            COALESCE(c.state, 'MH') as state,
+            COALESCE(c.state, 'Maharashtra') as state,
             COALESCE(c.gstin, '') as gstin,
             COALESCE(CONCAT(c.first_name, ' ', COALESCE(c.last_name, '')), '') as customer_name,
-            'Purchase' as voucher_type,
+            'Purchase Import' as voucher_type,
             COALESCE(p.product_name, '') as product_name,
             COALESCE(i.total_arrival_weight, 0) as quantity,
             COALESCE(i.sub_total / NULLIF(i.total_arrival_weight, 0) * 100, 0) as rate,
             COALESCE(i.sub_total, 0) as amount,
-            COALESCE(i.cgst_percent, 0) as cgst,
-            COALESCE(i.sub_total * i.cgst_percent / 100, 0) as cgst_amount,
-            COALESCE(i.sgst_percent, 0) as sgst,
-            COALESCE(i.sub_total * i.sgst_percent / 100, 0) as sgst_amount,
-            COALESCE(i.igst_percent, 0) as igst,
-            COALESCE(i.sub_total * i.igst_percent / 100, 0) as igst_amount,
+            COALESCE(i.cgst_percent, 0) as cgst_percent,
+            COALESCE(i.cgst_amount, 0) as cgst_amount,
+            COALESCE(i.sgst_percent, 0) as sgst_percent,
+            COALESCE(i.sgst_amount, 0) as sgst_amount,
+            COALESCE(i.igst_percent, 0) as igst_percent,
+            COALESCE(i.igst_amount, 0) as igst_amount,
             i.name as voucher_no,
-            COALESCE(p.hsn_code, '05-0...') as hsn_code,
-            'Kg' as uom
+            COALESCE(p.hsn_code, '') as hsn_code,
+            'nos' as uom
         FROM 
             `tabInward` i
         LEFT JOIN `tabCustomer` c ON i.customer = c.name
@@ -222,11 +222,11 @@ def get_data(filters):
         row['quantity'] = flt(row['quantity'], 2)
         row['rate'] = flt(row['rate'], 2) 
         row['amount'] = flt(row['amount'], 2)
-        row['cgst'] = flt(row['cgst'], 2)
+        row['cgst_percent'] = flt(row['cgst_percent'], 2)
         row['cgst_amount'] = flt(row['cgst_amount'], 2)
-        row['sgst'] = flt(row['sgst'], 2)
+        row['sgst_percent'] = flt(row['sgst_percent'], 2)
         row['sgst_amount'] = flt(row['sgst_amount'], 2)
-        row['igst'] = flt(row['igst'], 2)
+        row['igst_percent'] = flt(row['igst_percent'], 2)
         row['igst_amount'] = flt(row['igst_amount'], 2)
         
         # Clean up text fields and handle empty values
@@ -238,7 +238,7 @@ def get_data(filters):
         # Ensure no empty strings become None
         for key, value in row.items():
             if value is None or value == '':
-                if key in ['quantity', 'rate', 'amount', 'cgst', 'cgst_amount', 'sgst', 'sgst_amount', 'igst', 'igst_amount']:
+                if key in ['quantity', 'rate', 'amount', 'cgst_percent', 'cgst_amount', 'sgst_percent', 'sgst_amount', 'igst_percent', 'igst_amount']:
                     row[key] = 0.0
                 else:
                     row[key] = ''
@@ -265,25 +265,38 @@ def export_to_tally(filters):
         # Create CSV content for Tally import
         csv_content = []
         
-        # Add headers
-        headers = [col["label"] for col in columns]
+        # Add headers - EXACT Excel format
+        headers = [
+            "Supplier A/c", "Supplier Name", "State Name", "GSTIN", "Customer Name", 
+            "Voucher Type", "Product Name", "Quantity", "Rate", "Amount",
+            "CGST %", "CGST", "SGST %", "SGST", "IGST %", "IGST",
+            "Voucher No", "HSN", "UNIT"
+        ]
         csv_content.append(",".join(f'"{header}"' for header in headers))
         
         # Add data rows
         for row in data:
-            csv_row = []
-            for col in columns:
-                fieldname = col["fieldname"]
-                value = row.get(fieldname, "")
-                
-                # Format based on field type
-                if col["fieldtype"] in ["Currency", "Float"]:
-                    value = flt(value, 2)
-                elif col["fieldtype"] == "Percent":
-                    value = f"{flt(value, 2)}%"
-                
-                csv_row.append(f'"{value}"')
-            
+            csv_row = [
+                f'"{row.get("supplier_account", "")}"',
+                f'"{row.get("supplier_name", "")}"', 
+                f'"{row.get("state", "")}"',
+                f'"{row.get("gstin", "")}"',
+                f'"{row.get("customer_name", "")}"',
+                f'"{row.get("voucher_type", "")}"',
+                f'"{row.get("product_name", "")}"',
+                f'"{flt(row.get("quantity", 0), 2)}"',
+                f'"{flt(row.get("rate", 0), 2)}"',
+                f'"{flt(row.get("amount", 0), 2)}"',
+                f'"{flt(row.get("cgst_percent", 0), 2)}"',
+                f'"{flt(row.get("cgst_amount", 0), 2)}"',
+                f'"{flt(row.get("sgst_percent", 0), 2)}"',
+                f'"{flt(row.get("sgst_amount", 0), 2)}"',
+                f'"{flt(row.get("igst_percent", 0), 2)}"',
+                f'"{flt(row.get("igst_amount", 0), 2)}"',
+                f'"{row.get("voucher_no", "")}"',
+                f'"{row.get("hsn_code", "")}"',
+                f'"{row.get("uom", "")}"'
+            ]
             csv_content.append(",".join(csv_row))
         
         return "\n".join(csv_content)
