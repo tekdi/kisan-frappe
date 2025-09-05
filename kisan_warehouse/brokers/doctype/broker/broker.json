@@ -54,6 +54,7 @@
   "bank_info_section",
   "bank_account_name",
   "ifsc_code",
+  "branch_name",
   "column_break_drgj",
   "bank_account_no",
   "bank_name",
@@ -319,6 +320,11 @@
    "reqd": 1
   },
   {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
    "fieldname": "column_break_drgj",
    "fieldtype": "Column Break"
   },
@@ -370,7 +376,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:27:39.515367",
+ "modified": "2025-09-05 17:40:59.143331",
  "modified_by": "Administrator",
  "module": "brokers",
  "name": "Broker",

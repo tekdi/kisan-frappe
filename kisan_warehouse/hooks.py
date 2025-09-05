@@ -47,6 +47,17 @@ fixtures = [
             ]]
         ]
     },
+
+    # Server Scripts
+    {
+        "dt": "Server Script",
+        "filters": [
+            ["name", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings"
+            ]]
+        ]
+    },
     
     # Custom Fields (if any)
     {
@@ -87,7 +98,7 @@ fixtures = [
     # Notifications
     {
         "dt": "Notification",
-        "filters": [["name", "in", ["Sauda Saved"]]]
+        "filters": [["name", "in", ["Sauda Saved","Broker Agreement Email"]]]
     },
 
     "Workflow",

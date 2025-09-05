@@ -54,10 +54,10 @@
   "bank_ac_section",
   "bank_account_name",
   "ifsc_code",
+  "branch_name",
   "column_break_lffq",
   "bank_account_no",
   "bank_name",
-  "branch_name",
   "document_section",
   "upload_documents",
   "additional_section",
@@ -323,6 +323,11 @@
    "reqd": 1
   },
   {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
    "fieldname": "column_break_lffq",
    "fieldtype": "Column Break"
   },
@@ -337,11 +342,6 @@
    "fieldtype": "Data",
    "label": "Bank Name",
    "reqd": 1
-  },
-  {
-   "fieldname": "branch_name",
-   "fieldtype": "Data",
-   "label": "Branch Name"
   },
   {
    "fieldname": "document_section",
@@ -374,7 +374,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:27:39.381797",
+ "modified": "2025-09-05 17:42:26.983207",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
