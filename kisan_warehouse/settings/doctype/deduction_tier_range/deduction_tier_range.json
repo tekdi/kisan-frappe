@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-05 07:59:40.595849",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "range_from",
+  "range_to",
+  "multiplier"
+ ],
+ "fields": [
+  {
+   "fieldname": "range_from",
+   "fieldtype": "Float",
+   "label": "Range From",
+   "precision": "2"
+  },
+  {
+   "fieldname": "range_to",
+   "fieldtype": "Float",
+   "label": "Range to",
+   "precision": "2"
+  },
+  {
+   "fieldname": "multiplier",
+   "fieldtype": "Float",
+   "label": "Multiplier",
+   "precision": "2"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-05 08:08:03.113911",
+ "modified_by": "Administrator",
+ "module": "settings",
+ "name": "Deduction Tier Range",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
