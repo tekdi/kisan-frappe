@@ -108,7 +108,7 @@ def get_data(filters):
     # Build WHERE conditions based on filters
     conditions = get_conditions(filters)
     
-    # Main SQL query
+    # Main SQL query - ENHANCED to include bank details for export
     query = """
         SELECT 
             i.name as inward_id,
@@ -127,7 +127,13 @@ def get_data(filters):
             (SELECT ip.payment_note FROM `tabInward Payment` ip 
              WHERE ip.parent = i.name 
              ORDER BY ip.payment_date DESC 
-             LIMIT 1) as payment_notes
+             LIMIT 1) as payment_notes,
+            -- ADDED: Bank details for export (but not displayed in report)
+            i.customer as customer_id,
+            COALESCE(c.bank_account_name, '') as bank_account_name,
+            COALESCE(c.bank_account_no, '') as bank_account_no,
+            COALESCE(c.ifsc_code, '') as ifsc_code,
+            COALESCE(c.bank_name, '') as bank_name
         FROM `tabInward` i
         LEFT JOIN `tabCustomer` c ON i.customer = c.name
         LEFT JOIN `tabBroker` b ON i.broker = b.name  
@@ -175,6 +181,16 @@ def get_data(filters):
         # Handle missing Sauda ID
         if not row.sauda_id:
             row.sauda_id = "-"
+            
+        # Clean up bank details (for future bank export use)
+        if not row.bank_account_name:
+            row.bank_account_name = ""
+        if not row.bank_account_no:
+            row.bank_account_no = ""
+        if not row.ifsc_code:
+            row.ifsc_code = ""
+        if not row.bank_name:
+            row.bank_name = ""
     
     return data
 
@@ -224,3 +240,43 @@ def get_conditions(filters):
             conditions.append("i.payment_due_date = CURDATE()")
     
     return " AND " + " AND ".join(conditions) if conditions else ""
+
+@frappe.whitelist()
+def get_customer_bank_details(customer_ids):
+    """Get bank details for customers"""
+    import json
+    
+    if isinstance(customer_ids, str):
+        customer_ids = json.loads(customer_ids)
+    
+    if not customer_ids:
+        return {}
+    
+    # Create placeholders for SQL IN clause
+    placeholders = ', '.join(['%s'] * len(customer_ids))
+    
+    # Query customer bank details
+    query = f"""
+        SELECT 
+            name as customer_id,
+            COALESCE(bank_account_name, '') as bank_account_name,
+            COALESCE(bank_account_no, '') as bank_account_no,
+            COALESCE(ifsc_code, '') as ifsc_code,
+            COALESCE(bank_name, '') as bank_name
+        FROM `tabCustomer` 
+        WHERE name IN ({placeholders})
+    """
+    
+    bank_details = frappe.db.sql(query, customer_ids, as_dict=True)
+    
+    # Convert to dictionary with customer_id as key
+    result = {}
+    for detail in bank_details:
+        result[detail.customer_id] = {
+            'bank_account_name': detail.bank_account_name,
+            'bank_account_no': detail.bank_account_no,
+            'ifsc_code': detail.ifsc_code,
+            'bank_name': detail.bank_name
+        }
+    
+    return result
