@@ -55,6 +55,8 @@
   "total_deductions",
   "financial_section",
   "sub_total",
+  "debit_note_section",
+  "debit_note",
   "tax_information",
   "cgst_percent",
   "cgst_amount",
@@ -392,6 +394,17 @@
    "reqd": 1
   },
   {
+   "fieldname": "debit_note_section",
+   "fieldtype": "Section Break",
+   "label": "Debit Note"
+  },
+  {
+   "fieldname": "debit_note",
+   "fieldtype": "Table",
+   "label": "Debit Note",
+   "options": "Debit Note"
+  },
+  {
    "fieldname": "tax_information",
    "fieldtype": "Section Break",
    "label": "Tax Information"
@@ -605,7 +618,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:27:39.732636",
+ "modified": "2025-09-08 08:07:06.515471",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
