@@ -27,17 +27,15 @@
   "broker",
   "vendor_information_section",
   "vendor_doc_no",
-  "vendor_date",
-  "column_break_ewjd",
-  "invoice_no",
-  "vehicle_no",
-  "column_break_f44t",
   "vendor_amount",
+  "column_break_ewjd",
+  "vendor_date",
+  "rate_per_quintal",
+  "column_break_f44t",
+  "gross_weight",
   "inward_total_bags",
   "column_break_e6bm",
-  "gross_weight",
-  "rate_per_quintal",
-  "column_break_4ute",
+  "vehicle_no",
   "vendor_gstin",
   "item_details",
   "inward_items",
@@ -55,8 +53,6 @@
   "total_deductions",
   "financial_section",
   "sub_total",
-  "debit_note_section",
-  "debit_note",
   "tax_information",
   "cgst_percent",
   "cgst_amount",
@@ -79,6 +75,8 @@
   "tcs_amount",
   "final_amount_section",
   "net_total",
+  "debit_note_section",
+  "debit_note",
   "additional_information",
   "broker_commission_percent",
   "column_break_fxfh",
@@ -227,33 +225,34 @@
    "label": "Vendor Doc No"
   },
   {
-   "fieldname": "vendor_date",
-   "fieldtype": "Date",
-   "label": "Vendor Date"
+   "fieldname": "vendor_amount",
+   "fieldtype": "Float",
+   "label": "Vendor Amount",
+   "precision": "2"
   },
   {
    "fieldname": "column_break_ewjd",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "invoice_no",
-   "fieldtype": "Int",
-   "label": "Invoice No"
+   "fieldname": "vendor_date",
+   "fieldtype": "Date",
+   "label": "Vendor Date"
   },
   {
-   "fieldname": "vehicle_no",
-   "fieldtype": "Data",
-   "label": "Vehicle No",
-   "reqd": 1
+   "fieldname": "rate_per_quintal",
+   "fieldtype": "Float",
+   "label": "Rate (per Quintal)",
+   "precision": "2"
   },
   {
    "fieldname": "column_break_f44t",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "vendor_amount",
+   "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Vendor Amount",
+   "label": "Gross Weight",
    "precision": "2"
   },
   {
@@ -267,26 +266,16 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "gross_weight",
-   "fieldtype": "Float",
-   "label": "Gross Weight",
-   "precision": "2"
-  },
-  {
-   "fieldname": "rate_per_quintal",
-   "fieldtype": "Float",
-   "label": "Rate (per Quintal)",
-   "precision": "2"
-  },
-  {
-   "fieldname": "column_break_4ute",
-   "fieldtype": "Column Break"
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No",
+   "reqd": 1
   },
   {
    "fieldname": "vendor_gstin",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "Our GSTIN"
+   "label": "Vendor GSTIN"
   },
   {
    "fieldname": "item_details",
@@ -392,17 +381,6 @@
    "label": "Sub Total",
    "non_negative": 1,
    "reqd": 1
-  },
-  {
-   "fieldname": "debit_note_section",
-   "fieldtype": "Section Break",
-   "label": "Debit Note"
-  },
-  {
-   "fieldname": "debit_note",
-   "fieldtype": "Table",
-   "label": "Debit Note",
-   "options": "Debit Note"
   },
   {
    "fieldname": "tax_information",
@@ -518,6 +496,17 @@
    "reqd": 1
   },
   {
+   "fieldname": "debit_note_section",
+   "fieldtype": "Section Break",
+   "label": "Debit Note"
+  },
+  {
+   "fieldname": "debit_note",
+   "fieldtype": "Table",
+   "label": "Debit Note",
+   "options": "Debit Note"
+  },
+  {
    "fieldname": "additional_information",
    "fieldtype": "Section Break",
    "label": "Additional Information"
@@ -618,7 +607,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-08 08:07:06.515471",
+ "modified": "2025-09-08 19:08:22.263482",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",

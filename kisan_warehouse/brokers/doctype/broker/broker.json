@@ -21,11 +21,11 @@
   "last_name",
   "address_info",
   "address",
-  "section_break_kqry",
+  "column_break_qkmi",
   "city",
-  "column_break_ykfb",
+  "column_break_iwwh",
   "state",
-  "column_break_yfzb",
+  "column_break_hkqu",
   "zip",
   "contact_info",
   "mobile",
@@ -86,7 +86,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Broker Type",
-   "options": "\nIndividual\nCompany",
+   "options": "\nIndividual / Farmer\nCompany / Trader",
    "reqd": 1
   },
   {
@@ -146,13 +146,13 @@
   },
   {
    "fieldname": "address",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Address",
    "reqd": 1
   },
   {
-   "fieldname": "section_break_kqry",
-   "fieldtype": "Section Break"
+   "fieldname": "column_break_qkmi",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "city",
@@ -164,7 +164,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_ykfb",
+   "fieldname": "column_break_iwwh",
    "fieldtype": "Column Break"
   },
   {
@@ -174,7 +174,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_yfzb",
+   "fieldname": "column_break_hkqu",
    "fieldtype": "Column Break"
   },
   {
@@ -215,7 +215,7 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.broker_type==\"Individual\"",
+   "depends_on": "eval:doc.broker_type==\"Individual / Farmer\"",
    "fieldname": "identiy_individual_section",
    "fieldtype": "Section Break",
    "label": "Identity Verification (For Individual)"
@@ -273,7 +273,7 @@
    "label": "PAN Verified On"
   },
   {
-   "depends_on": "eval:doc.broker_type==\"Company\"",
+   "depends_on": "eval:doc.broker_type==\"Company / Trader\"",
    "fieldname": "identity_company_section",
    "fieldtype": "Section Break",
    "label": "Identity Verification (For Company)"
@@ -376,7 +376,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:40:59.143331",
+ "modified": "2025-09-09 08:25:50.049979",
  "modified_by": "Administrator",
  "module": "brokers",
  "name": "Broker",
