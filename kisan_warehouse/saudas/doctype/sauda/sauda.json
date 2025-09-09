@@ -24,6 +24,7 @@
   "warehouse",
   "column_break_wmob",
   "broker",
+  "broker_email",
   "product_section",
   "product",
   "column_break_vgnj",
@@ -178,6 +179,17 @@
    "options": "Broker"
   },
   {
+   "fieldname": "broker_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Broker Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
    "fieldname": "product_section",
    "fieldtype": "Section Break",
    "label": "Product & Quantity Details"
@@ -323,7 +335,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:27:39.674045",
+ "modified": "2025-09-08 18:59:24.290924",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",

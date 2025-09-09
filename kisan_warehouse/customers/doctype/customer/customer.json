@@ -21,11 +21,11 @@
   "last_name",
   "address_info_section",
   "address",
-  "section_break_hzhu",
+  "column_break_ehpu",
   "city",
-  "column_break_zqpz",
+  "column_break_nkix",
   "state",
-  "column_break_urun",
+  "column_break_wmxy",
   "zip",
   "contact_info_section",
   "mobile",
@@ -47,10 +47,13 @@
   "pan_verified_date",
   "indentity_verify_comp_section",
   "gstin",
+  "cgst_percent",
   "column_break_grgk",
-  "gstin_verified",
-  "column_break_dtlq",
   "gstin_verified_date",
+  "igst_percent",
+  "column_break_dtlq",
+  "gstin_verified",
+  "sgst_percent",
   "bank_ac_section",
   "bank_account_name",
   "ifsc_code",
@@ -149,13 +152,13 @@
   },
   {
    "fieldname": "address",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Address",
    "reqd": 1
   },
   {
-   "fieldname": "section_break_hzhu",
-   "fieldtype": "Section Break"
+   "fieldname": "column_break_ehpu",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "city",
@@ -167,7 +170,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_zqpz",
+   "fieldname": "column_break_nkix",
    "fieldtype": "Column Break"
   },
   {
@@ -177,7 +180,7 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_urun",
+   "fieldname": "column_break_wmxy",
    "fieldtype": "Column Break"
   },
   {
@@ -286,7 +289,27 @@
    "label": "GSTIN"
   },
   {
+   "fieldname": "cgst_percent",
+   "fieldtype": "Percent",
+   "label": "CGST (%)"
+  },
+  {
    "fieldname": "column_break_grgk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "gstin_verified_date",
+   "fieldtype": "Date",
+   "label": "GSTIN Verified On"
+  },
+  {
+   "fieldname": "igst_percent",
+   "fieldtype": "Percent",
+   "label": "IGST (%)"
+  },
+  {
+   "fieldname": "column_break_dtlq",
    "fieldtype": "Column Break"
   },
   {
@@ -296,14 +319,9 @@
    "label": "GSTIN Verified?"
   },
   {
-   "fieldname": "column_break_dtlq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "Today",
-   "fieldname": "gstin_verified_date",
-   "fieldtype": "Date",
-   "label": "GSTIN Verified On"
+   "fieldname": "sgst_percent",
+   "fieldtype": "Percent",
+   "label": "SGST (%)"
   },
   {
    "fieldname": "bank_ac_section",
@@ -374,7 +392,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-05 17:42:26.983207",
+ "modified": "2025-09-09 08:26:15.042884",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
