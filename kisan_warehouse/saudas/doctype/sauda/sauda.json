@@ -1,0 +1,396 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-09-02 07:50:15.566106",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "basic_info_section",
+  "naming_series",
+  "booking_date",
+  "column_break_epuy",
+  "booking_type",
+  "column_break_kwiv",
+  "company",
+  "sauda_invoice_no",
+  "column_break_pjiu",
+  "sauda_status",
+  "party_info_section",
+  "customer",
+  "customer_email",
+  "column_break_xetv",
+  "warehouse",
+  "column_break_wmob",
+  "broker",
+  "broker_email",
+  "product_section",
+  "product",
+  "column_break_vgnj",
+  "expected_quantity",
+  "column_break_yvip",
+  "sauda_rate",
+  "financial_section",
+  "total_amount",
+  "pending_quantity",
+  "column_break_dueg",
+  "booking_amount",
+  "pending_total_amount",
+  "column_break_fodh",
+  "cash_discount",
+  "duration_timeline_section",
+  "delivery_duration",
+  "delivery_end_date",
+  "column_break_apgj",
+  "payment_duration",
+  "payment_end_date",
+  "notes_section",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "basic_info_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Booking Information"
+  },
+  {
+   "bold": 1,
+   "default": "SAUDA-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "SAUDA-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "default": "Today",
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Booking Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_epuy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "booking_type",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Booking Type",
+   "options": "\nInward / Purchase\nOutward / Sales",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_kwiv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Our Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sauda_invoice_no",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Invoice No.",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_pjiu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "default": "pending",
+   "fieldname": "sauda_status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "pending\nconfirmed\ncancelled\ncompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party_info_section",
+   "fieldtype": "Section Break",
+   "label": "Party Information"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xetv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wmob",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "broker",
+   "fieldtype": "Link",
+   "label": "Broker",
+   "options": "Broker"
+  },
+  {
+   "fieldname": "broker_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Broker Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "product_section",
+   "fieldtype": "Section Break",
+   "label": "Product & Quantity Details"
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vgnj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expected_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Expected Quantity (kg)",
+   "non_negative": 1,
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_yvip",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sauda_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate (per Quintal)",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "financial_section",
+   "fieldtype": "Section Break",
+   "label": "Financial Details"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "pending_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Pending Quantity (kg)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_dueg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_amount",
+   "fieldtype": "Currency",
+   "label": "Booking Amount",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "pending_total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Pending Total Amount",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_fodh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cash_discount",
+   "fieldtype": "Float",
+   "label": "CD (Cash Discount %)",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "duration_timeline_section",
+   "fieldtype": "Section Break",
+   "label": "Duration & Timeline"
+  },
+  {
+   "fieldname": "delivery_duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Delivery Duration (Days)",
+   "non_negative": 1,
+   "placeholder": "No. of days to complete the Sauda/booking",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Delivery End Date",
+   "placeholder": "Delivery end date based on delivery durations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_apgj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_duration",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Payment Duration (Days)",
+   "non_negative": 1,
+   "placeholder": "No. of days to complete the Payment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payment End Date",
+   "placeholder": "Payment end date based on payment durations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes",
+   "placeholder": "Additional Internal Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-08 18:59:24.290924",
+ "modified_by": "Administrator",
+ "module": "saudas",
+ "name": "Sauda",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

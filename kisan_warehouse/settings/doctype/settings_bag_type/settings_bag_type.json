@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-02 09:06:01.270595",
+ "custom": 1,
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bag_type",
+  "charges"
+ ],
+ "fields": [
+  {
+   "fieldname": "bag_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bag Type"
+  },
+  {
+   "fieldname": "charges",
+   "fieldtype": "Currency",
+   "label": "Charges",
+   "non_negative": 1,
+   "precision": "2"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-02 09:12:00.939555",
+ "modified_by": "Administrator",
+ "module": "settings",
+ "name": "Settings Bag Type",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-02 07:50:13.522990",
+ "custom": 1,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "deduction_name",
+  "required_value",
+  "charges_per_unit",
+  "is_active",
+  "description",
+  "deduction_category",
+  "has_tiered_calculation"
+ ],
+ "fields": [
+  {
+   "fieldname": "deduction_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Deduction Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "required_value",
+   "fieldtype": "Float",
+   "label": "Required",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "charges_per_unit",
+   "fieldtype": "Currency",
+   "label": "Charges per Unit",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active?"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "default": "single",
+   "fieldname": "deduction_category",
+   "fieldtype": "Select",
+   "label": "Deduction Category",
+   "options": "single\nmultiple"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_tiered_calculation",
+   "fieldtype": "Check",
+   "label": "Tiered Calculation"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-05 07:58:16.027398",
+ "modified_by": "Administrator",
+ "module": "settings",
+ "name": "Settings Deduction Type",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

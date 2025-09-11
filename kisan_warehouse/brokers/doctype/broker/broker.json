@@ -1,0 +1,438 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-09-02 07:50:14.849271",
+ "custom": 1,
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "basic_info_section",
+  "naming_series",
+  "broker_type",
+  "column_break_wwnc",
+  "broker_status",
+  "section_break_bvei",
+  "first_name",
+  "column_break_eyyn",
+  "middle_name",
+  "column_break_ubkv",
+  "last_name",
+  "address_info",
+  "address",
+  "column_break_qkmi",
+  "city",
+  "column_break_iwwh",
+  "state",
+  "column_break_hkqu",
+  "zip",
+  "contact_info",
+  "mobile",
+  "column_break_orgi",
+  "alternate_mobile",
+  "column_break_baxj",
+  "email",
+  "identiy_individual_section",
+  "aadhar_number",
+  "column_break_pcio",
+  "aadhar_verified",
+  "column_break_mhva",
+  "aadhar_verified_date",
+  "section_break_hypr",
+  "pan_number",
+  "column_break_ousr",
+  "pan_verified",
+  "column_break_dirx",
+  "pan_verified_on",
+  "identity_company_section",
+  "gstin_number",
+  "column_break_dryx",
+  "gstin_verified",
+  "column_break_hbdz",
+  "gstin_verified_date",
+  "bank_info_section",
+  "bank_account_name",
+  "ifsc_code",
+  "branch_name",
+  "column_break_drgj",
+  "bank_account_no",
+  "bank_name",
+  "upload_doc_section",
+  "upload_documents",
+  "additional_info_section",
+  "commission_rate",
+  "small_text_nobm",
+  "broker_consent"
+ ],
+ "fields": [
+  {
+   "fieldname": "basic_info_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
+  {
+   "default": "BR-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "BR-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "broker_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Broker Type",
+   "options": "\nIndividual / Farmer\nCompany / Trader",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wwnc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "broker_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_bvei",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_eyyn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "column_break_ubkv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Last Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address_info",
+   "fieldtype": "Section Break",
+   "label": "Address Information"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qkmi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_iwwh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hkqu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "zip",
+   "fieldtype": "Data",
+   "label": "Zip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_info",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_orgi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "alternate_mobile",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile"
+  },
+  {
+   "fieldname": "column_break_baxj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.broker_type==\"Individual / Farmer\"",
+   "fieldname": "identiy_individual_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Individual)"
+  },
+  {
+   "fieldname": "aadhar_number",
+   "fieldtype": "Data",
+   "label": "Aadhar Number"
+  },
+  {
+   "fieldname": "column_break_pcio",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "aadhar_verified",
+   "fieldtype": "Check",
+   "label": "Aadhar Verified?"
+  },
+  {
+   "fieldname": "column_break_mhva",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "aadhar_verified_date",
+   "fieldtype": "Date",
+   "label": "Aadhar Verified On"
+  },
+  {
+   "fieldname": "section_break_hypr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "fieldname": "column_break_ousr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "pan_verified",
+   "fieldtype": "Check",
+   "label": "PAN Verified?"
+  },
+  {
+   "fieldname": "column_break_dirx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pan_verified_on",
+   "fieldtype": "Date",
+   "label": "PAN Verified On"
+  },
+  {
+   "depends_on": "eval:doc.broker_type==\"Company / Trader\"",
+   "fieldname": "identity_company_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Company)"
+  },
+  {
+   "fieldname": "gstin_number",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "column_break_dryx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "gstin_verified",
+   "fieldtype": "Check",
+   "label": "GSTIN Verified?"
+  },
+  {
+   "fieldname": "column_break_hbdz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gstin_verified_date",
+   "fieldtype": "Date",
+   "label": "GSTIN Verified On"
+  },
+  {
+   "fieldname": "bank_info_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Account Information"
+  },
+  {
+   "fieldname": "bank_account_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
+   "fieldname": "column_break_drgj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "upload_doc_section",
+   "fieldtype": "Section Break",
+   "label": "Upload Documents"
+  },
+  {
+   "fieldname": "upload_documents",
+   "fieldtype": "Table",
+   "label": "Upload Documents",
+   "options": "Upload Documents"
+  },
+  {
+   "fieldname": "additional_info_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "commission_rate",
+   "fieldtype": "Float",
+   "label": "Commission Rate (%)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "small_text_nobm",
+   "fieldtype": "Small Text"
+  },
+  {
+   "default": "0",
+   "fieldname": "broker_consent",
+   "fieldtype": "Check",
+   "label": "I confirm that the customer has provided consent to store and use their details for transactions as per applicable laws."
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-09 08:25:50.049979",
+ "modified_by": "Administrator",
+ "module": "brokers",
+ "name": "Broker",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "first_name"
+}

@@ -1,0 +1,216 @@
+[
+ {
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-07 12:54:41.977586",
+  "module": "inwards",
+  "name": "Tally Inward Report",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward",
+  "reference_report": null,
+  "report_name": "Tally Inward Report",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-07 12:54:28.592840",
+  "module": "saudas",
+  "name": "Pending Saudas",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Sauda",
+  "reference_report": null,
+  "report_name": "Pending Saudas",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-07 12:54:13.820456",
+  "module": "warehouses",
+  "name": "Stock by Warehouse",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward Item Detail",
+  "reference_report": null,
+  "report_name": "Stock by Warehouse",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-07 12:54:35.977107",
+  "module": "products",
+  "name": "Stock by Product",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward Item Detail",
+  "reference_report": null,
+  "report_name": "Stock by Product",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-08-07 12:54:51.894662",
+  "module": "inwards",
+  "name": "Payment Pending Inwards",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward",
+  "reference_report": null,
+  "report_name": "Payment Pending Inwards",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accountant"
+   }
+  ],
+  "timeout": 0
+ }
+]

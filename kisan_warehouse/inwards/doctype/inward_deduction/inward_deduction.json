@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-02 07:50:15.312597",
+ "custom": 1,
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "deduction_type",
+  "bags",
+  "required_value",
+  "actual_value",
+  "difference_value",
+  "charges_per_unit",
+  "deduction_amount",
+  "deduction_category"
+ ],
+ "fields": [
+  {
+   "fieldname": "deduction_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Deduction Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bags",
+   "fieldtype": "Int",
+   "label": "Bags",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "required_value",
+   "fieldtype": "Float",
+   "label": "Required",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "actual_value",
+   "fieldtype": "Float",
+   "label": "Actual",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "difference_value",
+   "fieldtype": "Float",
+   "label": "Difference",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "charges_per_unit",
+   "fieldtype": "Currency",
+   "label": "Charges",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "deduction_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "non_negative": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "deduction_category",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Deduction Category"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-04 18:17:35.520346",
+ "modified_by": "Administrator",
+ "module": "inwards",
+ "name": "Inward Deduction",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

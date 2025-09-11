@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-09-02 07:50:13.936651",
+ "custom": 1,
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "info_section",
+  "warehouse_status",
+  "address",
+  "warehouse_photo",
+  "column_break_rfmg",
+  "naming_series",
+  "warehouse_name",
+  "city",
+  "state",
+  "zip",
+  "section_break_wicy",
+  "contact_person",
+  "column_break_gkii",
+  "mobile",
+  "section_tax_info",
+  "gstin",
+  "column_break_qjnq",
+  "cgst_percent",
+  "column_break_vwpt",
+  "sgst_percent",
+  "column_break_vkeh",
+  "igst_percent"
+ ],
+ "fields": [
+  {
+   "fieldname": "info_section",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Information"
+  },
+  {
+   "default": "Active",
+   "fieldname": "warehouse_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warehouse_photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "column_break_rfmg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "WH-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "WH-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warehouse_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Warehouse Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "zip",
+   "fieldtype": "Data",
+   "label": "Zip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_wicy",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "column_break_gkii",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "section_tax_info",
+   "fieldtype": "Section Break",
+   "label": "Tax Informatiom"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "column_break_qjnq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cgst_percent",
+   "fieldtype": "Percent",
+   "label": "CGST (%)"
+  },
+  {
+   "fieldname": "column_break_vwpt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sgst_percent",
+   "fieldtype": "Percent",
+   "label": "SGST (%)"
+  },
+  {
+   "fieldname": "column_break_vkeh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "igst_percent",
+   "fieldtype": "Percent",
+   "label": "IGST (%)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-06 20:26:23.145646",
+ "modified_by": "Administrator",
+ "module": "warehouses",
+ "name": "Warehouse",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "warehouse_name"
+}

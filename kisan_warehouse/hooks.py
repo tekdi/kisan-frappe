@@ -5,6 +5,124 @@ app_description = "KisanMitra Warehouse Management System"
 app_email = "deepak_p@tekditechnologies.com"
 app_license = "mit"
 
+# Export Enhanced fixtures
+fixtures = [
+    # Core DocTypes
+    {
+        "dt": "DocType", 
+        "filters": [
+            ["name", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings", "Settings Deduction Type"
+            ]]
+        ]
+    },
+    
+    # Module Definitions
+    {
+        "dt": "Module Def",
+        "filters": [
+            ["name", "in", [
+                "company", "customers", "products", "brokers", "warehouses", 
+                "vehicles", "saudas", "inwards", "settings"
+            ]]
+        ]
+    },
+    
+    # Workspace
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "=", "Kisan Warehouse"]
+        ]
+    },
+    
+    # Client Scripts (JavaScript that runs in browser)
+    {
+        "dt": "Client Script",
+        "filters": [
+            ["dt", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings"
+            ]]
+        ]
+    },
+
+    # Server Scripts
+    {
+        "dt": "Server Script",
+        "filters": [
+            ["name", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "Inward Deduction", "App Settings"
+            ]]
+        ]
+    },
+    
+    # Custom Fields (if any)
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["dt", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "App Settings"
+            ]]
+        ]
+    },
+    
+    # Property Setter (for field customizations)
+    {
+        "dt": "Property Setter",
+        "filters": [
+            ["doc_type", "in", [
+                "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+                "Sauda", "Inward", "App Settings"
+            ]]
+        ]
+    },
+    
+  # Print format   
+{
+    "dt": "Print Format",
+	"filters": [
+		    ["doc_type", "in", [
+		        "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
+		        "Sauda", "Inward", "App Settings"
+		    ]]
+		]
+	},
+
+    # Reports
+    {"dt": "Report", "filters": [["module", "in", ["Saudas", "Inwards", "Products", "Warehouses"]]]},
+
+    # Notifications
+    {
+        "dt": "Notification",
+        "filters": [["name", "in", ["Sauda Saved","Broker Agreement Email"]]]
+    },
+
+    "Workflow",
+    "Workflow State", 
+    "Workflow Document State",
+    "Workflow Action",
+    "Workflow Transition",
+    "Workflow Action Master",
+    
+    # Custom Roles
+    {
+        "dt": "Role",
+        "filters": [
+            ["name", "in", [
+                "Kisan Admin", 
+                "Kisan Accountant", 
+                "Kisan Operator"
+            ]]
+        ]
+    }
+    
+]
+
+
 # Apps
 # ------------------
 
