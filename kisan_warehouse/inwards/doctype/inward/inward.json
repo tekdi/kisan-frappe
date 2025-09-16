@@ -37,6 +37,8 @@
   "column_break_e6bm",
   "vehicle_no",
   "vendor_gstin",
+  "section_break_kjfe",
+  "report_type",
   "item_details",
   "inward_items",
   "weight_information_section",
@@ -276,6 +278,17 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Vendor GSTIN"
+  },
+  {
+   "fieldname": "section_break_kjfe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Multi State Report",
+   "fieldname": "report_type",
+   "fieldtype": "Select",
+   "label": "Report Type",
+   "options": "Single Report\nMulti State Report\nMulti Rate Report"
   },
   {
    "fieldname": "item_details",
@@ -607,7 +620,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-08 19:08:22.263482",
+ "modified": "2025-09-10 08:08:19.367246",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
