@@ -56,7 +56,6 @@
    "label": "Gross Weight (kg)",
    "non_negative": 1,
    "precision": "2",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -89,7 +88,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-17 18:03:12.205709",
+ "modified": "2025-09-18 08:12:05.778383",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Item Detail",
