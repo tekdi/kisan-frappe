@@ -284,11 +284,11 @@
    "fieldtype": "Section Break"
   },
   {
-   "default": "Multi State Report",
+   "default": "Multi Report",
    "fieldname": "report_type",
    "fieldtype": "Select",
    "label": "Report Type",
-   "options": "Single Report\nMulti State Report\nMulti Rate Report"
+   "options": "Single Report\nMulti Report\nMulti Rate"
   },
   {
    "fieldname": "item_details",
@@ -620,7 +620,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-10 08:08:19.367246",
+ "modified": "2025-09-18 11:10:37.831236",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
