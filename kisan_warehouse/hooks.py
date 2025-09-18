@@ -118,7 +118,15 @@ fixtures = [
                 "Kisan Operator"
             ]]
         ]
+    },
+
+    # Configuration Settings
+    {
+        "dt": "App Settings",
+        "filters": {
+            "name": "App Settings"
     }
+}
     
 ]
 
