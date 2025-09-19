@@ -82,7 +82,7 @@ fixtures = [
     },
     
   # Print format   
-{
+    {
     "dt": "Print Format",
 	"filters": [
 		    ["doc_type", "in", [
@@ -100,13 +100,6 @@ fixtures = [
         "dt": "Notification",
         "filters": [["name", "in", ["Sauda Saved","Broker Agreement Email"]]]
     },
-
-    "Workflow",
-    "Workflow State", 
-    "Workflow Document State",
-    "Workflow Action",
-    "Workflow Transition",
-    "Workflow Action Master",
     
     # Custom Roles
     {
@@ -118,16 +111,7 @@ fixtures = [
                 "Kisan Operator"
             ]]
         ]
-    },
-
-    # Configuration Settings
-    {
-        "dt": "App Settings",
-        "filters": {
-            "name": "App Settings"
     }
-}
-    
 ]
 
 
