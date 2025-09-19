@@ -11,7 +11,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-07 12:54:41.977586",
+  "modified": "2025-09-19 12:52:08.775870",
   "module": "inwards",
   "name": "Tally Inward Report",
   "prepared_report": 0,
@@ -32,7 +32,19 @@
     "parent": "Tally Inward Report",
     "parentfield": "roles",
     "parenttype": "Report",
-    "role": "Accountant"
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Tally Inward Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
    }
   ],
   "timeout": 0
@@ -49,7 +61,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-07 12:54:28.592840",
+  "modified": "2025-09-19 12:53:09.482625",
   "module": "saudas",
   "name": "Pending Saudas",
   "prepared_report": 0,
@@ -76,7 +88,19 @@
     "parent": "Pending Saudas",
     "parentfield": "roles",
     "parenttype": "Report",
-    "role": "Accountant"
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Pending Saudas",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
    }
   ],
   "timeout": 0
@@ -93,7 +117,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-07 12:54:13.820456",
+  "modified": "2025-09-19 12:53:41.312024",
   "module": "warehouses",
   "name": "Stock by Warehouse",
   "prepared_report": 0,
@@ -120,7 +144,19 @@
     "parent": "Stock by Warehouse",
     "parentfield": "roles",
     "parenttype": "Report",
-    "role": "Accountant"
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Stock by Warehouse",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
    }
   ],
   "timeout": 0
@@ -137,7 +173,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-07 12:54:35.977107",
+  "modified": "2025-09-19 12:52:43.358227",
   "module": "products",
   "name": "Stock by Product",
   "prepared_report": 0,
@@ -164,7 +200,19 @@
     "parent": "Stock by Product",
     "parentfield": "roles",
     "parenttype": "Report",
-    "role": "Accountant"
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
    }
   ],
   "timeout": 0
@@ -181,7 +229,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-08-07 12:54:51.894662",
+  "modified": "2025-09-19 12:51:13.143969",
   "module": "inwards",
   "name": "Payment Pending Inwards",
   "prepared_report": 0,
@@ -208,7 +256,19 @@
     "parent": "Payment Pending Inwards",
     "parentfield": "roles",
     "parenttype": "Report",
-    "role": "Accountant"
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
    }
   ],
   "timeout": 0
