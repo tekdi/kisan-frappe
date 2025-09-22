@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-09-02 07:50:15.566106",
+ "creation": "2025-09-19 12:39:51.664221",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -164,7 +164,7 @@
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Warehouse",
+   "label": "Warehouse Location",
    "options": "Warehouse",
    "reqd": 1
   },
@@ -289,16 +289,14 @@
    "in_list_view": 1,
    "label": "Delivery Duration (Days)",
    "non_negative": 1,
-   "placeholder": "No. of days to complete the Sauda/booking",
-   "reqd": 1
+   "placeholder": "No. of days to complete the Sauda/booking"
   },
   {
    "fieldname": "delivery_end_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Delivery End Date",
-   "placeholder": "Delivery end date based on delivery durations",
-   "reqd": 1
+   "placeholder": "Delivery end date based on delivery durations"
   },
   {
    "fieldname": "column_break_apgj",
@@ -310,16 +308,14 @@
    "in_list_view": 1,
    "label": "Payment Duration (Days)",
    "non_negative": 1,
-   "placeholder": "No. of days to complete the Payment",
-   "reqd": 1
+   "placeholder": "No. of days to complete the Payment"
   },
   {
    "fieldname": "payment_end_date",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Payment End Date",
-   "placeholder": "Payment end date based on payment durations",
-   "reqd": 1
+   "placeholder": "Payment end date based on payment durations"
   },
   {
    "fieldname": "notes_section",
@@ -335,7 +331,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-08 18:59:24.290924",
+ "modified": "2025-09-22 16:18:58.921484",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",

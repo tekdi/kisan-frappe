@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-09-02 07:50:15.941102",
+ "creation": "2025-09-19 12:39:52.078665",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -25,18 +25,19 @@
   "warehouse",
   "column_break_xitv",
   "broker",
+  "vendor_gstin",
   "vendor_information_section",
   "vendor_doc_no",
-  "vendor_amount",
+  "gross_weight",
   "column_break_ewjd",
   "vendor_date",
   "rate_per_quintal",
   "column_break_f44t",
-  "gross_weight",
+  "vendor_weight",
   "inward_total_bags",
   "column_break_e6bm",
+  "vendor_amount",
   "vehicle_no",
-  "vendor_gstin",
   "section_break_kjfe",
   "report_type",
   "item_details",
@@ -202,7 +203,7 @@
   {
    "fieldname": "warehouse",
    "fieldtype": "Link",
-   "label": "Warehouse",
+   "label": "Warehouse Location",
    "options": "Warehouse",
    "reqd": 1
   },
@@ -217,6 +218,12 @@
    "options": "Broker"
   },
   {
+   "fieldname": "vendor_gstin",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Vendor GSTIN"
+  },
+  {
    "fieldname": "vendor_information_section",
    "fieldtype": "Section Break",
    "label": "Vendor Information"
@@ -227,9 +234,9 @@
    "label": "Vendor Doc No"
   },
   {
-   "fieldname": "vendor_amount",
+   "fieldname": "gross_weight",
    "fieldtype": "Float",
-   "label": "Vendor Amount",
+   "label": "Gross Weight",
    "precision": "2"
   },
   {
@@ -252,9 +259,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "gross_weight",
+   "fieldname": "vendor_weight",
    "fieldtype": "Float",
-   "label": "Gross Weight",
+   "label": "Vendor Weight",
    "precision": "2"
   },
   {
@@ -268,16 +275,16 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "vendor_amount",
+   "fieldtype": "Float",
+   "label": "Vendor Amount",
+   "precision": "2"
+  },
+  {
    "fieldname": "vehicle_no",
    "fieldtype": "Data",
    "label": "Vehicle No",
    "reqd": 1
-  },
-  {
-   "fieldname": "vendor_gstin",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Vendor GSTIN"
   },
   {
    "fieldname": "section_break_kjfe",
@@ -620,7 +627,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-18 11:10:37.831236",
+ "modified": "2025-09-22 16:19:42.238295",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
