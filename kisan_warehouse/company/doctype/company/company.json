@@ -1,19 +1,20 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-09-02 07:50:15.123648",
+ "creation": "2025-09-19 12:39:51.228744",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "basic_company_information_section",
   "company_name",
-  "state",
-  "zip",
-  "column_break_fgts",
   "address",
   "city",
   "mobile",
+  "column_break_fgts",
+  "company_gst_no",
+  "state",
+  "zip",
   "section_break_ekhc",
   "logo",
   "is_default",
@@ -34,20 +35,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "state",
-   "fieldtype": "Data",
-   "label": "State"
-  },
-  {
-   "fieldname": "zip",
-   "fieldtype": "Data",
-   "label": "Zip"
-  },
-  {
-   "fieldname": "column_break_fgts",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "address",
    "fieldtype": "Data",
    "label": "Address",
@@ -64,6 +51,25 @@
    "label": "Mobile Number"
   },
   {
+   "fieldname": "column_break_fgts",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company_gst_no",
+   "fieldtype": "Data",
+   "label": "GST No"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "zip",
+   "fieldtype": "Data",
+   "label": "Zip"
+  },
+  {
    "fieldname": "section_break_ekhc",
    "fieldtype": "Section Break"
   },
@@ -71,8 +77,7 @@
    "fieldname": "logo",
    "fieldtype": "Attach Image",
    "in_preview": 1,
-   "label": "Logo",
-   "reqd": 1
+   "label": "Logo"
   },
   {
    "default": "0",
@@ -97,7 +102,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-06 20:26:22.638771",
+ "modified": "2025-09-22 13:28:26.867532",
  "modified_by": "Administrator",
  "module": "company",
  "name": "Company",

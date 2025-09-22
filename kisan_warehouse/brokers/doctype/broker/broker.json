@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-09-02 07:50:14.849271",
+ "creation": "2025-09-19 12:39:50.958874",
  "custom": 1,
  "default_view": "List",
  "doctype": "DocType",
@@ -121,6 +121,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.broker_type==\"Individual / Farmer\"",
    "fieldname": "middle_name",
    "fieldtype": "Data",
    "label": "Middle Name"
@@ -130,14 +131,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.broker_type==\"Individual / Farmer\"",
    "fieldname": "last_name",
    "fieldtype": "Data",
    "in_filter": 1,
    "in_global_search": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Last Name",
-   "reqd": 1
+   "label": "Last Name"
   },
   {
    "fieldname": "address_info",
@@ -310,14 +311,12 @@
   {
    "fieldname": "bank_account_name",
    "fieldtype": "Data",
-   "label": "Account Holder Name",
-   "reqd": 1
+   "label": "Account Holder Name"
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
-   "label": "IFSC Code",
-   "reqd": 1
+   "label": "IFSC Code"
   },
   {
    "fieldname": "branch_name",
@@ -331,14 +330,12 @@
   {
    "fieldname": "bank_account_no",
    "fieldtype": "Data",
-   "label": "Account Number",
-   "reqd": 1
+   "label": "Account Number"
   },
   {
    "fieldname": "bank_name",
    "fieldtype": "Data",
-   "label": "Bank Name",
-   "reqd": 1
+   "label": "Bank Name"
   },
   {
    "fieldname": "upload_doc_section",
@@ -376,7 +373,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-09 08:25:50.049979",
+ "modified": "2025-09-22 16:00:34.653577",
  "modified_by": "Administrator",
  "module": "brokers",
  "name": "Broker",
