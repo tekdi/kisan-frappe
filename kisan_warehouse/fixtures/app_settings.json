@@ -1,0 +1,160 @@
+[
+ {
+  "deduction_tier_range": [
+   {
+    "multiplier": 1.0,
+    "parent": "App Settings",
+    "parentfield": "deduction_tier_range",
+    "parenttype": "App Settings",
+    "range_from": 10.0,
+    "range_to": 18.0
+   },
+   {
+    "multiplier": 2.0,
+    "parent": "App Settings",
+    "parentfield": "deduction_tier_range",
+    "parenttype": "App Settings",
+    "range_from": 19.0,
+    "range_to": 22.0
+   },
+   {
+    "multiplier": 3.0,
+    "parent": "App Settings",
+    "parentfield": "deduction_tier_range",
+    "parenttype": "App Settings",
+    "range_from": 23.0,
+    "range_to": 999.0
+   }
+  ],
+  "default_bag_types": [
+   {
+    "bag_type": "plastic",
+    "charges": 0.2,
+    "parent": "App Settings",
+    "parentfield": "default_bag_types",
+    "parenttype": "App Settings"
+   },
+   {
+    "bag_type": "jute",
+    "charges": 0.6,
+    "parent": "App Settings",
+    "parentfield": "default_bag_types",
+    "parenttype": "App Settings"
+   }
+  ],
+  "default_deduction_types": [
+   {
+    "charges_per_unit": 0.0,
+    "deduction_category": "multiple",
+    "deduction_name": "Moise",
+    "description": null,
+    "has_tiered_calculation": 1,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 10.0
+   },
+   {
+    "charges_per_unit": 15.0,
+    "deduction_category": "multiple",
+    "deduction_name": "Damage",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 2.0
+   },
+   {
+    "charges_per_unit": 0.0,
+    "deduction_category": "multiple",
+    "deduction_name": "S/S",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 2.0
+   },
+   {
+    "charges_per_unit": 10.0,
+    "deduction_category": "single",
+    "deduction_name": "PP",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   },
+   {
+    "charges_per_unit": 12.0,
+    "deduction_category": "single",
+    "deduction_name": "UNLOADING",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   },
+   {
+    "charges_per_unit": 1.5,
+    "deduction_category": "single",
+    "deduction_name": "Others",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   },
+   {
+    "charges_per_unit": 100.0,
+    "deduction_category": "single",
+    "deduction_name": "Weighbridge",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   },
+   {
+    "charges_per_unit": 60.0,
+    "deduction_category": "single",
+    "deduction_name": "RTGS",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   },
+   {
+    "charges_per_unit": 0.0,
+    "deduction_category": "single",
+    "deduction_name": "Miscellaneous",
+    "description": null,
+    "has_tiered_calculation": 0,
+    "is_active": 1,
+    "parent": "App Settings",
+    "parentfield": "default_deduction_types",
+    "parenttype": "App Settings",
+    "required_value": 0.0
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "App Settings",
+  "modified": "2025-09-25 13:18:02.742986",
+  "name": "App Settings"
+ }
+]
