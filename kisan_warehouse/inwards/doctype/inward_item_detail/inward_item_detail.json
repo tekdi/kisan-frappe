@@ -21,7 +21,8 @@
    "fieldname": "item_bag_type",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Bag Type"
+   "label": "Bag Type",
+   "options": "plastic\njute"
   },
   {
    "fieldname": "item_bags",
@@ -88,7 +89,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-18 08:12:05.778383",
+ "modified": "2025-09-25 17:26:17.862923",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward Item Detail",
