@@ -86,7 +86,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Broker Type",
-   "options": "\nIndividual / Farmer\nCompany / Trader",
+   "options": "Individual / Farmer\nCompany / Trader",
    "reqd": 1
   },
   {
@@ -373,7 +373,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-22 16:00:34.653577",
+ "modified": "2025-09-29 16:20:52.703144",
  "modified_by": "Administrator",
  "module": "brokers",
  "name": "Broker",
