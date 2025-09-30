@@ -19,9 +19,10 @@
   "sauda_status",
   "party_info_section",
   "customer",
+  "warehouse",
   "customer_email",
   "column_break_xetv",
-  "warehouse",
+  "customer_location",
   "column_break_wmob",
   "broker",
   "broker_email",
@@ -144,6 +145,16 @@
    "reqd": 1
   },
   {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Warehouse Location",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
    "fieldname": "customer_email",
    "fieldtype": "Data",
    "hidden": 1,
@@ -159,14 +170,13 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "warehouse",
-   "fieldtype": "Link",
+   "fieldname": "customer_location",
+   "fieldtype": "Data",
    "in_filter": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Warehouse Location",
-   "options": "Warehouse",
-   "reqd": 1
+   "label": "Customer Location",
+   "options": "Customer"
   },
   {
    "fieldname": "column_break_wmob",
@@ -331,7 +341,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-22 16:18:58.921484",
+ "modified": "2025-09-29 14:18:42.020311",
  "modified_by": "Administrator",
  "module": "saudas",
  "name": "Sauda",
