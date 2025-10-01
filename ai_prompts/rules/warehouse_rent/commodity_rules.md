@@ -1,3 +1,173 @@
+Create a Frappe v15 DocType for Commodity with these specifications:
+
+**Basic Configuration:**
+- DocType Name: Commodity
+- Module: Warehouse Rent
+- Naming: Auto-naming with series "COMM-.YYYY.-.####"
+- Track Changes: Yes
+- Is Submittable: No
+- Custom: Yes
+
+**Fields (in exact order):**
+
+1. **naming_series** (Select)
+   - Hidden: Yes
+   - Default: "COMM-.YYYY.-.####"
+
+2. **Section Break:** Commodity Information
+
+3. **commodity_name** (Data)
+   - Label: Commodity Name
+   - Mandatory: Yes
+   - Length: 140
+   - In List View: Yes
+
+4. **description** (Small Text)
+   - Label: Description
+   - Mandatory: No
+   - Rows: 3
+
+5. **Column Break**
+
+6. **hsn_code** (Data)
+   - Label: HSN Code
+   - Mandatory: No
+   - Length: 8
+   - In List View: Yes
+
+7. **category** (Select)
+   - Label: Category
+   - Mandatory: No
+   - Options: Grains, Pulses, Seeds, Other
+   - In List View: Yes
+
+8. **Section Break:** Bag Configurations
+
+9. **bag_configurations** (Table)
+   - Label: Bag Configurations
+   - Mandatory: Yes
+   - Options: Commodity Bag Configuration
+
+10. **Section Break:** Status
+
+11. **status** (Select)
+    - Label: Status
+    - Mandatory: Yes
+    - Options: Active, Inactive
+    - Default: Active
+    - In List View: Yes
+
+**Additional Settings:**
+- Title Field: commodity_name
+- Search Fields: commodity_name, hsn_code, category
+- Sort Field: modified
+- Sort Order: DESC
+
+**Permissions:**
+- System Manager: All rights
+- Kisan Admin: Create, Read, Write
+- Kisan Accountant: Read, Write
+- Kisan Operator: Read
+
+**File Location:**
+apps/kisan_warehouse/kisan_warehouse/warehouse_rent/doctype/commodity/
+
+Create:
+1. commodity.json (DocType definition)
+2. commodity.py (Minimal server script: class Commodity(Document): pass)
+3. __init__.py (empty file)
+
+Child DocType: Commodity Bag Configuration
+Create a Frappe v15 Child DocType with these specifications:
+
+**Basic Configuration:**
+- DocType Name: Commodity Bag Configuration
+- Module: Warehouse Rent
+- Is Child Table: Yes
+- Parent DocType: Commodity
+- Custom: Yes
+
+**Fields (in exact order):**
+
+1. **bag_weight** (Select)
+   - Label: Bag Weight (Kg)
+   - Mandatory: Yes
+   - Options: 5, 10, 15, 20, 25, 30, 50 (one per line)
+   - In List View: Yes
+
+2. **rate_per_bag_per_day** (Currency)
+   - Label: Rate per Bag per Day (₹)
+   - Mandatory: Yes
+   - Precision: 2
+   - In List View: Yes
+
+
+**File Location:**
+apps/kisan_warehouse/kisan_warehouse/warehouse_rent/doctype/commodity_bag_configuration/
+
+Create:
+1. commodity_bag_configuration.json (DocType definition)
+2. commodity_bag_configuration.py (class CommodityBagConfiguration(Document): pass)
+3. __init__.py (empty file)
+
+
+## 📋 FIELD REFERENCE TABLE
+
+**Parent: Commodity**
+
+| Field Name | Label | Type | Required | Length | Options/Default |
+|------------|-------|------|----------|--------|-----------------|
+| commodity_name | Commodity Name | Data | Yes | 140 | - |
+| description | Description | Small Text | No | - | 3 rows |
+| hsn_code | HSN Code | Data | No | 8 | - |
+| category | Category | Select | No | - | Grains, Pulses, Seeds, Other |
+| bag_configurations | Bag Configurations | Table | Yes | - | Commodity Bag Configuration |
+| status | Status | Select | Yes | - | Active, Inactive (Default: Active) |
+
+**Child: Commodity Bag Configuration**
+
+| Field Name | Label | Type | Required | Options |
+|------------|-------|------|----------|---------|
+| bag_weight | Bag Weight (Kg) | Select | Yes | 5, 10, 15, 20, 25, 30, 50 |
+| rate_per_bag_per_day | Rate per Bag per Day (₹) | Currency | Yes | Precision: 2 |
+
+
+⚙️ POST-CREATION COMMANDS
+Run these commands after both DocTypes are created:
+bash# 1. Export fixtures
+bench --site kisan-new.localhost export-fixtures
+
+# 2. Migrate database
+bench --site kisan-new.localhost migrate
+
+# 3. Reload DocTypes
+bench --site kisan-new.localhost reload-doctype "Commodity"
+bench --site kisan-new.localhost reload-doctype "Commodity Bag Configuration"
+
+# 4. Clear cache
+bench --site kisan-new.localhost clear-cache
+
+# 5. Build assets
+bench build --app kisan_warehouse
+
+# 6. Restart
+bench restart
+
+✅ TESTING CHECKLIST
+After creation, verify:
+
+ Commodity DocType appears in Warehouse Rent module
+ Commodity Bag Configuration child table created
+ Naming series generates COMM-2025-0001 format
+ Can create new Commodity record
+ Child table shows with "Add Row" button
+ Bag weight dropdown shows all 7 options
+ Rate field accepts currency with 2 decimals
+ Status defaults to "Active"
+ Can save commodity with bag configurations
+ Search by name/HSN works
+
+
 # Commodity DocType Scripts
 
 ## **IMPLEMENTATION PROMPT TEMPLATE**
@@ -6,7 +176,7 @@
 I need to implement client and server scripts for the Commodity DocType in our Kisan Warehouse Frappe app.
 
 **CRITICAL REQUIREMENTS:**
-1. Use ONLY Client Script DocType (created via bench console) - DO NOT create .js files
+1. Use ONLY Client Script DocType (created via bench console) 
 2. Server script should be minimal: `class Commodity(Document): pass`
 3. All calculations must be client-side only
 4. No server-side validation that could cause database locks
@@ -54,11 +224,9 @@ bench restart
 ## **LESSONS LEARNED - WHAT NOT TO DO**
 
 ### **Common Mistakes to Avoid:**
-- Don't create separate .js files initially
 - Don't add complex server-side validation
 - Don't skip export-fixtures after changes
 - Don't ignore database lock errors
-- Don't add client-side validate() functions that throw errors
 - Don't allow duplicate bag weights in configurations
 - Don't allow zero or negative rates
 
@@ -211,24 +379,6 @@ Commodity: Wheat
 3. **Clear Differentiation:** Distinct rates for different weights
 4. **Regular Review:** Update rates based on costs and demand
 
-## **INTEGRATION POINTS**
-
-### **With Inward Aawak:**
-- **Bag Type Selection:** Operator selects from configured bag weights
-- **Weight Auto-fill:** Auto-populate bag_weight from selection
-- **Rate Reference:** Store rate for future Jawak billing
-
-### **With Outward Jawak:**
-- **Rate Retrieval:** Pull rate_per_bag_per_day for rent calculation
-- **Billing Accuracy:** Ensure correct rate applied per bag type
-- **Duration Calculation:** Rate × Days = rent per bag
-
-### **With Reporting:**
-- **Popular Commodities:** Track most stored products
-- **Revenue by Commodity:** Calculate earnings per product type
-- **Rate Analysis:** Compare rates across commodities
-- **Storage Trends:** Monitor commodity storage patterns
-
 ## **NAMING CONVENTION**
 
 ### **Auto-Naming:**
@@ -260,9 +410,9 @@ Commodity: Wheat
 
 ### **Role-Based Access:**
 - **System Manager:** Full access (CRUD)
-- **Administrator:** Create, Read, Update (no delete)
-- **Accountant:** Read, Update rates only
-- **Operator:** Read only (use for transactions)
+- **Kisan Admin:** Create, Read, Update (no delete)
+- **Kisan Accountant:** Read, Update rates only
+- **Kisan Operator:** Read only (use for transactions)
 
 ### **Rate Management:**
 - **Rate Changes:** Track historical rate changes
