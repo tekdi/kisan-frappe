@@ -6,11 +6,10 @@
 I need to implement client and server scripts for the Warehouse Floor DocType in our Kisan Warehouse Frappe app.
 
 **CRITICAL REQUIREMENTS:**
-1. Use ONLY Client Script DocType (created via bench console) - DO NOT create .js files
-2. Server script should be minimal: `class WarehouseFloor(Document): pass`
-3. All calculations must be client-side only
-4. No server-side validation that could cause database locks
-5. Follow Frappe v15 standards
+1. Server script should be minimal: `class WarehouseFloor(Document): pass`
+2. All calculations must be client-side only
+3. No server-side validation that could cause database locks
+4. Follow Frappe v15 standards
 
 **Business Logic:**
 [See calculations below]
@@ -54,11 +53,9 @@ bench restart
 ## **LESSONS LEARNED - WHAT NOT TO DO**
 
 ### **Common Mistakes to Avoid:**
-- Don't create separate .js files initially
 - Don't add complex server-side validation
 - Don't skip export-fixtures after changes
 - Don't ignore database lock errors
-- Don't add client-side validate() functions that throw errors
 - Don't allow floors without chambers when has_chambers is checked
 - Don't allow duplicate floor numbers within same godown
 
