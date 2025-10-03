@@ -1,3 +1,122 @@
+# Godown - AI DocType Creation Guide
+
+You are an expert Frappe/ERPNext developer.  
+I am building a Warehouse Rent module in my Kisan Warehouse application.  
+I want to implement the "Godown → Floor → Chamber" hierarchy using a **flattened structure** (instead of nested child tables).  
+
+### Current Problem
+- Earlier I created nested child DocTypes (Godown → Floor child → Chamber child).  
+- This caused issues in UI rendering, filtering, and reporting.  
+- I now want to **refactor to flattened DocTypes**.
+
+### Required Flattened DocType Design
+1. **Godown (Main DocType)**
+   - Fields:
+     - `godown_name` (Data, Mandatory, Unique per record)
+     - `godown_code` (Data, Auto naming series optional e.g. GD-.####)
+     `address` (Small Text, Required)  
+    - `city` (Data, Required)  
+    - `state` (Data, Required)  
+    - `zip` (Data, Required)  
+    - `total_area` (Float, Optional) → Total warehouse area  
+    - `contact_person` (Data, Optional)  
+    - `mobile` (Data, Optional)  
+     - `status` (Select: Active, Inactive, Maintenance)
+
+2. **Warehouse Floor (Main DocType)**
+   - Fields:
+    - `floor_name` (Data, Required) → Display name (Ground, First, etc.)  
+    - `floor_number` (Int, Required) → Numeric identifier  
+    - `floor_type` (Select, Optional) → Options: Ground, Upper, Basement  
+    - `total_area` (Float, Optional) → Floor area  
+     - `godown` (Link to Godown, Mandatory)
+     - `status` (Select: Active, Inactive, Maintenance)
+
+3. **Floor Chamber (Main DocType)**
+   - Fields:
+     - `chamber_name` (Data, e.g., Chamber A, Chamber 1)
+     - `chamber_code` (Data or Auto naming series, e.g., CH-.####)
+     - `floor` (Link to Warehouse Floor, Mandatory)
+     - `area` (Float, sqm)
+     - `max_capacity` (Int, no. of bags)
+     - `status` (Select: Available, Occupied, Reserved, Maintenance)
+
+### Filtering Requirements
+- When selecting **Floor**, it must only show floors of the selected **Godown**.
+- When selecting **Chamber**, it must only show chambers of the selected **Floor**.
+- If Godown is changed → Floors reset → Chambers reset.
+- If Floor is changed → Chambers reset.
+
+### Script Requirements
+- Write **Client Scripts** in Frappe for dynamic filtering:
+  1. In forms where user selects Godown → Floor → Chamber:
+     - Filter Floors by Godown.
+     - Filter Chambers by Floor.
+  2. On Godown change → reset Floor + Chamber.
+  3. On Floor change → reset Chamber.
+- Use `frm.set_query` for filters.
+- Example:
+  ```javascript
+  frappe.ui.form.on("Your Transaction Doctype", {
+      refresh: function(frm) {
+          frm.set_query("floor", function() {
+              return {
+                  filters: {
+                      godown: frm.doc.godown
+                  }
+              };
+          });
+          frm.set_query("chamber", function() {
+              return {
+                  filters: {
+                      floor: frm.doc.floor
+                  }
+              };
+          });
+      },
+      godown: function(frm) {
+          frm.set_value("floor", "");
+          frm.set_value("chamber", "");
+      },
+      floor: function(frm) {
+          frm.set_value("chamber", "");
+      }
+  });
+
+
+
+## ⚙️ POST-CREATION COMMANDS
+
+Run these commands after all three DocTypes are created:
+
+```bash
+# 1. Export fixtures
+bench --site kisan-new.localhost export-fixtures
+
+# 2. Migrate database
+bench --site kisan-new.localhost migrate
+
+# 3. Reload DocTypes
+bench --site kisan-new.localhost reload-doctype "Godown"
+bench --site kisan-new.localhost reload-doctype "Warehouse Floor"
+bench --site kisan-new.localhost reload-doctype "Floor Chamber"
+
+# 4. Clear cache
+bench --site kisan-new.localhost clear-cache
+
+# 5. Build assets
+bench build --app kisan_warehouse
+
+# 6. Restart
+bench restart
+```
+
+# Godown DocType Scripts
+```
+
+Add this section at the very beginning of your Godown rules document (before the IMPLEMENTATION PROMPT TEMPLATE section). This gives Cursor complete specifications to create all three hierarchical DocTypes before implementing the business logic.
+
+
 # Godown DocType Scripts
 
 ## **IMPLEMENTATION PROMPT TEMPLATE**
@@ -6,11 +125,10 @@
 I need to implement client and server scripts for the Godown DocType in our Kisan Warehouse Frappe app.
 
 **CRITICAL REQUIREMENTS:**
-1. Use ONLY Client Script DocType (created via bench console) - DO NOT create .js files
-2. Server script should be minimal: `class Godown(Document): pass`
-3. All calculations must be client-side only
-4. No server-side validation that could cause database locks
-5. Follow Frappe v15 standards
+1. Server script should be minimal: `class Godown(Document): pass`
+2. All calculations must be client-side only
+3. No server-side validation that could cause database locks
+4. Follow Frappe v15 standards
 
 **Business Logic:**
 [See calculations below]
@@ -54,11 +172,9 @@ bench restart
 ## **LESSONS LEARNED - WHAT NOT TO DO**
 
 ### **Common Mistakes to Avoid:**
-- Don't create separate .js files initially
 - Don't add complex server-side validation
 - Don't skip export-fixtures after changes
 - Don't ignore database lock errors
-- Don't add client-side validate() functions that throw errors
 - Don't allow duplicate godown codes
 - Don't create floors without chambers
 - Don't allow duplicate chamber codes within floors
@@ -321,25 +437,6 @@ Godown List
 - **Inactive Floor:** All chambers in floor inactive
 - **Maintenance Chamber:** Only that chamber unavailable
 
-## **INTEGRATION POINTS**
-
-### **With Inward Aawak:**
-- **Chamber Selection:** Show available chambers for allocation
-- **Capacity Check:** Validate allocation against available capacity
-- **Occupancy Update:** Update chamber occupied_capacity
-- **Status Change:** Mark chamber as 'Occupied' when allocated
-
-### **With Outward Jawak:**
-- **Release Processing:** Free up chamber capacity
-- **Status Update:** Change chamber to 'Available' when empty
-- **Capacity Restoration:** Add released capacity back to available
-
-### **With Reporting:**
-- **Utilization Reports:** Track capacity usage trends
-- **Revenue by Godown:** Calculate earnings per facility
-- **Occupancy Patterns:** Analyze peak usage times
-- **Efficiency Metrics:** Compare utilization across godowns
-
 ## **NAMING CONVENTION**
 
 ### **Auto-Naming:**
@@ -380,13 +477,6 @@ Godown List
 - **Alert Indicators:** High utilization warnings
 - **Trends:** Historical capacity usage
 
-## **PERMISSIONS & SECURITY**
-
-### **Role-Based Access:**
-- **System Manager:** Full access (CRUD)
-- **Administrator:** Create, Read, Update (no delete)
-- **Accountant:** Read only
-- **Operator:** Read only (use for allocations)
 
 ### **Data Integrity:**
 - **Structure Integrity:** Prevent orphan floors/chambers
