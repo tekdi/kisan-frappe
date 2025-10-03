@@ -14,11 +14,12 @@
   "description",
   "column_break_6",
   "hsn_code",
+  "column_break_hrks",
   "category",
+  "column_break_vmly",
+  "status",
   "section_break_9",
-  "bag_configurations",
-  "section_break_11",
-  "status"
+  "bag_configurations"
  ],
  "fields": [
   {
@@ -46,6 +47,7 @@
   {
    "fieldname": "description",
    "fieldtype": "Small Text",
+   "hidden": 1,
    "label": "Description",
    "options": "3"
   },
@@ -80,11 +82,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "section_break_11",
-   "fieldtype": "Section Break",
-   "label": "Status"
-  },
-  {
    "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -92,11 +89,19 @@
    "label": "Status",
    "options": "Active\nInactive",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hrks",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vmly",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 11:44:25.160827",
+ "modified": "2025-10-03 18:30:39.139752",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Commodity",

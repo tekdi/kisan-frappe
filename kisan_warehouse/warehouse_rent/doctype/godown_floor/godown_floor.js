@@ -1,7 +1,7 @@
 // Copyright (c) 2025, Kisan Warehouse and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Warehouse Floor', {
+frappe.ui.form.on('Godown Floor', {
 	refresh: function(frm) {
 		// Set default values
 		if (frm.is_new()) {

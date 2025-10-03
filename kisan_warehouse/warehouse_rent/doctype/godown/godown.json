@@ -10,17 +10,20 @@
  "field_order": [
   "naming_series",
   "section_break_2",
-  "godown_name",
-  "godown_code",
-  "column_break_6",
-  "total_area",
   "status",
+  "column_break_6",
+  "godown_name",
+  "column_break_ttbz",
+  "godown_code",
+  "column_break_hchx",
+  "total_area",
   "section_break_8",
   "address",
   "column_break_10",
   "city",
-  "state",
   "column_break_13",
+  "state",
+  "column_break_xulk",
   "zip",
   "section_break_15",
   "contact_person",
@@ -86,10 +89,9 @@
   },
   {
    "fieldname": "address",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Address",
-   "options": "3",
-   "reqd": 1
+   "options": "3"
   },
   {
    "fieldname": "column_break_10",
@@ -99,15 +101,13 @@
    "fieldname": "city",
    "fieldtype": "Data",
    "label": "City",
-   "length": 100,
-   "reqd": 1
+   "length": 100
   },
   {
    "fieldname": "state",
    "fieldtype": "Data",
    "label": "State",
-   "length": 100,
-   "reqd": 1
+   "length": 100
   },
   {
    "fieldname": "column_break_13",
@@ -117,8 +117,7 @@
    "fieldname": "zip",
    "fieldtype": "Data",
    "label": "ZIP Code",
-   "length": 6,
-   "reqd": 1
+   "length": 6
   },
   {
    "fieldname": "section_break_15",
@@ -140,11 +139,23 @@
    "fieldtype": "Data",
    "label": "Mobile Number",
    "length": 10
+  },
+  {
+   "fieldname": "column_break_xulk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ttbz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hchx",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-01 18:25:18.064123",
+ "modified": "2025-10-03 18:24:15.722066",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Godown",

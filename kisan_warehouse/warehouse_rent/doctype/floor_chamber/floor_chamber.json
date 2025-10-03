@@ -11,14 +11,16 @@
   "naming_series",
   "section_break_2",
   "chamber_name",
-  "chamber_code",
   "column_break_6",
-  "area",
-  "max_capacity",
-  "section_break_8",
+  "chamber_code",
+  "column_break_xgds",
   "floor",
+  "column_break_eucd",
+  "status",
+  "section_break_8",
+  "area",
   "column_break_10",
-  "status"
+  "max_capacity"
  ],
  "fields": [
   {
@@ -69,15 +71,14 @@
   },
   {
    "fieldname": "section_break_8",
-   "fieldtype": "Section Break",
-   "label": "Location"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "floor",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Floor",
-   "options": "Warehouse Floor",
+   "options": "Godown Floor",
    "reqd": 1
   },
   {
@@ -92,11 +93,19 @@
    "label": "Status",
    "options": "Available\nOccupied\nReserved\nMaintenance",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xgds",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eucd",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 11:45:29.391842",
+ "modified": "2025-10-03 18:29:04.572934",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Floor Chamber",

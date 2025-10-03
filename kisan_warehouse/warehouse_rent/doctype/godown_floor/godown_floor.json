@@ -11,9 +11,11 @@
   "naming_series",
   "section_break_2",
   "floor_name",
-  "floor_number",
   "column_break_6",
+  "floor_number",
+  "column_break_bjuo",
   "floor_type",
+  "column_break_dcxk",
   "total_area",
   "section_break_8",
   "godown",
@@ -91,14 +93,22 @@
    "label": "Status",
    "options": "Active\nInactive\nMaintenance",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bjuo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dcxk",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-01 18:28:50.281402",
+ "modified": "2025-10-03 18:27:02.212038",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
- "name": "Warehouse Floor",
+ "name": "Godown Floor",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
