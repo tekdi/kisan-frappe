@@ -7,3 +7,5 @@ from frappe.model.document import Document
 
 class BagDetails(Document):
 	pass
+
+
