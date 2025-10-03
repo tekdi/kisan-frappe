@@ -1,3 +1,261 @@
+
+# Inward Aawak - AI DocType Creation Guide
+
+## **Parent DocType: Inward Aawak**
+
+```
+Create a Frappe v15 DocType for Inward Aawak with these specifications:
+
+**Basic Configuration:**
+- DocType Name: Inward Aawak
+- Module: Warehouse Rent
+- Naming: Auto-naming with series "AAWAK-.YYYY.-.####"
+- Track Changes: Yes
+- Is Submittable: Yes
+- Custom: Yes
+
+**Fields (in exact order):**
+
+1. **naming_series** (Select)
+   - Hidden: Yes
+   - Default: "AAWAK-.YYYY.-.####"
+
+2. **Section Break:** Basic Information
+
+3. **aawak_date** (Datetime)
+   - Label: Aawak Date
+   - Mandatory: Yes
+   - Default: Now
+   - In List View: Yes
+
+4. **Column Break**
+
+5. **vehicle_number** (Data)
+   - Label: Vehicle Number
+   - Mandatory: Yes
+   - Length: 20
+   - In List View: Yes
+
+6. **Section Break:** Customer & Product
+
+7. **storage_customer** (Link)
+   - Label: Storage Customer
+   - Mandatory: Yes
+   - Options: Storage Customer
+   - In List View: Yes
+
+8. **commodity** (Link)
+   - Label: Commodity
+   - Mandatory: Yes
+   - Options: Commodity
+
+9. **Column Break**
+
+10. **bag_type** (Link)
+    - Label: Bag Type
+    - Mandatory: Yes
+    - Options: Commodity Bag Configuration
+    - In List View: Yes
+    - Description: From Commodity bag config
+
+11. **Section Break:** Quantity Details
+
+12. **total_bags** (Int)
+    - Label: Total Bags
+    - Mandatory: Yes
+    - In List View: Yes
+
+13. **bag_weight** (Float)
+    - Label: Bag Weight (Kg)
+    - Mandatory: Yes
+    - Read Only: Yes
+    - Precision: 2
+    - Description: Auto-filled from Commodity
+
+14. **Column Break**
+
+15. **total_weight** (Float)
+    - Label: Total Weight (Kg)
+    - Mandatory: Yes
+    - Read Only: Yes
+    - Precision: 2
+    - Description: Calculated: total_bags × bag_weight
+
+16. **Section Break:** Storage Allocation
+
+17. **godown** (Link)
+    - Label: Godown
+    - Mandatory: Yes
+    - Options: Godown
+
+18. **chamber_allocations** (Table)
+    - Label: Chamber Allocations
+    - Mandatory: Yes
+    - Options: Chamber Allocation
+
+19. **Section Break:** Additional
+
+20. **notes** (Small Text)
+    - Label: Notes
+    - Mandatory: No
+    - Rows: 3
+
+21. **Column Break**
+
+22. **status** (Select)
+    - Label: Status
+    - Mandatory: Yes
+    - Options: Draft, Active, Completed
+    - Default: Draft
+    - In List View: Yes
+
+**Additional Settings:**
+- Title Field: naming_series
+- Search Fields: storage_customer, commodity, vehicle_number
+- Sort Field: aawak_date
+- Sort Order: DESC
+
+**Permissions:**
+- System Manager: All rights
+- Kisan Admin: Create, Read, Write, Submit
+- Kisan Accountant: Create, Read, Write, Submit
+- Kisan Operator: Create, Read, Write, Submit
+
+**File Location:**
+apps/kisan_warehouse/kisan_warehouse/warehouse_rent/doctype/inward_aawak/
+
+Create:
+1. inward_aawak.json (DocType definition)
+2. inward_aawak.py (Minimal server script: class InwardAawak(Document): pass)
+3. __init__.py (empty file)
+```
+
+---
+
+## **Child DocType: Chamber Allocation**
+
+```
+Create a Frappe v15 Child DocType with these specifications:
+
+**Basic Configuration:**
+- DocType Name: Chamber Allocation
+- Module: Warehouse Rent
+- Is Child Table: Yes
+- Parent DocType: Inward Aawak
+- Custom: Yes
+
+**Fields (in exact order):**
+
+1. **floor** (Link)
+   - Label: Floor
+   - Mandatory: Yes
+   - Options: Warehouse Floor
+   - In List View: Yes
+
+2. **chamber** (Link)
+   - Label: Chamber
+   - Mandatory: Yes
+   - Options: Floor Chamber
+   - In List View: Yes
+
+3. **bags_allocated** (Int)
+   - Label: Bags Allocated
+   - Mandatory: Yes
+   - In List View: Yes
+
+4. **allocation_date** (Date)
+   - Label: Allocation Date
+   - Mandatory: Yes
+   - Default: Today
+   - In List View: Yes
+
+**File Location:**
+apps/kisan_warehouse/kisan_warehouse/warehouse_rent/doctype/chamber_allocation/
+
+Create:
+1. chamber_allocation.json (DocType definition)
+2. chamber_allocation.py (class ChamberAllocation(Document): pass)
+3. __init__.py (empty file)
+```
+
+---
+
+## 📋 FIELD REFERENCE TABLE
+
+**Parent: Inward Aawak**
+
+| Field Name | Label | Type | Required | Read Only | Default | Options/Link |
+|------------|-------|------|----------|-----------|---------|--------------|
+| aawak_date | Aawak Date | Datetime | Yes | No | Now | - |
+| vehicle_number | Vehicle Number | Data | Yes | No | - | Length: 20 |
+| storage_customer | Storage Customer | Link | Yes | No | - | Storage Customer |
+| commodity | Commodity | Link | Yes | No | - | Commodity |
+| bag_type | Bag Type | Link | Yes | No | - | Commodity Bag Configuration |
+| total_bags | Total Bags | Int | Yes | No | - | - |
+| bag_weight | Bag Weight (Kg) | Float | Yes | Yes | - | Auto-filled |
+| total_weight | Total Weight (Kg) | Float | Yes | Yes | - | Calculated |
+| godown | Godown | Link | Yes | No | - | Godown |
+| chamber_allocations | Chamber Allocations | Table | Yes | No | - | Chamber Allocation |
+| notes | Notes | Small Text | No | No | - | 3 rows |
+| status | Status | Select | Yes | No | Draft | Draft, Active, Completed |
+
+**Child: Chamber Allocation**
+
+| Field Name | Label | Type | Required | Default | Options/Link |
+|------------|-------|------|----------|---------|--------------|
+| floor | Floor | Link | Yes | - | Warehouse Floor |
+| chamber | Chamber | Link | Yes | - | Floor Chamber |
+| bags_allocated | Bags Allocated | Int | Yes | - | - |
+| allocation_date | Allocation Date | Date | Yes | Today | - |
+
+---
+
+## ⚙️ POST-CREATION COMMANDS
+
+Run these commands after both DocTypes are created:
+
+```bash
+# 1. Export fixtures
+bench --site kisan-new.localhost export-fixtures
+
+# 2. Migrate database
+bench --site kisan-new.localhost migrate
+
+# 3. Reload DocTypes
+bench --site kisan-new.localhost reload-doctype "Inward Aawak"
+bench --site kisan-new.localhost reload-doctype "Chamber Allocation"
+
+# 4. Clear cache
+bench --site kisan-new.localhost clear-cache
+
+# 5. Build assets
+bench build --app kisan_warehouse
+
+# 6. Restart
+bench restart
+```
+
+---
+
+## ✅ TESTING CHECKLIST
+
+After creation, verify:
+
+- [ ] Inward Aawak DocType appears in Warehouse Rent module
+- [ ] Chamber Allocation child table created
+- [ ] Naming series generates AAWAK-2025-0001 format
+- [ ] Can create new Inward Aawak record
+- [ ] Is Submittable setting enabled (can save as Draft and Submit)
+- [ ] aawak_date defaults to current datetime
+- [ ] allocation_date defaults to today
+- [ ] Chamber Allocations table shows with "Add Row" button
+- [ ] bag_weight field is read-only
+- [ ] total_weight field is read-only
+- [ ] Status defaults to "Draft"
+- [ ] Can link Storage Customer, Commodity, Godown
+- [ ] bag_type shows Commodity Bag Configuration options
+- [ ] Submit button appears after save
+
 # Inward Aawak DocType Scripts
 
 ## **IMPLEMENTATION PROMPT TEMPLATE**
@@ -6,11 +264,10 @@
 I need to implement client and server scripts for the Inward Aawak DocType in our Kisan Warehouse Frappe app.
 
 **CRITICAL REQUIREMENTS:**
-1. Use ONLY Client Script DocType (created via bench console) - DO NOT create .js files
-2. Server script should be minimal: `class InwardAawak(Document): pass`
-3. All calculations must be client-side only
-4. No server-side validation that could cause database locks
-5. Follow Frappe v15 standards
+1. Server script should be minimal: `class InwardAawak(Document): pass`
+2. All calculations must be client-side only
+3. No server-side validation that could cause database locks
+4. Follow Frappe v15 standards
 
 **Business Logic:**
 [See calculations below]
@@ -54,7 +311,6 @@ bench restart
 ## **LESSONS LEARNED - WHAT NOT TO DO**
 
 ### **Common Mistakes to Avoid:**
-- Don't create separate .js files initially
 - Don't add complex server-side validation
 - Don't skip export-fixtures after changes
 - Don't ignore database lock errors
