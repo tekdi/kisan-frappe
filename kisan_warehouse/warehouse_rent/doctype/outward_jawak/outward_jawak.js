@@ -23,6 +23,9 @@ frappe.ui.form.on('Outward Jawak', {
 			console.log('Triggering calculation on form load');
 			recalculateAllAmounts(frm);
 		}
+		
+		// Apply bold styling to specific field labels
+		applyBoldLabels(frm);
 	},
 
 	refresh: function(frm) {
@@ -62,6 +65,9 @@ frappe.ui.form.on('Outward Jawak', {
 			recalculateAllAmounts(frm);
 		}
 		
+		// Apply bold styling to specific field labels
+		applyBoldLabels(frm);
+		
 		console.log('All fields refreshed');
 	},
 
@@ -70,6 +76,9 @@ frappe.ui.form.on('Outward Jawak', {
 		if (frm.doc.aawak_reference) {
 			console.log('Calling populateFromAawak');
 			populateFromAawak(frm);
+			
+			// Validate Jawak date against Aawak date after populating
+			validateJawakDate(frm);
 		} else {
 			console.log('Calling clearForm');
 			clearForm(frm);
@@ -78,6 +87,10 @@ frappe.ui.form.on('Outward Jawak', {
 
 	jawak_date: function(frm) {
 		console.log('jawak_date changed to:', frm.doc.jawak_date);
+		
+		// Validate Jawak date against Aawak date
+		validateJawakDate(frm);
+		
 		// Recalculate all days and amounts when jawak date changes
 		recalculateAllAmounts(frm);
 	},
@@ -184,11 +197,11 @@ function populateFromAawak(frm) {
 				frm.refresh_field('chamber');
 				frm.refresh_field('jawak_bag_details');
 				
-				frappe.msgprint({
-					title: __('Aawak Details Loaded'),
-					message: __('Form populated with Aawak details'),
-					indicator: 'green'
-				});
+				// frappe.msgprint({
+				// 	title: __('Aawak Details Loaded'),
+				// 	message: __('Form populated with Aawak details'),
+				// 	indicator: 'green'
+				// });
 			} else {
 				frappe.msgprint({
 					title: __('Error'),
@@ -250,11 +263,11 @@ function populateBagDetails(frm, aawak) {
 					// Calculate all amounts after populating bag details
 					recalculateAllAmounts(frm);
 					
-					frappe.msgprint({
-						title: __('Bag Details Loaded'),
-						message: __('Bag details populated from Aawak reference'),
-						indicator: 'green'
-					});
+					// frappe.msgprint({
+					// 	title: __('Bag Details Loaded'),
+					// 	message: __('Bag details populated from Aawak reference'),
+					// 	indicator: 'green'
+					// });
 				} else {
 					frappe.msgprint({
 						title: __('No Commodity Configuration'),
@@ -439,4 +452,68 @@ function clearForm(frm) {
 	frm.set_value('released_bag_weight', 0);
 	frm.set_value('total_amount', 0);
 	frm.set_value('net_amount', 0);
+}
+
+function validateJawakDate(frm) {
+	// Only validate if both dates are present
+	if (!frm.doc.jawak_date || !frm.doc.aawak_reference) {
+		return;
+	}
+	
+	console.log('Validating Jawak date against Aawak date');
+	
+	// Get Aawak date from the reference
+	frappe.call({
+		method: 'frappe.client.get_value',
+		args: {
+			doctype: 'Inward Aawak',
+			filters: { name: frm.doc.aawak_reference },
+			fieldname: 'aawak_date'
+		},
+		callback: function(r) {
+			if (r.message && r.message.aawak_date) {
+				let aawakDate = new Date(r.message.aawak_date);
+				let jawakDate = new Date(frm.doc.jawak_date);
+				
+				console.log('Comparing dates - Aawak:', aawakDate, 'Jawak:', jawakDate);
+				
+				// Check if Jawak date is after Aawak date
+				if (jawakDate <= aawakDate) {
+					// Clear the invalid Jawak date
+					frm.set_value('jawak_date', '');
+					
+					// Show error message
+					frappe.msgprint({
+						title: __('Invalid Jawak Date'),
+						message: __('Jawak Date must be after Aawak Date. Aawak Date is: ' + frappe.datetime.str_to_user(aawakDate) + '. Please enter a later date.'),
+						indicator: 'red'
+					});
+					
+					console.log('Date validation failed - Jawak date cleared');
+				} else {
+					console.log('Date validation passed');
+				}
+			}
+		}
+	});
+}
+
+function applyBoldLabels(frm) {
+	// Apply bold styling to specific field labels
+	const fieldsToBold = ['godown', 'floor', 'chamber'];
+	
+	fieldsToBold.forEach(function(fieldname) {
+		// Use setTimeout to ensure DOM is ready
+		setTimeout(function() {
+			// Find the label element for the field
+			let fieldWrapper = frm.fields_dict[fieldname].$wrapper;
+			if (fieldWrapper && fieldWrapper.length) {
+				let labelElement = fieldWrapper.find('label');
+				if (labelElement && labelElement.length) {
+					labelElement.css('font-weight', 'bold');
+					console.log('Applied bold styling to', fieldname, 'label');
+				}
+			}
+		}, 100);
+	});
 }

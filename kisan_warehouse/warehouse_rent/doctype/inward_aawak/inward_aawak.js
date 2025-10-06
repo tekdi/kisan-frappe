@@ -312,22 +312,25 @@ function populateBagWeights(frm) {
 				// Update bag_weight field options in child table
 				frm.fields_dict.bag_details.grid.update_docfield_property('bag_weight', 'options', optionsString);
 				
-				// Clear existing rows and add one empty row
+				// Clear existing rows
 				frm.clear_table('bag_details');
-				frm.add_child('bag_details');
 				
-				// Pre-select first weight in the new row
-				if (bagWeights.length > 0) {
-					let new_row = frm.doc.bag_details[frm.doc.bag_details.length - 1];
-					frappe.model.set_value('Bag Details', new_row.name, 'bag_weight', bagWeights[0]);
-				}
+				// Create a row for EACH bag configuration
+				r.message.bag_configurations.forEach(function(config, index) {
+					let new_row = frm.add_child('bag_details');
+					
+					// Pre-fill with bag weight from configuration
+					frappe.model.set_value('Bag Details', new_row.name, 'bag_weight', config.bag_weight);
+					frappe.model.set_value('Bag Details', new_row.name, 'number_of_bags', 0);
+					frappe.model.set_value('Bag Details', new_row.name, 'total_weight', 0);
+				});
 				
 				frm.refresh_field('bag_details');
 				
 				// Show success message
 				frappe.msgprint({
-					title: __('Bag Weights Loaded'),
-					message: __('Available bag weights: ' + bagWeights.join(', ') + ' kg'),
+					title: __('Bag Configurations Loaded'),
+					message: __('Pre-filled ' + r.message.bag_configurations.length + ' bag detail rows with weights: ' + bagWeights.join(', ') + ' kg'),
 					indicator: 'green'
 				});
 			} else {

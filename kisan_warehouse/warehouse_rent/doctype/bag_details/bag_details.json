@@ -13,33 +13,33 @@
  ],
  "fields": [
   {
+   "columns": 2,
+   "description": "Select bag weight from available options from selected commodity Commodity Bag Configuration",
    "fieldname": "bag_weight",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Bag Weight (kg)",
-   "reqd": 1,
-   "columns": 2,
-   "description": "Select bag weight from available options from selected commodity Commodity Bag Configuration"
+   "reqd": 1
   },
   {
+   "columns": 3,
+   "default": "0",
+   "description": "Enter quantity of bags",
    "fieldname": "number_of_bags",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Number of Bags",
-   "reqd": 1,
-   "columns": 3,
-   "default": 0,
-   "description": "Enter quantity of bags"
+   "reqd": 1
   },
   {
+   "columns": 2,
+   "description": "Auto-calculated: Bag Weight \u00d7 Number of Bags",
    "fieldname": "total_weight",
    "fieldtype": "Float",
    "in_list_view": 1,
    "label": "Total Weight (kg)",
    "precision": "2",
-   "read_only": 1,
-   "columns": 2,
-   "description": "Auto-calculated: Bag Weight × Number of Bags"
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -59,4 +59,3 @@
  "title_field": "bag_weight",
  "track_changes": 1
 }
-
