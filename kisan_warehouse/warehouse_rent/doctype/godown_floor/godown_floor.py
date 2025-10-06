@@ -5,5 +5,5 @@ import frappe
 from frappe.model.document import Document
 
 
-class WarehouseFloor(Document):
+class GodownFloor(Document):
 	pass
