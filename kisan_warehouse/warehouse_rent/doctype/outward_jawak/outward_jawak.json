@@ -12,14 +12,16 @@
   "section_break_2",
   "jawak_date",
   "column_break_4",
-  "vehicle_number",
-  "section_break_6",
   "aawak_reference",
+  "column_break_vkog",
+  "vehicle_number",
+  "column_break_itcp",
+  "status",
   "section_break_8",
   "storage_customer",
-  "commodity",
-  "column_break_11",
   "godown",
+  "column_break_11",
+  "commodity",
   "floor",
   "column_break_14",
   "chamber",
@@ -27,24 +29,26 @@
   "jawak_bag_details",
   "section_break_18",
   "total_bags",
-  "released_bags",
   "column_break_21",
+  "released_bags",
+  "column_break_fmfd",
   "total_weight",
+  "column_break_dfco",
   "released_bag_weight",
   "section_break_24",
   "total_amount",
-  "additional_charges",
+  "net_amount",
   "column_break_27",
   "discount",
-  "net_amount",
+  "column_break_jdbk",
+  "additional_charges",
   "section_break_30",
   "payment_method",
   "column_break_32",
   "payment_reference",
   "section_break_34",
   "notes",
-  "column_break_36",
-  "status"
+  "column_break_36"
  ],
  "fields": [
   {
@@ -64,7 +68,7 @@
   },
   {
    "fieldname": "jawak_date",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Jawak Date",
    "reqd": 1
@@ -77,11 +81,6 @@
    "fieldname": "vehicle_number",
    "fieldtype": "Data",
    "label": "Vehicle Number"
-  },
-  {
-   "fieldname": "section_break_6",
-   "fieldtype": "Section Break",
-   "label": "Aawak Reference"
   },
   {
    "fieldname": "aawak_reference",
@@ -99,38 +98,40 @@
   {
    "fieldname": "storage_customer",
    "fieldtype": "Link",
-   "label": "Storage Customer",
+   "label": "Customer",
    "options": "Storage Customer",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "commodity",
    "fieldtype": "Link",
    "label": "Commodity",
    "options": "Commodity",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_11",
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "fieldname": "floor",
    "fieldtype": "Link",
    "label": "Floor",
    "options": "Godown Floor",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_14",
    "fieldtype": "Column Break"
   },
   {
+   "bold": 1,
    "fieldname": "chamber",
    "fieldtype": "Link",
    "label": "Chamber",
    "options": "Floor Chamber",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "section_break_16",
@@ -220,7 +221,7 @@
   },
   {
    "fieldname": "payment_method",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "label": "Payment Method",
    "options": "Cash\nUPI\nBank Transfer\nCheque"
   },
@@ -240,7 +241,7 @@
   },
   {
    "fieldname": "notes",
-   "fieldtype": "Text",
+   "fieldtype": "Data",
    "label": "Notes"
   },
   {
@@ -248,6 +249,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Released",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -256,16 +258,37 @@
    "reqd": 1
   },
   {
+   "bold": 1,
    "fieldname": "godown",
    "fieldtype": "Link",
    "label": "Godown",
    "options": "Godown",
-   "read_only": 1
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vkog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_itcp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fmfd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dfco",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_jdbk",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 18:40:03.534221",
+ "modified": "2025-10-06 12:39:26.373509",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Outward Jawak",
