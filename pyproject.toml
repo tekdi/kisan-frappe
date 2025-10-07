@@ -3,7 +3,7 @@ name = "kisan_warehouse"
 authors = [
     { name = "Deepak Patil", email = "deepak_p@tekditechnologies.com"}
 ]
-description = "KisanMitra Warehouse Management System"
+description = "Agri Warehouse Management System"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
