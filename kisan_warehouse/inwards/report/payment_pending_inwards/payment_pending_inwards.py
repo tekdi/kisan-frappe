@@ -54,7 +54,7 @@ def get_columns():
         },
         {
             "label": _("Inward Date"),
-            "fieldname": "inward_date",
+            "fieldname": "arrival_date",
             "fieldtype": "Date",
             "width": 100
         },
@@ -117,7 +117,7 @@ def get_data(filters):
             COALESCE(CONCAT(b.first_name, ' ', b.last_name), 'No Broker') as broker_name,
             COALESCE(p.product_name, 'No Product') as product_name,
             COALESCE(w.warehouse_name, 'No Warehouse') as warehouse_name,
-            i.inward_date,
+            i.arrival_date,
             i.net_total,
             COALESCE(i.total_amount_paid, 0) as total_amount_paid,
             COALESCE(i.total_amount_pending, i.net_total) as total_amount_pending,
