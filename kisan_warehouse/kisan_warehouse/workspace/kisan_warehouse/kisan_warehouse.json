@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"v6Qo4-xTi0\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Warehouse Management</b></span>\",\"col\":12}},{\"id\":\"92uoP0nuHN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"E2b1OFGwZh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"NR1ndOCpdk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"HoUE3BXe5c\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UVuQVlQJM1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"88GG8c_vcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"XX2G3EYYdF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"utbAmWdtyd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers/Farmers\",\"col\":4}},{\"id\":\"h5U0B6EbNU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}},{\"id\":\"z_6YP-sW6e\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inward/Purchase\",\"col\":4}},{\"id\":\"hktse1cxwZ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sIBGF7SOFN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"yu6n9oBIJ8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pending Saudas\",\"col\":4}},{\"id\":\"uR4vthxgv3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Pending Inwards\",\"col\":4}},{\"id\":\"o5fiMgrkuE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tally Inward Report\",\"col\":4}},{\"id\":\"eX0uFIwFb_\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"FISx08sdU1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock By Warehouse\",\"col\":4}},{\"id\":\"76ebQeEG6b\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock By Product\",\"col\":4}}]",
- "creation": "2025-08-08 18:15:47.429171",
+ "content": "[{\"id\":\"v6Qo4-xTi0\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Warehouse Management</b></span>\",\"col\":12}},{\"id\":\"92uoP0nuHN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Company\",\"col\":4}},{\"id\":\"E2b1OFGwZh\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Warehouse\",\"col\":4}},{\"id\":\"NR1ndOCpdk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":4}},{\"id\":\"HoUE3BXe5c\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UVuQVlQJM1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vehicles\",\"col\":4}},{\"id\":\"88GG8c_vcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Brokers\",\"col\":4}},{\"id\":\"XX2G3EYYdF\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"utbAmWdtyd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers/Farmers\",\"col\":4}},{\"id\":\"h5U0B6EbNU\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sauda/Booking\",\"col\":4}},{\"id\":\"z_6YP-sW6e\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inward/Purchase\",\"col\":4}},{\"id\":\"hktse1cxwZ\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sIBGF7SOFN\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"yu6n9oBIJ8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Pending Saudas\",\"col\":4}},{\"id\":\"uR4vthxgv3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Pending Inwards\",\"col\":4}},{\"id\":\"o5fiMgrkuE\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tally Inward Report\",\"col\":4}},{\"id\":\"eX0uFIwFb_\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"FISx08sdU1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock By Warehouse\",\"col\":4}},{\"id\":\"76ebQeEG6b\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock By Product\",\"col\":4}},{\"id\":\"qBkX3EaPeS\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"72x4hEbKgg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Warehouse Rent</b></span>\",\"col\":12}},{\"id\":\"597LIl335P\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Storage Customer\",\"col\":4}},{\"id\":\"lnQtsmyJIu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Commodity\",\"col\":4}},{\"id\":\"kaKwbGKZWT\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E5lDTj19eD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Godown\",\"col\":4}},{\"id\":\"scsKVK8P9u\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Godown Floor\",\"col\":4}},{\"id\":\"-F9RFOOeQO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Floor Chamber\",\"col\":4}},{\"id\":\"XzItB7wTEm\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ws29lK7nMx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Inward Aawak\",\"col\":4}},{\"id\":\"YN6gj4U_yX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outward Jawak\",\"col\":4}}]",
+ "creation": "2025-10-03 16:48:07.902268",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -13,7 +13,7 @@
  "is_hidden": 0,
  "label": "Kisan Warehouse",
  "links": [],
- "modified": "2025-08-08 17:59:32.217040",
+ "modified": "2025-10-06 12:48:32.687464",
  "modified_by": "Administrator",
  "module": "Kisan Warehouse",
  "name": "Kisan Warehouse",
@@ -22,9 +22,46 @@
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "roles": [],
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Kisan Accountant"
+  },
+  {
+   "role": "Kisan Admin"
+  },
+  {
+   "role": "Kisan Operator"
+  }
+ ],
  "sequence_id": 29.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Storage Customer",
+   "link_to": "Storage Customer",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Commodity",
+   "link_to": "Commodity",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Godown Floor",
+   "link_to": "Godown Floor",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
@@ -36,8 +73,32 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Godown",
+   "link_to": "Godown",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Floor Chamber",
+   "link_to": "Floor Chamber",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Company",
    "link_to": "Company",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Inward Aawak",
+   "link_to": "Inward Aawak",
    "stats_filter": "[]",
    "type": "DocType"
   },
@@ -46,6 +107,14 @@
    "doc_view": "List",
    "label": "Brokers",
    "link_to": "Broker",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Outward Jawak",
+   "link_to": "Outward Jawak",
    "stats_filter": "[]",
    "type": "DocType"
   },

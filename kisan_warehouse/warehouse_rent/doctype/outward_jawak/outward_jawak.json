@@ -1,0 +1,350 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-01-27 12:00:00",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "section_break_2",
+  "jawak_date",
+  "column_break_4",
+  "aawak_reference",
+  "column_break_vkog",
+  "vehicle_number",
+  "column_break_itcp",
+  "status",
+  "section_break_8",
+  "storage_customer",
+  "godown",
+  "column_break_11",
+  "commodity",
+  "floor",
+  "column_break_14",
+  "chamber",
+  "section_break_16",
+  "jawak_bag_details",
+  "section_break_18",
+  "total_bags",
+  "column_break_21",
+  "released_bags",
+  "column_break_fmfd",
+  "total_weight",
+  "column_break_dfco",
+  "released_bag_weight",
+  "section_break_24",
+  "total_amount",
+  "net_amount",
+  "column_break_27",
+  "discount",
+  "column_break_jdbk",
+  "additional_charges",
+  "section_break_30",
+  "payment_method",
+  "column_break_32",
+  "payment_reference",
+  "section_break_34",
+  "notes",
+  "column_break_36"
+ ],
+ "fields": [
+  {
+   "default": "JAWAK-.YYYY.-.####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Naming Series",
+   "options": "JAWAK-.YYYY.-.####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break",
+   "label": "Basic Information"
+  },
+  {
+   "fieldname": "jawak_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Jawak Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Number"
+  },
+  {
+   "fieldname": "aawak_reference",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Aawak Reference",
+   "options": "Inward Aawak",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Pre-filled Inward Details"
+  },
+  {
+   "fieldname": "storage_customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Storage Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "commodity",
+   "fieldtype": "Link",
+   "label": "Commodity",
+   "options": "Commodity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "label": "Floor",
+   "options": "Godown Floor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "chamber",
+   "fieldtype": "Link",
+   "label": "Chamber",
+   "options": "Floor Chamber",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break",
+   "label": "Bag Details"
+  },
+  {
+   "fieldname": "jawak_bag_details",
+   "fieldtype": "Table",
+   "label": "Jawak Bag Details",
+   "options": "Jawak Bag Detail"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "label": "Summary Totals"
+  },
+  {
+   "fieldname": "total_bags",
+   "fieldtype": "Int",
+   "label": "Total Bags",
+   "read_only": 1
+  },
+  {
+   "fieldname": "released_bags",
+   "fieldtype": "Int",
+   "label": "Released Bags",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "released_bag_weight",
+   "fieldtype": "Float",
+   "label": "Released Bag Weight (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break",
+   "label": "Financial Summary"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "additional_charges",
+   "fieldtype": "Currency",
+   "label": "Additional Charges",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "label": "Discount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_30",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Data",
+   "label": "Payment Method",
+   "options": "Cash\nUPI\nBank Transfer\nCheque"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "Payment Reference"
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Data",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "column_break_36",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Released",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nPaid\nReleased",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "godown",
+   "fieldtype": "Link",
+   "label": "Godown",
+   "options": "Godown",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vkog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_itcp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fmfd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dfco",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_jdbk",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-06 12:39:26.373509",
+ "modified_by": "Administrator",
+ "module": "Warehouse Rent",
+ "name": "Outward Jawak",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Accountant",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kisan Operator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

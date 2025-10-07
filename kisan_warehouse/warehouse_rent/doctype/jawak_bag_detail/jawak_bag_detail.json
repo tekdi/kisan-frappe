@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-01-27 12:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bag_type",
+  "total_bags",
+  "release_bags",
+  "rate",
+  "total_days",
+  "total_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "bag_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Bag Type (kg)",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "From Aawak",
+   "fieldname": "total_bags",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Bags",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Editable, cannot exceed total_bags",
+   "fieldname": "release_bags",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Release Bags",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate per Bag per Day",
+   "precision": "2",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Auto-calculated storage duration",
+   "fieldname": "total_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Days",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "release_bags \u00d7 rate \u00d7 total_days",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "precision": "2",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-06 12:39:26.129580",
+ "modified_by": "Administrator",
+ "module": "Warehouse Rent",
+ "name": "Jawak Bag Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

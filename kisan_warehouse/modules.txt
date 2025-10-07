@@ -7,4 +7,5 @@ vehicles
 saudas
 inwards
 settings
+warehouse_rent
 Kisan Warehouse

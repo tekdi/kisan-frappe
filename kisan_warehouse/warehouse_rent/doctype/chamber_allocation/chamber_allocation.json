@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-01-27 10:00:00",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "floor",
+  "chamber",
+  "bags_allocated",
+  "allocation_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "floor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Floor",
+   "options": "Godown Floor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "chamber",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Chamber",
+   "options": "Floor Chamber",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bags_allocated",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Bags Allocated",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "allocation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Allocation Date",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-03 18:25:01.257434",
+ "modified_by": "Administrator",
+ "module": "Warehouse Rent",
+ "name": "Chamber Allocation",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "chamber",
+ "track_changes": 1
+}

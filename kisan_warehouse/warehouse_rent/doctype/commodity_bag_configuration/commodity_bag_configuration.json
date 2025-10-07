@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-01-27 10:00:00",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "bag_weight",
+  "rate_per_bag_per_day"
+ ],
+ "fields": [
+  {
+   "fieldname": "bag_weight",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Bag Weight (Kg)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rate_per_bag_per_day",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate per Bag per Day (\u20b9)",
+   "precision": "2",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-01 11:59:06.769411",
+ "modified_by": "Administrator",
+ "module": "Warehouse Rent",
+ "name": "Commodity Bag Configuration",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "bag_weight",
+ "track_changes": 1
+}
