@@ -173,62 +173,6 @@
   "javascript": null,
   "json": null,
   "letter_head": "",
-  "modified": "2025-09-19 12:52:43.358227",
-  "module": "products",
-  "name": "Stock by Product",
-  "prepared_report": 0,
-  "query": "",
-  "ref_doctype": "Inward Item Detail",
-  "reference_report": null,
-  "report_name": "Stock by Product",
-  "report_script": null,
-  "report_type": "Script Report",
-  "roles": [
-   {
-    "parent": "Stock by Product",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "System Manager"
-   },
-   {
-    "parent": "Stock by Product",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Administrator"
-   },
-   {
-    "parent": "Stock by Product",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Kisan Admin"
-   },
-   {
-    "parent": "Stock by Product",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Kisan Accountant"
-   },
-   {
-    "parent": "Stock by Product",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Kisan Operator"
-   }
-  ],
-  "timeout": 0
- },
- {
-  "add_total_row": 1,
-  "add_translate_data": 0,
-  "columns": [],
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "Yes",
-  "javascript": null,
-  "json": null,
-  "letter_head": "",
   "modified": "2025-09-19 12:51:13.143969",
   "module": "inwards",
   "name": "Payment Pending Inwards",
@@ -266,6 +210,62 @@
    },
    {
     "parent": "Payment Pending Inwards",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Operator"
+   }
+  ],
+  "timeout": 0
+ },
+ {
+  "add_total_row": 1,
+  "add_translate_data": 0,
+  "columns": [],
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "",
+  "modified": "2025-09-19 12:52:43.358227",
+  "module": "products",
+  "name": "Stock by Product",
+  "prepared_report": 0,
+  "query": "",
+  "ref_doctype": "Inward Item Detail",
+  "reference_report": null,
+  "report_name": "Stock by Product",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "System Manager"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Administrator"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Admin"
+   },
+   {
+    "parent": "Stock by Product",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Kisan Accountant"
+   },
+   {
+    "parent": "Stock by Product",
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "Kisan Operator"
