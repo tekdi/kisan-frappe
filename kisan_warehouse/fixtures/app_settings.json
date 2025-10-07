@@ -1,5 +1,8 @@
 [
  {
+  "debit_note_cgst_rate": 2.5,
+  "debit_note_igst_rate": 5.0,
+  "debit_note_sgst_rate": 2.5,
   "deduction_tier_range": [
    {
     "multiplier": 1.0,
@@ -154,7 +157,7 @@
   ],
   "docstatus": 0,
   "doctype": "App Settings",
-  "modified": "2025-09-25 13:18:02.742986",
+  "modified": "2025-10-07 07:10:06.409317",
   "name": "App Settings"
  }
 ]
