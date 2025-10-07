@@ -1,14 +1,17 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-09-19 12:39:49.530424",
+ "creation": "2025-10-07 07:01:59.317589",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "default_deduction_types",
   "default_bag_types",
-  "deduction_tier_range"
+  "deduction_tier_range",
+  "debit_note_cgst_rate",
+  "debit_note_sgst_rate",
+  "debit_note_igst_rate"
  ],
  "fields": [
   {
@@ -28,13 +31,35 @@
    "fieldtype": "Table",
    "label": "Deduction Tier Range",
    "options": "Deduction Tier Range"
+  },
+  {
+   "default": "2.5",
+   "fieldname": "debit_note_cgst_rate",
+   "fieldtype": "Float",
+   "label": "Debit Note CGST Rate (%)",
+   "options": "Deduction Tier Range",
+   "precision": "2"
+  },
+  {
+   "default": "2.5",
+   "fieldname": "debit_note_sgst_rate",
+   "fieldtype": "Float",
+   "label": "Debit Note SGST Rate (%)",
+   "precision": "2"
+  },
+  {
+   "default": "5.0",
+   "fieldname": "debit_note_igst_rate",
+   "fieldtype": "Float",
+   "label": "Debit Note IGST Rate (%)",
+   "precision": "2"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-09-29 14:38:02.255910",
+ "modified": "2025-10-07 07:09:44.564186",
  "modified_by": "Administrator",
  "module": "settings",
  "name": "App Settings",
