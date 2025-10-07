@@ -60,7 +60,7 @@ def get_data(filters):
             w.name as warehouse_name,
             w.warehouse_name as warehouse_display_name,
             COUNT(DISTINCT i.product) as total_products,
-            SUM(iid.bags) as total_bags,
+            SUM(iid.item_bags) as total_bags,
             SUM(iid.item_arrival_weight) as stock_kg,
             SUM(iid.item_amount) as total_value
         FROM `tabInward Item Detail` iid
@@ -135,22 +135,22 @@ def get_date_condition(filters):
     today_date = getdate(today())  # Convert string to date object
     
     if filter_by == "Today":
-        return f"DATE(i.inward_date) = '{today()}'"
+        return f"DATE(i.arrival_date) = '{today()}'"
     
     elif filter_by == "Yesterday":
         yesterday = add_days(today(), -1)
-        return f"DATE(i.inward_date) = '{yesterday}'"
+        return f"DATE(i.arrival_date) = '{yesterday}'"
     
     elif filter_by == "Last 7 Days":
         week_ago = add_days(today(), -7)
-        return f"DATE(i.inward_date) BETWEEN '{week_ago}' AND '{today()}'"
+        return f"DATE(i.arrival_date) BETWEEN '{week_ago}' AND '{today()}'"
     
     elif filter_by == "Current Month":
         # First day of current month
         import datetime
         today_date_obj = getdate(today())
         first_day = today_date_obj.replace(day=1)
-        return f"DATE(i.inward_date) BETWEEN '{first_day}' AND '{today()}'"
+        return f"DATE(i.arrival_date) BETWEEN '{first_day}' AND '{today()}'"
     
     elif filter_by == "Last Month":
         # First and last day of previous month
@@ -159,7 +159,7 @@ def get_date_condition(filters):
         first_day_current = today_date_obj.replace(day=1)
         last_day_last_month = first_day_current - datetime.timedelta(days=1)
         first_day_last_month = last_day_last_month.replace(day=1)
-        return f"DATE(i.inward_date) BETWEEN '{first_day_last_month}' AND '{last_day_last_month}'"
+        return f"DATE(i.arrival_date) BETWEEN '{first_day_last_month}' AND '{last_day_last_month}'"
     
     elif filter_by == "Custom":
         # Use custom date range
@@ -167,10 +167,10 @@ def get_date_condition(filters):
         date_to = filters.get("date_to")
         
         if date_from and date_to:
-            return f"DATE(i.inward_date) BETWEEN '{date_from}' AND '{date_to}'"
+            return f"DATE(i.arrival_date) BETWEEN '{date_from}' AND '{date_to}'"
         elif date_from:
-            return f"DATE(i.inward_date) >= '{date_from}'"
+            return f"DATE(i.arrival_date) >= '{date_from}'"
         elif date_to:
-            return f"DATE(i.inward_date) <= '{date_to}'"
+            return f"DATE(i.arrival_date) <= '{date_to}'"
     
     return ""

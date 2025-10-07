@@ -155,7 +155,7 @@ def get_data(filters):
     values = []
     
     # Date filters
-    conditions.append("i.inward_date BETWEEN %s AND %s")
+    conditions.append("i.arrival_date BETWEEN %s AND %s")
     values.extend([filters["from_date"], filters["to_date"]])
     
     # Optional filters
@@ -210,7 +210,7 @@ def get_data(filters):
         WHERE 
             {where_clause}
         ORDER BY 
-            i.inward_date DESC, i.name DESC
+            i.arrival_date DESC, i.name DESC
     """
     
     data = frappe.db.sql(query, values, as_dict=1)

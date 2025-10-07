@@ -9,13 +9,16 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "column_break_2",
   "section_break_3",
   "customer_type",
   "column_break_5",
-  "first_name",
-  "middle_name",
+  "status",
   "column_break_8",
+  "section_break_name",
+  "first_name",
+  "column_break_middle",
+  "middle_name",
+  "column_break_last",
   "last_name",
   "section_break_11",
   "mobile",
@@ -27,11 +30,10 @@
   "address",
   "column_break_19",
   "city",
-  "state",
   "column_break_22",
-  "zip",
-  "section_break_24",
-  "status"
+  "state",
+  "column_break_hbtn",
+  "zip"
  ],
  "fields": [
   {
@@ -42,10 +44,6 @@
    "label": "Naming Series",
    "options": "SCUST-.YYYY.-.####",
    "reqd": 1
-  },
-  {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_3",
@@ -65,6 +63,22 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nInactive",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_name",
+   "fieldtype": "Section Break"
+  },
+  {
    "fieldname": "first_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -73,13 +87,17 @@
    "reqd": 1
   },
   {
+   "fieldname": "column_break_middle",
+   "fieldtype": "Column Break"
+  },
+  {
    "fieldname": "middle_name",
    "fieldtype": "Data",
    "label": "Middle Name",
    "length": 100
   },
   {
-   "fieldname": "column_break_8",
+   "fieldname": "column_break_last",
    "fieldtype": "Column Break"
   },
   {
@@ -131,7 +149,7 @@
   },
   {
    "fieldname": "address",
-   "fieldtype": "Small Text",
+   "fieldtype": "Data",
    "label": "Address",
    "reqd": 1
   },
@@ -165,22 +183,13 @@
    "reqd": 1
   },
   {
-   "fieldname": "section_break_24",
-   "fieldtype": "Section Break",
-   "label": "Status"
-  },
-  {
-   "default": "Active",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Active\nInactive",
-   "reqd": 1
+   "fieldname": "column_break_hbtn",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 13:44:11.244095",
+ "modified": "2025-10-07 16:53:46.699372",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Storage Customer",
