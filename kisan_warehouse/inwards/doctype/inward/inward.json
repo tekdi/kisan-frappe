@@ -2,8 +2,9 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-09-19 12:39:52.078665",
+ "creation": "2025-10-09 12:37:13.041612",
  "custom": 1,
+ "default_print_format": "Inward Receipt",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -651,7 +652,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-25 17:30:29.241985",
+ "modified": "2025-10-09 13:09:57.045648",
  "modified_by": "Administrator",
  "module": "inwards",
  "name": "Inward",
@@ -683,6 +684,7 @@
   },
   {
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,

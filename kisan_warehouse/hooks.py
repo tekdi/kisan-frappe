@@ -136,6 +136,23 @@ fixtures = [
                 ]
             ]
         ]
+    },
+    {
+        "dt": "Property Setter",
+        "filters": [
+            ["doc_type", "in", [
+                "Company",
+                "Customer",
+                "Product",
+                "Broker",
+                "Warehouse",
+                "Vehicle",
+                "Sauda",
+                "Inward",
+                "Inward Aawak",
+                "Outward Jawak"
+            ]]
+        ]
     }
 ]
 

@@ -121,7 +121,7 @@ def get_data(filters):
             s.total_amount,
             s.booking_amount,
             s.sauda_status,
-            DATEDIFF(CURDATE(), s.delivery_end_date) as days_overdue
+            COALESCE(DATEDIFF(CURDATE(), s.delivery_end_date), 0) as days_overdue
         FROM `tabSauda` s
         LEFT JOIN `tabCustomer` c ON s.customer = c.name
         LEFT JOIN `tabBroker` b ON s.broker = b.name  
@@ -138,6 +138,10 @@ def get_data(filters):
     for row in data:
         # Format customer name
         row.customer_name = row.customer_full_name
+        
+        # Ensure days_overdue is not None
+        if row.days_overdue is None:
+            row.days_overdue = 0
         
         # Handle negative days (future dates)
         if row.days_overdue < 0:
