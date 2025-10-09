@@ -5,6 +5,11 @@ app_description = "KisanMitra Warehouse Management System"
 app_email = "deepak_p@tekditechnologies.com"
 app_license = "mit"
 
+
+after_migrate = [
+    "kisan_warehouse.utils.workflow_cleanup.setup_workflows"
+]
+
 # Export Enhanced fixtures
 fixtures = [
     # Core DocTypes
@@ -110,6 +115,26 @@ fixtures = [
                 "Kisan Accountant", 
                 "Kisan Operator"
             ]]
+        ]
+    },
+    # Workflows - 
+    {
+        "dt": "Workflow",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Kisan Customer Approval",
+                    "Kisan Company Approval",
+                    "Kisan Product Approval",
+                    "Kisan Vehicle Approval",
+                    "Kisan Warehouse Approval",
+                    "Kisan Broker Approval",
+                    "Kisan Inward Approval",
+                    "Kisan Sauda Approval"
+                ]
+            ]
         ]
     }
 ]
