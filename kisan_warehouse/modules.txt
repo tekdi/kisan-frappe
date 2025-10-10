@@ -6,6 +6,7 @@ brokers
 vehicles
 saudas
 inwards
+outwards
 settings
 warehouse_rent
 Kisan Warehouse
