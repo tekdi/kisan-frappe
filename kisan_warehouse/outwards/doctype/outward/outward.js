@@ -1,7 +1,6 @@
 // Copyright (c) 2025, Kisan Warehouse and contributors
 // For license information, please see license.txt
 
-
 frappe.ui.form.on('Outward', {
     onload: function(frm) {
         // Ensure proper field display on form load
@@ -12,6 +11,11 @@ frappe.ui.form.on('Outward', {
             (!frm.doc.net_total || frm.doc.net_total === 0)) {
             calculate_net_total(frm);
         }
+        
+        // Calculate payment pending if data exists
+        if (frm.doc.net_total && frm.doc.net_total > 0) {
+            calculate_payment_pending(frm);
+        }
     },
 
     refresh: function(frm) {
@@ -19,6 +23,9 @@ frappe.ui.form.on('Outward', {
         if (frm.is_new()) {
             frm.set_value('outward_date', frappe.datetime.get_today());
             frm.set_value('outward_status', 'pending');
+            frm.set_value('payment_status', 'pending');
+            frm.set_value('total_amount_paid', 0);
+            frm.set_value('total_amount_pending', 0);
         }
         
         // Refresh all link fields to show actual names
@@ -28,6 +35,11 @@ frappe.ui.form.on('Outward', {
         if (frm.doc.outward_items && frm.doc.outward_items.length > 0 && 
             (!frm.doc.net_total || frm.doc.net_total === 0)) {
             calculate_net_total(frm);
+        }
+        
+        // Calculate payment pending
+        if (frm.doc.net_total && frm.doc.net_total > 0) {
+            calculate_payment_pending(frm);
         }
     },
 
@@ -47,6 +59,16 @@ frappe.ui.form.on('Outward', {
             frappe.msgprint({
                 title: __('Required Field Missing'),
                 message: __('Vehicle is required'),
+                indicator: 'red'
+            });
+            frappe.validated = false;
+            return false;
+        }
+
+        if (!frm.doc.payment_due_date) {
+            frappe.msgprint({
+                title: __('Required Field Missing'),
+                message: __('Payment Due Date is required'),
                 indicator: 'red'
             });
             frappe.validated = false;
@@ -124,6 +146,11 @@ frappe.ui.form.on('Outward', {
                     frm.set_value('product', sauda_doc.product);
                     frm.set_value('broker', sauda_doc.broker || '');
                     
+                    // Auto-populate payment due date from Sauda payment_end_date
+                    if (sauda_doc.payment_end_date) {
+                        frm.set_value('payment_due_date', sauda_doc.payment_end_date);
+                    }
+                    
                     // Refresh fields after setting values
                     setTimeout(function() {
                         refreshAllLinkFields(frm);
@@ -167,6 +194,11 @@ frappe.ui.form.on('Outward', {
     // Calculate broker commission when percentage changes
     broker_commission_percent: function(frm) {
         calculate_broker_commission(frm);
+    },
+
+    // Calculate payment pending when total_amount_paid changes
+    total_amount_paid: function(frm) {
+        calculate_payment_pending(frm);
     }
 });
 
@@ -189,6 +221,21 @@ frappe.ui.form.on('Outward Item Detail', {
     }
 });
 
+// Child table events for Outward Payment
+frappe.ui.form.on('Outward Payment', {
+    payment_amount: function(frm, cdt, cdn) {
+        calculate_total_amount_paid(frm);
+    },
+
+    payment_status: function(frm, cdt, cdn) {
+        calculate_total_amount_paid(frm);
+    },
+
+    outward_payments_remove: function(frm) {
+        calculate_total_amount_paid(frm);
+    }
+});
+
 // Helper Functions
 
 function refreshAllLinkFields(frm) {
@@ -203,6 +250,11 @@ function refreshAllLinkFields(frm) {
     frm.refresh_field('net_total');
     frm.refresh_field('broker_commission_percent');
     frm.refresh_field('broker_commission_amount');
+    frm.refresh_field('payment_due_date');
+    frm.refresh_field('total_amount_paid');
+    frm.refresh_field('total_amount_pending');
+    frm.refresh_field('payment_status');
+    frm.refresh_field('outward_payments');
 }
 
 function prefill_outward_items(frm, sauda_doc) {
@@ -299,8 +351,9 @@ function calculate_net_total(frm) {
     // Set net total
     frm.set_value('net_total', net_total);
     
-    // Trigger broker commission calculation
+    // Trigger broker commission and payment pending calculations
     calculate_broker_commission(frm);
+    calculate_payment_pending(frm);
 }
 
 function calculate_broker_commission(frm) {
@@ -317,6 +370,68 @@ function calculate_broker_commission(frm) {
     frm.set_value('broker_commission_amount', commission_amount);
 }
 
+function calculate_total_amount_paid(frm) {
+    let total_paid = 0;
+    
+    // Loop through all payment rows and sum successful payments
+    if (frm.doc.outward_payments && frm.doc.outward_payments.length > 0) {
+        frm.doc.outward_payments.forEach(function(row) {
+            // Only count payments with 'success' status
+            if (row.payment_status === 'success') {
+                total_paid += flt(row.payment_amount) || 0;
+            }
+        });
+    }
+    
+    // Round to 2 decimal places
+    total_paid = Math.round(total_paid * 100) / 100;
+    
+    // Set total amount paid
+    frm.set_value('total_amount_paid', total_paid);
+    
+    // Trigger payment pending calculation
+    calculate_payment_pending(frm);
+}
+
+function calculate_payment_pending(frm) {
+    let net_total = flt(frm.doc.net_total) || 0;
+    let total_paid = flt(frm.doc.total_amount_paid) || 0;
+    
+    // Calculate pending amount
+    let pending_amount = net_total - total_paid;
+    
+    // Round to 2 decimal places
+    pending_amount = Math.round(pending_amount * 100) / 100;
+    
+    // Ensure pending amount is not negative
+    if (pending_amount < 0) {
+        pending_amount = 0;
+    }
+    
+    // Set total amount pending
+    frm.set_value('total_amount_pending', pending_amount);
+    
+    // Update payment status based on pending amount
+    update_payment_status(frm, net_total, total_paid, pending_amount);
+}
+
+function update_payment_status(frm, net_total, total_paid, pending_amount) {
+    let payment_status = 'pending';
+    
+    if (net_total === 0) {
+        payment_status = 'pending';
+    } else if (pending_amount === 0 && total_paid > 0) {
+        payment_status = 'success';
+    } else if (total_paid > 0 && pending_amount > 0) {
+        payment_status = 'processing';
+    } else {
+        payment_status = 'pending';
+    }
+    
+    // Set payment status
+    frm.set_value('payment_status', payment_status);
+}
+
 function clearForm(frm) {
     // Clear all auto-populated fields
     frm.set_value('customer', '');
@@ -325,10 +440,17 @@ function clearForm(frm) {
     frm.set_value('broker', '');
     frm.set_value('broker_commission_percent', 0);
     frm.set_value('broker_commission_amount', 0);
+    frm.set_value('payment_due_date', '');
+    frm.set_value('total_amount_paid', 0);
+    frm.set_value('total_amount_pending', 0);
+    frm.set_value('payment_status', 'pending');
     
-    // Clear child table
+    // Clear child tables
     frm.clear_table('outward_items');
     frm.refresh_field('outward_items');
+    
+    frm.clear_table('outward_payments');
+    frm.refresh_field('outward_payments');
     
     // Reset totals
     frm.set_value('net_total', 0);

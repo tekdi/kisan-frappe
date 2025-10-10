@@ -2,12 +2,12 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-01-30 10:00:00",
+ "creation": "2025-10-10 12:13:46.097774",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
- "field_order": [
+  "field_order": [
   "naming_series",
   "section_break_1",
   "outward_date",
@@ -32,6 +32,16 @@
   "column_break_13",
   "broker_commission_percent",
   "broker_commission_amount",
+  "section_break_tefq",
+  "payment_due_date",
+  "column_break_hzzz",
+  "total_amount_paid",
+  "column_break_bbjb",
+  "total_amount_pending",
+  "column_break_atrq",
+  "payment_status",
+  "section_break_payments",
+  "outward_payments",
   "section_break_15",
   "notes",
   "amended_from"
@@ -195,6 +205,59 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "section_break_tefq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payment_due_date",
+   "fieldtype": "Date",
+   "label": "Payment Due Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hzzz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_paid",
+   "fieldtype": "Currency",
+   "label": "Total Amount Paid",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_bbjb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_pending",
+   "fieldtype": "Currency",
+   "label": "Total Amount Pending",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_atrq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "Payment Status",
+   "options": "pending\nprocessing\nsuccess\nfailed"
+  },
+  {
+   "fieldname": "section_break_payments",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "fieldname": "outward_payments",
+   "fieldtype": "Table",
+   "label": "Outward Payments",
+   "options": "Outward Payment"
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -208,7 +271,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-10-10 08:20:07.978523",
+ "modified": "2025-10-10 12:17:43.433801",
  "modified_by": "Administrator",
  "module": "Outwards",
  "name": "Outward",

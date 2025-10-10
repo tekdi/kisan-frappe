@@ -206,9 +206,10 @@ def get_data(filters):
         FROM 
             `tabInward` i
         LEFT JOIN `tabCustomer` c ON i.customer = c.name
-        LEFT JOIN `tabProduct` p ON i.product = p.name  
+        LEFT JOIN `tabProduct` p ON i.product = p.name
+        LEFT JOIN `tabSauda` s ON i.sauda = s.name
         WHERE 
-            {where_clause}
+            s.booking_type = 'Inward / Purchase' AND {where_clause}
         ORDER BY 
             i.arrival_date DESC, i.name DESC
     """
