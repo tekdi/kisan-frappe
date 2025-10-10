@@ -15,10 +15,10 @@ def get_columns():
     """Define report columns with proper formatting"""
     return [
         {
-            "label": _("Inward ID"),
-            "fieldname": "inward_id",
+            "label": _("Outward ID"),
+            "fieldname": "outward_id",
             "fieldtype": "Link",
-            "options": "Inward",
+            "options": "Outward",
             "width": 140
         },
         {
@@ -53,8 +53,8 @@ def get_columns():
             "width": 130
         },
         {
-            "label": _("Inward Date"),
-            "fieldname": "arrival_date",
+            "label": _("Outward Date"),
+            "fieldname": "outward_date",
             "fieldtype": "Date",
             "width": 100
         },
@@ -84,7 +84,7 @@ def get_columns():
         },
         {
             "label": _("Payment Status"),
-            "fieldname": "inward_payment_status",
+            "fieldname": "payment_status",
             "fieldtype": "Data",
             "width": 100
         },
@@ -93,98 +93,71 @@ def get_columns():
             "fieldname": "days_status",
             "fieldtype": "Data",
             "width": 120
-        },
-        {
-            "label": _("Payment Notes"),
-            "fieldname": "payment_notes",
-            "fieldtype": "Data",
-            "width": 150
         }
     ]
 
 def get_data(filters):
     """Fetch and process report data"""
     
-    # Build WHERE conditions based on filters
     conditions = get_conditions(filters)
     
-    # Main SQL query - ENHANCED to include bank details for export
     query = """
         SELECT 
-            i.name as inward_id,
-            COALESCE(i.sauda, '') as sauda_id,
+            o.name as outward_id,
+            COALESCE(o.sauda, '') as sauda_id,
             COALESCE(CONCAT(c.first_name, ' ', c.last_name), 'No Customer') as customer_name,
             COALESCE(CONCAT(b.first_name, ' ', b.last_name), 'No Broker') as broker_name,
             COALESCE(p.product_name, 'No Product') as product_name,
             COALESCE(w.warehouse_name, 'No Warehouse') as warehouse_name,
-            i.arrival_date,
-            i.net_total,
-            COALESCE(i.total_amount_paid, 0) as total_amount_paid,
-            COALESCE(i.total_amount_pending, i.net_total) as total_amount_pending,
-            i.payment_due_date,
-            COALESCE(i.inward_payment_status, 'pending') as inward_payment_status,
-            DATEDIFF(CURDATE(), i.payment_due_date) as days_difference,
-            (SELECT ip.payment_note FROM `tabInward Payment` ip 
-             WHERE ip.parent = i.name 
-             ORDER BY ip.payment_date DESC 
-             LIMIT 1) as payment_notes,
-            -- ADDED: Bank details for export (but not displayed in report)
-            i.customer as customer_id,
+            o.outward_date,
+            COALESCE(o.net_total, 0) as net_total,
+            COALESCE(o.total_amount_paid, 0) as total_amount_paid,
+            COALESCE(o.total_amount_pending, o.net_total) as total_amount_pending,
+            o.payment_due_date,
+            COALESCE(o.payment_status, 'pending') as payment_status,
+            DATEDIFF(CURDATE(), o.payment_due_date) as days_difference,
+            o.customer as customer_id,
             COALESCE(c.bank_account_name, '') as bank_account_name,
             COALESCE(c.bank_account_no, '') as bank_account_no,
             COALESCE(c.ifsc_code, '') as ifsc_code,
             COALESCE(c.bank_name, '') as bank_name
-        FROM `tabInward` i
-        LEFT JOIN `tabCustomer` c ON i.customer = c.name
-        LEFT JOIN `tabBroker` b ON i.broker = b.name  
-        LEFT JOIN `tabProduct` p ON i.product = p.name
-        LEFT JOIN `tabWarehouse` w ON i.warehouse = w.name
-        LEFT JOIN `tabSauda` s ON i.sauda = s.name
-        WHERE i.docstatus < 2 
-        AND s.booking_type = 'Inward / Purchase' {conditions}
-        ORDER BY i.payment_due_date ASC, i.total_amount_pending DESC
+        FROM `tabOutward` o
+        LEFT JOIN `tabCustomer` c ON o.customer = c.name
+        LEFT JOIN `tabBroker` b ON o.broker = b.name  
+        LEFT JOIN `tabProduct` p ON o.product = p.name
+        LEFT JOIN `tabWarehouse` w ON o.warehouse = w.name
+        LEFT JOIN `tabSauda` s ON o.sauda = s.name
+        WHERE o.docstatus < 2 
+        AND s.booking_type = 'Outward / Sales' {conditions}
+        ORDER BY o.payment_due_date ASC, o.total_amount_pending DESC
     """.format(conditions=conditions)
     
-    # Execute query
     data = frappe.db.sql(query, filters, as_dict=1)
     
-    # Process calculations and formatting
     for row in data:
-        # Handle null values
         if not row.total_amount_paid:
             row.total_amount_paid = 0
             
         if not row.total_amount_pending:
             row.total_amount_pending = row.net_total
             
-        # Calculate actual pending amount
         row.total_amount_pending = flt(row.net_total - row.total_amount_paid, 2)
         
-        # CORRECT Days Logic (as you suggested)
         days_diff = row.days_difference
         if days_diff > 0:
-            # Past due date - Overdue
             row.days_status = f"{days_diff} Days Overdue"
             row.urgency = "Overdue"
         elif days_diff == 0:
-            # Due today
             row.days_status = "Due Today"
             row.urgency = "Due Today"
         else:
-            # Future date - Upcoming
             days_future = abs(days_diff)
             row.days_status = f"Due in {days_future} Days"
             row.urgency = "Upcoming"
             
-        # Clean up payment notes
-        if not row.payment_notes:
-            row.payment_notes = "-"
-            
-        # Handle missing Sauda ID
         if not row.sauda_id:
             row.sauda_id = "-"
             
-        # Clean up bank details (for future bank export use)
         if not row.bank_account_name:
             row.bank_account_name = ""
         if not row.bank_account_no:
@@ -200,46 +173,40 @@ def get_conditions(filters):
     """Build SQL WHERE conditions based on filters"""
     conditions = []
     
-    # Core business logic: Only show pending payments (exactly as per PDF)
-    conditions.append("i.inward_payment_status = 'pending'")
-    conditions.append("i.total_amount_pending > 0")
+    conditions.append("o.payment_status IN ('pending', 'processing')")
+    conditions.append("o.total_amount_pending > 0")
     
-    # Customer filter
     if filters.get("customer"):
-        conditions.append("i.customer = %(customer)s")
+        conditions.append("o.customer = %(customer)s")
     
-    # Broker filter
     if filters.get("broker"):
-        conditions.append("i.broker = %(broker)s")
+        conditions.append("o.broker = %(broker)s")
     
-    # Product filter
     if filters.get("product"):
-        conditions.append("i.product = %(product)s")
+        conditions.append("o.product = %(product)s")
     
-    # Warehouse filter
     if filters.get("warehouse"):
-        conditions.append("i.warehouse = %(warehouse)s")
+        conditions.append("o.warehouse = %(warehouse)s")
     
-    # Payment due date range filters
     if filters.get("payment_due_date_from"):
-        conditions.append("i.payment_due_date >= %(payment_due_date_from)s")
+        conditions.append("o.payment_due_date >= %(payment_due_date_from)s")
     
     if filters.get("payment_due_date_to"):
-        conditions.append("i.payment_due_date <= %(payment_due_date_to)s")
+        conditions.append("o.payment_due_date <= %(payment_due_date_to)s")
     
-    # Payment status filter (updated logic)
     if filters.get("payment_status"):
         if filters.get("payment_status") == "Pending":
-            conditions.append("i.inward_payment_status = 'pending'")
+            conditions.append("o.payment_status = 'pending'")
         elif filters.get("payment_status") == "Processing":
-            conditions.append("i.inward_payment_status = 'processing'")
+            conditions.append("o.payment_status = 'processing'")
         elif filters.get("payment_status") == "Success":
-            conditions.append("i.inward_payment_status = 'success'")
+            conditions.append("o.payment_status = 'success'")
+        elif filters.get("payment_status") == "Failed":
+            conditions.append("o.payment_status = 'failed'")
     
-    # Default filter: Show today's pending if no payment due date filter provided
     if not filters.get("payment_due_date_from") and not filters.get("payment_due_date_to"):
         if not filters.get("show_all"):
-            conditions.append("i.payment_due_date = CURDATE()")
+            conditions.append("o.payment_due_date = CURDATE()")
     
     return " AND " + " AND ".join(conditions) if conditions else ""
 
@@ -254,10 +221,8 @@ def get_customer_bank_details(customer_ids):
     if not customer_ids:
         return {}
     
-    # Create placeholders for SQL IN clause
     placeholders = ', '.join(['%s'] * len(customer_ids))
     
-    # Query customer bank details
     query = f"""
         SELECT 
             name as customer_id,
@@ -271,7 +236,6 @@ def get_customer_bank_details(customer_ids):
     
     bank_details = frappe.db.sql(query, customer_ids, as_dict=True)
     
-    # Convert to dictionary with customer_id as key
     result = {}
     for detail in bank_details:
         result[detail.customer_id] = {

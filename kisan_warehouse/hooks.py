@@ -18,7 +18,7 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
-                "Sauda", "Inward", "Inward Deduction", "App Settings", "Settings Deduction Type"
+                "Sauda", "Inward", "Outward","Inward Deduction", "App Settings", "Settings Deduction Type"
             ]]
         ]
     },
@@ -29,7 +29,7 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "company", "customers", "products", "brokers", "warehouses", 
-                "vehicles", "saudas", "inwards", "settings"
+                "vehicles", "saudas", "inwards","outwards" ,"settings"
             ]]
         ]
     },
@@ -70,7 +70,7 @@ fixtures = [
         "filters": [
             ["dt", "in", [
                 "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
-                "Sauda", "Inward", "App Settings"
+                "Sauda", "Inward", "Outward","App Settings"
             ]]
         ]
     },
@@ -132,7 +132,8 @@ fixtures = [
                     "Kisan Warehouse Approval",
                     "Kisan Broker Approval",
                     "Kisan Inward Approval",
-                    "Kisan Sauda Approval"
+                    "Kisan Sauda Approval",
+                    "Kisan Outward Approval"
                 ]
             ]
         ]
@@ -149,6 +150,7 @@ fixtures = [
                 "Vehicle",
                 "Sauda",
                 "Inward",
+                "Outward"
                 "Inward Aawak",
                 "Outward Jawak"
             ]]
