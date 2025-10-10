@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-01-30 10:00:00.000000",
+ "creation": "2025-01-30 10:00:00",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -56,21 +56,19 @@
   {
    "fieldname": "notes",
    "fieldtype": "Small Text",
-   "label": "Notes",
-   "rows": 2
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_child_table": 1,
+ "istable": 1,
  "links": [],
- "modified": "2025-01-30 10:00:00.000000",
+ "modified": "2025-10-10 13:48:28.012281",
  "modified_by": "Administrator",
  "module": "Outwards",
  "name": "Outward Payment",
  "owner": "Administrator",
- "parent_doctype": "Outward",
  "permissions": [],
- "quick_entry": 0,
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

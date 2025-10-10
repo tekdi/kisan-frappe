@@ -56,27 +56,52 @@ def get_columns():
     ]
 
 def get_data(filters):
-    """Fetch and process report data"""
+    """Fetch and process report data with inward minus outward"""
     
     # Build WHERE conditions based on filters
     conditions = get_conditions(filters)
     
-    # Main SQL query - Aggregated by Product
+    # Main SQL query - Net stock = Inward - Outward
     query = """
         SELECT 
             p.name as product_name,
             p.product_name as product_display_name,
-            SUM(iid.item_bags) as total_bags,
-            SUM(iid.item_arrival_weight) as stock_kg,
-            SUM(iid.item_amount) as total_value,
-            COUNT(DISTINCT i.warehouse) as warehouse_count
-        FROM `tabInward Item Detail` iid
-        INNER JOIN `tabInward` i ON iid.parent = i.name
-        INNER JOIN `tabProduct` p ON i.product = p.name
-        WHERE i.docstatus < 2 {conditions}
-        GROUP BY p.name, p.product_name
-        ORDER BY SUM(iid.item_arrival_weight) DESC
-    """.format(conditions=conditions)
+            (COALESCE(inward_data.total_bags, 0) - COALESCE(outward_data.total_bags, 0)) as total_bags,
+            (COALESCE(inward_data.total_weight, 0) - COALESCE(outward_data.total_weight, 0)) as stock_kg,
+            (COALESCE(inward_data.total_amount, 0) - COALESCE(outward_data.total_amount, 0)) as total_value,
+            COALESCE(inward_data.warehouse_count, 0) as warehouse_count
+        FROM `tabProduct` p
+        LEFT JOIN (
+            SELECT 
+                i.product,
+                SUM(iid.item_bags) as total_bags,
+                SUM(iid.item_arrival_weight) as total_weight,
+                SUM(iid.item_amount) as total_amount,
+                COUNT(DISTINCT i.warehouse) as warehouse_count
+            FROM `tabInward Item Detail` iid
+            INNER JOIN `tabInward` i ON iid.parent = i.name
+            WHERE i.docstatus < 2 {conditions}
+            GROUP BY i.product
+        ) as inward_data ON p.name = inward_data.product
+        LEFT JOIN (
+            SELECT 
+                o.product,
+                SUM(oid.item_bags) as total_bags,
+                SUM(oid.item_gross_weight) as total_weight,
+                SUM(oid.item_amount) as total_amount
+            FROM `tabOutward Item Detail` oid
+            INNER JOIN `tabOutward` o ON oid.parent = o.name
+            WHERE o.docstatus < 2
+            GROUP BY o.product
+        ) as outward_data ON p.name = outward_data.product
+        WHERE (inward_data.product IS NOT NULL OR outward_data.product IS NOT NULL)
+        {product_filter}
+        HAVING stock_kg > 0
+        ORDER BY stock_kg DESC
+    """.format(
+        conditions=conditions,
+        product_filter="AND p.name = %(product)s" if filters.get("product") else ""
+    )
     
     # Execute query
     data = frappe.db.sql(query, filters, as_dict=1)
@@ -102,7 +127,7 @@ def get_data(filters):
         if not row.warehouse_count:
             row.warehouse_count = 0
             
-        # Set product name for display (use actual product name, not ID)
+        # Set product name for display
         if row.product_display_name:
             row.product_name_display = row.product_display_name
         else:
