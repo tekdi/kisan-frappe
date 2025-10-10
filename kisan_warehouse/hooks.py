@@ -18,7 +18,7 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
-                "Sauda", "Inward", "Outward","Inward Deduction", "App Settings", "Settings Deduction Type"
+                "Sauda", "Inward","Inward Deduction", "App Settings", "Settings Deduction Type","Outward","Outward Item Detail","Outward Payment"
             ]]
         ]
     },
@@ -29,7 +29,7 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "company", "customers", "products", "brokers", "warehouses", 
-                "vehicles", "saudas", "inwards","outwards" ,"settings"
+                "vehicles", "saudas", "inwards","outwards" ,"settings","Outward Item Detail","Outward Payment"
             ]]
         ]
     },
@@ -70,7 +70,7 @@ fixtures = [
         "filters": [
             ["dt", "in", [
                 "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
-                "Sauda", "Inward", "Outward","App Settings"
+                "Sauda", "Inward", "Outward","App Settings","Outward Item Detail","Outward Payment"
             ]]
         ]
     },
