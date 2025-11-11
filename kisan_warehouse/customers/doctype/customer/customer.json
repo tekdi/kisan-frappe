@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-10-09 12:37:11.103133",
+ "creation": "2025-10-13 18:26:06.156613",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,6 +13,32 @@
   "column_break_rmbk",
   "customer_status",
   "column_break_oyxj",
+  "identity_verification_section",
+  "aadhar_number",
+  "column_break_qnil",
+  "aadhar_verified_date",
+  "column_break_ywyc",
+  "aadhar_verified",
+  "section_break_pxbf",
+  "pan_number",
+  "column_break_bdhp",
+  "verify_pan",
+  "column_break_xwil",
+  "pan_verified",
+  "pan_verified_date",
+  "indentity_verify_comp_section",
+  "gstin",
+  "column_break_grgk",
+  "verify_gstin",
+  "column_break_dtlq",
+  "gstin_verified",
+  "gstin_verified_date",
+  "section_break_tvcf",
+  "cgst_percent",
+  "column_break_wmjg",
+  "igst_percent",
+  "column_break_lzqw",
+  "sgst_percent",
   "section_break_fhpk",
   "first_name",
   "column_break_ysdy",
@@ -33,27 +59,6 @@
   "alternate_mobile",
   "column_break_gzcq",
   "email",
-  "identity_verification_section",
-  "aadhar_number",
-  "column_break_qnil",
-  "aadhar_verified",
-  "column_break_ywyc",
-  "aadhar_verified_date",
-  "section_break_jbbc",
-  "pan_number",
-  "column_break_mfnp",
-  "pan_verified",
-  "column_break_awht",
-  "pan_verified_date",
-  "indentity_verify_comp_section",
-  "gstin",
-  "cgst_percent",
-  "column_break_grgk",
-  "gstin_verified_date",
-  "igst_percent",
-  "column_break_dtlq",
-  "gstin_verified",
-  "sgst_percent",
   "bank_ac_section",
   "bank_account_name",
   "ifsc_code",
@@ -107,6 +112,139 @@
   {
    "fieldname": "column_break_oyxj",
    "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
+   "fieldname": "identity_verification_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Individual)"
+  },
+  {
+   "fieldname": "aadhar_number",
+   "fieldtype": "Data",
+   "label": "Aadhar Number"
+  },
+  {
+   "fieldname": "column_break_qnil",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "aadhar_verified_date",
+   "fieldtype": "Date",
+   "label": "Aadhar Verified On"
+  },
+  {
+   "fieldname": "column_break_ywyc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "aadhar_verified",
+   "fieldtype": "Check",
+   "label": "Aadhar Verified?"
+  },
+  {
+   "fieldname": "section_break_pxbf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number"
+  },
+  {
+   "fieldname": "column_break_bdhp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
+   "fieldname": "verify_pan",
+   "fieldtype": "Button",
+   "label": "Verify PAN"
+  },
+  {
+   "fieldname": "column_break_xwil",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "pan_verified",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "PAN Verified?"
+  },
+  {
+   "fieldname": "pan_verified_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "PAN Verified On"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Company / Trader\"",
+   "fieldname": "indentity_verify_comp_section",
+   "fieldtype": "Section Break",
+   "label": "Identity Verification (For Company)"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_grgk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "verify_gstin",
+   "fieldtype": "Button",
+   "label": "Verify GSTIN"
+  },
+  {
+   "fieldname": "column_break_dtlq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "gstin_verified",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "GSTIN Verified?"
+  },
+  {
+   "default": "Today",
+   "fieldname": "gstin_verified_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "GSTIN Verified On"
+  },
+  {
+   "fieldname": "section_break_tvcf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cgst_percent",
+   "fieldtype": "Percent",
+   "label": "CGST (%)"
+  },
+  {
+   "fieldname": "column_break_wmjg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "igst_percent",
+   "fieldtype": "Percent",
+   "label": "IGST (%)"
+  },
+  {
+   "fieldname": "column_break_lzqw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sgst_percent",
+   "fieldtype": "Percent",
+   "label": "SGST (%)"
   },
   {
    "fieldname": "section_break_fhpk",
@@ -220,111 +358,6 @@
    "options": "Email"
   },
   {
-   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
-   "fieldname": "identity_verification_section",
-   "fieldtype": "Section Break",
-   "label": "Identity Verification (For Individual)"
-  },
-  {
-   "fieldname": "aadhar_number",
-   "fieldtype": "Data",
-   "label": "Aadhar Number"
-  },
-  {
-   "fieldname": "column_break_qnil",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "aadhar_verified",
-   "fieldtype": "Check",
-   "label": "Aadhar Verified?"
-  },
-  {
-   "fieldname": "column_break_ywyc",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "aadhar_verified_date",
-   "fieldtype": "Date",
-   "label": "Aadhar Verified On"
-  },
-  {
-   "fieldname": "section_break_jbbc",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "pan_number",
-   "fieldtype": "Data",
-   "label": "PAN Number"
-  },
-  {
-   "fieldname": "column_break_mfnp",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "pan_verified",
-   "fieldtype": "Check",
-   "label": "PAN Verified?"
-  },
-  {
-   "fieldname": "column_break_awht",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "pan_verified_date",
-   "fieldtype": "Date",
-   "label": "PAN Verified On"
-  },
-  {
-   "depends_on": "eval:doc.customer_type==\"Company / Trader\"",
-   "fieldname": "indentity_verify_comp_section",
-   "fieldtype": "Section Break",
-   "label": "Identity Verification (For Company)"
-  },
-  {
-   "fieldname": "gstin",
-   "fieldtype": "Data",
-   "label": "GSTIN",
-   "reqd": 1
-  },
-  {
-   "fieldname": "cgst_percent",
-   "fieldtype": "Percent",
-   "label": "CGST (%)"
-  },
-  {
-   "fieldname": "column_break_grgk",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "Today",
-   "fieldname": "gstin_verified_date",
-   "fieldtype": "Date",
-   "label": "GSTIN Verified On"
-  },
-  {
-   "fieldname": "igst_percent",
-   "fieldtype": "Percent",
-   "label": "IGST (%)"
-  },
-  {
-   "fieldname": "column_break_dtlq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "0",
-   "fieldname": "gstin_verified",
-   "fieldtype": "Check",
-   "label": "GSTIN Verified?"
-  },
-  {
-   "fieldname": "sgst_percent",
-   "fieldtype": "Percent",
-   "label": "SGST (%)"
-  },
-  {
    "fieldname": "bank_ac_section",
    "fieldtype": "Section Break",
    "label": "Bank Account Information"
@@ -389,7 +422,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-09 13:10:38.761968",
+ "modified": "2025-11-10 16:38:52.651287",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
