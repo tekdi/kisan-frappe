@@ -16,9 +16,14 @@
   "identity_verification_section",
   "aadhar_number",
   "column_break_qnil",
-  "aadhar_verified_date",
+  "send_otp_button",
   "column_break_ywyc",
+  "aadhar_otp",
+  "column_break_hswz",
+  "verify_aadhar_button",
   "aadhar_verified",
+  "aadhar_verified_date",
+  "aadhar_reference_id",
   "section_break_pxbf",
   "pan_number",
   "column_break_bdhp",
@@ -129,19 +134,46 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "aadhar_verified_date",
-   "fieldtype": "Date",
-   "label": "Aadhar Verified On"
+   "fieldname": "send_otp_button",
+   "fieldtype": "Button",
+   "label": "Generate Otp"
   },
   {
    "fieldname": "column_break_ywyc",
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "aadhar_otp",
+   "fieldtype": "Data",
+   "label": "Aadhar Otp"
+  },
+  {
+   "fieldname": "column_break_hswz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "verify_aadhar_button",
+   "fieldtype": "Button",
+   "label": "Verify Aadhar"
+  },
+  {
    "default": "0",
    "fieldname": "aadhar_verified",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Aadhar Verified?"
+  },
+  {
+   "fieldname": "aadhar_verified_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Aadhar Verified On"
+  },
+  {
+   "fieldname": "aadhar_reference_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Aadhar Reference id "
   },
   {
    "fieldname": "section_break_pxbf",
@@ -422,7 +454,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-10 16:38:52.651287",
+ "modified": "2025-11-13 19:03:21.267379",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",

@@ -5,6 +5,7 @@ import requests
 from frappe import _
 from frappe.utils import today
 import uuid
+import re
 
 @frappe.whitelist()
 def verify_pan_api(pan_number, first_name=None, last_name=None, customer_type=None):
@@ -243,3 +244,269 @@ def verify_gstin_api(gstin, first_name=None):
             "message": "Verification failed. Please try again.",
             "gstin_verified": 0
         }
+
+## ==================== AADHAAR VERIFICATION FUNCTIONS ====================
+
+@frappe.whitelist()
+def send_aadhaar_otp(aadhaar_number):
+    """
+    Send OTP to Aadhaar number
+    Step 1: Generate OTP
+    """
+    if not aadhaar_number:
+        return {
+            "status": "failed",
+            "message": _("Please enter Aadhaar number")
+        }
+    
+    # Validate Aadhaar format (12 digits only)
+    aadhaar_clean = re.sub(r'\s+', '', aadhaar_number)
+    if not re.match(r'^\d{12}$', aadhaar_clean):
+        return {
+            "status": "failed",
+            "message": _("Invalid Aadhaar format. Must be 12 digits")
+        }
+    
+    url = "https://api.sandbox.co.in/kyc/aadhaar/okyc/otp"
+    
+    headers = {
+        "accept": "application/json",
+        "authorization": "eyJ0eXAiOiJKV1MiLCJhbGciOiJSU0FTU0FfUFNTX1NIQV81MTIiLCJraWQiOiIwYzYwMGUzMS01MDAwLTRkYTItYjM3YS01ODdkYTA0ZTk4NTEifQ.eyJ3b3Jrc3BhY2VfaWQiOiI0ZmI3ODEwYi0yMzBlLTQzNjEtYTVhMC04NjFlNGI4YmI1MmEiLCJzdWIiOiJrZXlfdGVzdF82Yjg0NmNiZmQ1YzI0ZTFmYjRiNjgxZWM5Y2FjZTIxNyIsImFwaV9rZXkiOiJrZXlfdGVzdF82Yjg0NmNiZmQ1YzI0ZTFmYjRiNjgxZWM5Y2FjZTIxNyIsImF1ZCI6IkFQSSIsImludGVudCI6IkFDQ0VTU19UT0tFTiIsImlzcyI6InByb2QxLWFwaS5zYW5kYm94LmNvLmluIiwiaWF0IjoxNzYzMDI1OTI2LCJleHAiOjE3NjMxMTIzMjZ9.XMB-ucjZnOo4eigCuNUcmDkmj8LgEBgXU5m9cMbgm_hLGNfLaYGnt54gDZjFsuNwLMDbHXhjeqwmO_3iIudrD5vC9O9B6o4mRojSXMSL5g_-0ZSf5KVD8XBc4cp5ab5zm1P2XaZuSj0W_TmTl7dunEYSPV67o_xFxF3i7A-SInDP1tZChexAaxZ1b7AX85ApeJZUWjTfrKGmjLtjaIqzSxUebhVY3wR3r17OdqsiGpSLMur8gvBqGJjkd1G5SEXUZvcongnvvyOWOzst-Qj5hgkjItqUUCGrm973Rexl4vycfiwl_0vt2NpLy2lU-8oRZq_54mSJY9crnmyEWY37Sg",
+        "x-api-key": "key_test_6b846cbfd5c24e1fb4b681ec9cace217",
+        "x-api-version": "2.0",
+        "content-type": "application/json"
+    }
+    
+    payload = {
+        "@entity": "in.co.sandbox.kyc.aadhaar.okyc.otp.request",
+        "aadhaar_number": aadhaar_clean,
+        "consent": "y",
+        "reason": "For KYC"
+    }
+    
+    try:
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
+        
+        if response.status_code != 200:
+            return {
+                "status": "failed",
+                "message": _("Failed to send OTP. Please try again.")
+            }
+        
+        data = response.json()
+        
+        if data.get("code") == 200 and data.get("data"):
+            reference_id = data["data"].get("reference_id")
+            
+            if not reference_id:
+                return {
+                    "status": "failed",
+                    "message": _("Failed to get reference ID")
+                }
+            
+            return {
+                "status": "success",
+                "message": _("OTP sent successfully to registered mobile"),
+                "reference_id": reference_id,
+                "transaction_id": data.get("transaction_id")
+            }
+        else:
+            return {
+                "status": "failed",
+                "message": data.get("data", {}).get("message", _("Failed to send OTP"))
+            }
+            
+    except requests.exceptions.Timeout:
+        return {
+            "status": "failed",
+            "message": _("Request timeout. Please try again.")
+        }
+    except requests.exceptions.RequestException as e:
+        frappe.log_error(f"Aadhaar OTP error: {str(e)}", "Aadhaar OTP")
+        return {
+            "status": "failed",
+            "message": _("Network error. Please try again.")
+        }
+    except Exception as e:
+        frappe.log_error(f"Aadhaar OTP error: {str(e)}", "Aadhaar OTP")
+        return {
+            "status": "failed",
+            "message": _("An error occurred. Please try again.")
+        }
+
+
+@frappe.whitelist()
+def verify_aadhaar_otp(reference_id, otp):
+    """
+    Verify Aadhaar OTP
+    Step 2: Verify OTP and get Aadhaar details
+    """
+    if not reference_id:
+        return {
+            "status": "failed",
+            "message": _("Reference ID not found. Please send OTP first.")
+        }
+    
+    if not otp:
+        return {
+            "status": "failed",
+            "message": _("Please enter OTP")
+        }
+    
+    # Validate OTP format (6 digits)
+    otp_clean = re.sub(r'\s+', '', otp)
+    if not re.match(r'^\d{6}$', otp_clean):
+        return {
+            "status": "failed",
+            "message": _("Invalid OTP format. Must be 6 digits")
+        }
+    
+    url = "https://api.sandbox.co.in/kyc/aadhaar/okyc/otp/verify"
+    
+    headers = {
+        "accept": "application/json",
+        "authorization": "eyJ0eXAiOiJKV1MiLCJhbGciOiJSU0FTU0FfUFNTX1NIQV81MTIiLCJraWQiOiIwYzYwMGUzMS01MDAwLTRkYTItYjM3YS01ODdkYTA0ZTk4NTEifQ.eyJ3b3Jrc3BhY2VfaWQiOiI0ZmI3ODEwYi0yMzBlLTQzNjEtYTVhMC04NjFlNGI4YmI1MmEiLCJzdWIiOiJrZXlfdGVzdF82Yjg0NmNiZmQ1YzI0ZTFmYjRiNjgxZWM5Y2FjZTIxNyIsImFwaV9rZXkiOiJrZXlfdGVzdF82Yjg0NmNiZmQ1YzI0ZTFmYjRiNjgxZWM5Y2FjZTIxNyIsImF1ZCI6IkFQSSIsImludGVudCI6IkFDQ0VTU19UT0tFTiIsImlzcyI6InByb2QxLWFwaS5zYW5kYm94LmNvLmluIiwiaWF0IjoxNzYzMDI1OTI2LCJleHAiOjE3NjMxMTIzMjZ9.XMB-ucjZnOo4eigCuNUcmDkmj8LgEBgXU5m9cMbgm_hLGNfLaYGnt54gDZjFsuNwLMDbHXhjeqwmO_3iIudrD5vC9O9B6o4mRojSXMSL5g_-0ZSf5KVD8XBc4cp5ab5zm1P2XaZuSj0W_TmTl7dunEYSPV67o_xFxF3i7A-SInDP1tZChexAaxZ1b7AX85ApeJZUWjTfrKGmjLtjaIqzSxUebhVY3wR3r17OdqsiGpSLMur8gvBqGJjkd1G5SEXUZvcongnvvyOWOzst-Qj5hgkjItqUUCGrm973Rexl4vycfiwl_0vt2NpLy2lU-8oRZq_54mSJY9crnmyEWY37Sg",
+        "x-api-key": "key_test_6b846cbfd5c24e1fb4b681ec9cace217",
+        "x-api-version": "2.0",
+        "content-type": "application/json"
+    }
+    
+    payload = {
+        "@entity": "in.co.sandbox.kyc.aadhaar.okyc.request",
+        "reference_id": str(reference_id),  # Ensure it's a string
+        "otp": otp_clean
+    }
+    
+    try:
+        response = requests.post(url, json=payload, headers=headers, timeout=10)
+        
+        # Log complete request and response for debugging
+        frappe.log_error(
+            f"Aadhaar Verification Debug:\n"
+            f"URL: {url}\n"
+            f"Reference ID: {reference_id}\n"
+            f"OTP: {otp_clean}\n"
+            f"Status Code: {response.status_code}\n"
+            f"Response: {response.text}",
+            "Aadhaar Verification Debug"
+        )
+        
+        # Parse response
+        try:
+            data = response.json()
+        except ValueError as e:
+            frappe.log_error(f"JSON Parse Error: {str(e)}\nRaw Response: {response.text}", "Aadhaar JSON Parse Error")
+            return {
+                "status": "failed",
+                "message": _("Invalid response from verification service")
+            }
+        
+        # SUCCESS CASE: Check for code 200 and data.status VALID
+        # Based on API docs, successful response structure is:
+        # { "code": 200, "data": { "status": "VALID", ... } }
+        if data.get("code") == 200 and data.get("data"):
+            aadhaar_data = data.get("data", {})
+            
+            # Check if status is VALID inside data object
+            if aadhaar_data.get("status") == "VALID":
+                # Parse name from Aadhaar response
+                full_name = aadhaar_data.get("name", "")
+                parsed_names = parse_full_name(full_name)
+                
+                # Parse address from Aadhaar response
+                address_obj = aadhaar_data.get("address", {})
+                address_data = {
+                    "address": aadhaar_data.get("full_address", ""),
+                    "city": address_obj.get("district", "") if isinstance(address_obj, dict) else "",
+                    "state": address_obj.get("state", "") if isinstance(address_obj, dict) else "",
+                    "zip": str(address_obj.get("pincode", "")) if isinstance(address_obj, dict) else ""
+                }
+                
+                return {
+                    "status": "success",
+                    "message": _("Aadhaar verified successfully"),
+                    "aadhar_verified": 1,
+                    "aadhar_verified_date": today(),
+                    "parsed_names": parsed_names,
+                    "address_data": address_data,
+                    "gender": aadhaar_data.get("gender", ""),
+                    "date_of_birth": aadhaar_data.get("date_of_birth", ""),
+                    "photo": aadhaar_data.get("photo", ""),
+                    "full_data": aadhaar_data
+                }
+            else:
+                # Data exists but status is not VALID
+                return {
+                    "status": "failed",
+                    "message": aadhaar_data.get("message", _("Aadhaar verification failed"))
+                }
+        
+        # ERROR CASE 1: Invalid OTP (code 422)
+        elif data.get("code") == 422:
+            error_msg = data.get("message", _("Invalid OTP. Please try again."))
+            if data.get("data") and isinstance(data.get("data"), dict):
+                error_msg = data["data"].get("message", error_msg)
+            return {
+                "status": "failed",
+                "message": error_msg
+            }
+        
+        # ERROR CASE 2: OTP Expired (code 410)
+        elif data.get("code") == 410:
+            return {
+                "status": "failed",
+                "message": _("OTP has expired. Please request a new OTP.")
+            }
+        
+        # ERROR CASE 3: Other errors
+        else:
+            error_message = data.get("message", _("Verification failed"))
+            if data.get("data") and isinstance(data.get("data"), dict):
+                error_message = data["data"].get("message", error_message)
+            
+            return {
+                "status": "failed",
+                "message": error_message
+            }
+            
+    except requests.exceptions.Timeout:
+        return {
+            "status": "failed",
+            "message": _("Request timeout. Please try again.")
+        }
+    except requests.exceptions.RequestException as e:
+        frappe.log_error(f"Aadhaar verification network error: {str(e)}", "Aadhaar Verification Error")
+        return {
+            "status": "failed",
+            "message": _("Network error. Please try again.")
+        }
+    except Exception as e:
+        frappe.log_error(f"Aadhaar verification unexpected error: {str(e)}", "Aadhaar Verification Error")
+        return {
+            "status": "failed",
+            "message": _("An error occurred. Please try again.")
+        }
+
+
+def parse_full_name(full_name):
+    """
+    Parse full name into first, middle, and last name
+    Example: "Vineet Rajanikant Jadhav" -> first: Vineet, middle: Rajanikant, last: Jadhav
+    """
+    if not full_name:
+        return {}
+    
+    name_parts = full_name.strip().split()
+    
+    parsed = {}
+    if len(name_parts) >= 3:
+        parsed["first_name"] = name_parts[0].title()
+        parsed["middle_name"] = " ".join(name_parts[1:-1]).title()
+        parsed["last_name"] = name_parts[-1].title()
+    elif len(name_parts) == 2:
+        parsed["first_name"] = name_parts[0].title()
+        parsed["last_name"] = name_parts[1].title()
+    elif len(name_parts) == 1:
+        parsed["first_name"] = name_parts[0].title()
+    
+    return parsed
