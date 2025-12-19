@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-10-13 18:26:06.156613",
+ "creation": "2025-12-15 22:41:36.796386",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,6 +13,26 @@
   "column_break_rmbk",
   "customer_status",
   "column_break_oyxj",
+  "section_break_zrkl",
+  "first_name",
+  "column_break_klmb",
+  "middle_name",
+  "column_break_vsoz",
+  "last_name",
+  "address_info_section",
+  "address",
+  "column_break_ehpu",
+  "city",
+  "column_break_nkix",
+  "state",
+  "column_break_wmxy",
+  "zip",
+  "contact_info_section",
+  "mobile",
+  "column_break_ghnz",
+  "alternate_mobile",
+  "column_break_gzcq",
+  "email",
   "identity_verification_section",
   "aadhar_number",
   "column_break_qnil",
@@ -44,26 +64,6 @@
   "igst_percent",
   "column_break_lzqw",
   "sgst_percent",
-  "section_break_fhpk",
-  "first_name",
-  "column_break_ysdy",
-  "middle_name",
-  "column_break_yrjo",
-  "last_name",
-  "address_info_section",
-  "address",
-  "column_break_ehpu",
-  "city",
-  "column_break_nkix",
-  "state",
-  "column_break_wmxy",
-  "zip",
-  "contact_info_section",
-  "mobile",
-  "column_break_ghnz",
-  "alternate_mobile",
-  "column_break_gzcq",
-  "email",
   "bank_ac_section",
   "bank_account_name",
   "ifsc_code",
@@ -117,6 +117,117 @@
   {
    "fieldname": "column_break_oyxj",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zrkl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "First Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_klmb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
+   "fieldname": "middle_name",
+   "fieldtype": "Data",
+   "label": "Middle Name"
+  },
+  {
+   "fieldname": "column_break_vsoz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "address_info_section",
+   "fieldtype": "Section Break",
+   "label": "Address Information"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ehpu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "City",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_nkix",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wmxy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "zip",
+   "fieldtype": "Data",
+   "label": "Zip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_info_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "column_break_ghnz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "alternate_mobile",
+   "fieldtype": "Data",
+   "label": "Alternate Mobile"
+  },
+  {
+   "fieldname": "column_break_gzcq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
   },
   {
    "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
@@ -279,117 +390,6 @@
    "label": "SGST (%)"
   },
   {
-   "fieldname": "section_break_fhpk",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "first_name",
-   "fieldtype": "Data",
-   "in_filter": 1,
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "First Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_ysdy",
-   "fieldtype": "Column Break"
-  },
-  {
-   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
-   "fieldname": "middle_name",
-   "fieldtype": "Data",
-   "label": "Middle Name"
-  },
-  {
-   "fieldname": "column_break_yrjo",
-   "fieldtype": "Column Break"
-  },
-  {
-   "depends_on": "eval:doc.customer_type==\"Individual / Farmer\"",
-   "fieldname": "last_name",
-   "fieldtype": "Data",
-   "in_filter": 1,
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Last Name"
-  },
-  {
-   "fieldname": "address_info_section",
-   "fieldtype": "Section Break",
-   "label": "Address Information"
-  },
-  {
-   "fieldname": "address",
-   "fieldtype": "Data",
-   "label": "Address",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_ehpu",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "city",
-   "fieldtype": "Data",
-   "in_global_search": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "City",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_nkix",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "state",
-   "fieldtype": "Data",
-   "label": "State",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_wmxy",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "zip",
-   "fieldtype": "Data",
-   "label": "Zip",
-   "reqd": 1
-  },
-  {
-   "fieldname": "contact_info_section",
-   "fieldtype": "Section Break",
-   "label": "Contact Information"
-  },
-  {
-   "fieldname": "mobile",
-   "fieldtype": "Data",
-   "label": "Mobile"
-  },
-  {
-   "fieldname": "column_break_ghnz",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "alternate_mobile",
-   "fieldtype": "Data",
-   "label": "Alternate Mobile"
-  },
-  {
-   "fieldname": "column_break_gzcq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "label": "Email",
-   "options": "Email"
-  },
-  {
    "fieldname": "bank_ac_section",
    "fieldtype": "Section Break",
    "label": "Bank Account Information"
@@ -454,7 +454,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-13 19:03:21.267379",
+ "modified": "2025-12-17 14:31:41.471955",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",

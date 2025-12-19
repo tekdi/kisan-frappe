@@ -1,250 +1,315 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "naming_series:",
- "creation": "2025-01-27 10:00:00",
- "default_view": "List",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "naming_series",
-  "section_break_2",
-  "aawak_date",
-  "column_break_4",
-  "commodity",
-  "column_break_wzcm",
-  "storage_customer",
-  "column_break_wtvz",
-  "vehicle_number",
-  "section_break_8",
-  "bag_details",
-  "section_break_10",
-  "total_bags",
-  "column_break_12",
-  "total_weight",
-  "section_break_14",
-  "godown",
-  "chamber_allocations",
-  "section_break_16",
-  "notes",
-  "column_break_18",
-  "status",
-  "amended_from"
- ],
- "fields": [
-  {
-   "default": "AAWAK-.YYYY.-.####",
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "hidden": 1,
-   "label": "Naming Series",
-   "options": "AAWAK-.YYYY.-.####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_2",
-   "fieldtype": "Section Break",
-   "label": "Basic Information"
-  },
-  {
-   "default": "now",
-   "fieldname": "aawak_date",
-   "fieldtype": "Datetime",
-   "in_list_view": 1,
-   "label": "Aawak Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "vehicle_number",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Vehicle Number",
-   "length": 20,
-   "reqd": 1
-  },
-  {
-   "fieldname": "storage_customer",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Storage Customer",
-   "options": "Storage Customer",
-   "reqd": 1
-  },
-  {
-   "fieldname": "commodity",
-   "fieldtype": "Link",
-   "label": "Commodity",
-   "options": "Commodity",
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_8",
-   "fieldtype": "Section Break",
-   "label": "Bag Details"
-  },
-  {
-   "fieldname": "bag_details",
-   "fieldtype": "Table",
-   "label": "Bag Details",
-   "options": "Bag Details",
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_10",
-   "fieldtype": "Section Break",
-   "label": "Summary"
-  },
-  {
-   "fieldname": "total_bags",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Total Bags",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_12",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "total_weight",
-   "fieldtype": "Float",
-   "label": "Total Weight (Kg)",
-   "precision": "2",
-   "read_only": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_14",
-   "fieldtype": "Section Break",
-   "label": "Storage Allocation"
-  },
-  {
-   "fieldname": "godown",
-   "fieldtype": "Link",
-   "label": "Godown",
-   "options": "Godown",
-   "reqd": 1
-  },
-  {
-   "fieldname": "chamber_allocations",
-   "fieldtype": "Table",
-   "label": "Chamber Allocations",
-   "options": "Chamber Allocation",
-   "reqd": 1
-  },
-  {
-   "fieldname": "section_break_16",
-   "fieldtype": "Section Break",
-   "label": "Additional"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes",
-   "options": "3"
-  },
-  {
-   "fieldname": "column_break_18",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "Draft",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Draft\nActive\nCompleted",
-   "reqd": 1
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Inward Aawak",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "column_break_wzcm",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_wtvz",
-   "fieldtype": "Column Break"
-  }
- ],
- "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [],
- "modified": "2025-10-06 17:36:31.645215",
- "modified_by": "Administrator",
- "module": "Warehouse Rent",
- "name": "Inward Aawak",
- "naming_rule": "By \"Naming Series\" field",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Kisan Admin",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Kisan Accountant",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Kisan Operator",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "search_fields": "storage_customer,commodity,vehicle_number",
- "sort_field": "aawak_date",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "naming_series:",
+    "creation": "2025-01-27 10:00:00",
+    "default_view": "List",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "naming_series",
+        "lot_number",
+        "section_break_2",
+        "aawak_date",
+        "column_break_4",
+        "commodities",
+        "column_break_wzcm",
+        "storage_customer",
+        "column_break_wtvz",
+        "vehicle_number",
+        "column_break_eioe",
+        "status",
+        "section_break_mkdx",
+        "receiver_name",
+        "column_break_fqux",
+        "receiver_mobile_no",
+        "section_break_8",
+        "bag_details",
+        "section_break_anor",
+        "commodity_condition",
+        "section_break_10",
+        "total_bags",
+        "column_break_12",
+        "total_weight",
+        "section_break_14",
+        "firm",
+        "column_break_firm",
+        "godown",
+        "section_break_lcxu",
+        "chamber_allocations",
+        "section_break_16",
+        "notes",
+        "column_break_18",
+        "amended_from"
+    ],
+    "fields": [
+        {
+            "default": "AAWAK-.YYYY.-.####",
+            "fieldname": "naming_series",
+            "fieldtype": "Select",
+            "hidden": 1,
+            "label": "Naming Series",
+            "options": "AAWAK-.YYYY.-.####",
+            "reqd": 1
+        },
+        {
+            "fieldname": "lot_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Lot Number",
+            "read_only": 1
+        },
+        {
+            "fieldname": "section_break_2",
+            "fieldtype": "Section Break",
+            "label": "Basic Information"
+        },
+        {
+            "default": "now",
+            "fieldname": "aawak_date",
+            "fieldtype": "Datetime",
+            "in_list_view": 1,
+            "label": "Aawak Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "vehicle_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Vehicle Number",
+            "length": 20,
+            "reqd": 1
+        },
+        {
+            "fieldname": "storage_customer",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Storage Customer",
+            "options": "Storage Customer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "commodities",
+            "fieldtype": "Table MultiSelect",
+            "label": "Commodities",
+            "options": "Inward Commodity",
+            "reqd": 1
+        },
+        {
+            "fieldname": "section_break_8",
+            "fieldtype": "Section Break",
+            "label": "Bag Details"
+        },
+        {
+            "fieldname": "bag_details",
+            "fieldtype": "Table",
+            "label": "Bag Details",
+            "options": "Bag Details",
+            "reqd": 1
+        },
+        {
+            "fieldname": "section_break_10",
+            "fieldtype": "Section Break",
+            "label": "Summary"
+        },
+        {
+            "fieldname": "total_bags",
+            "fieldtype": "Int",
+            "in_list_view": 1,
+            "label": "Total Bags",
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_12",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "total_weight",
+            "fieldtype": "Float",
+            "label": "Total Weight (Kg)",
+            "precision": "2",
+            "read_only": 1,
+            "reqd": 1
+        },
+        {
+            "fieldname": "section_break_14",
+            "fieldtype": "Section Break",
+            "label": "Storage Allocation"
+        },
+        {
+            "fieldname": "firm",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "Firm",
+            "options": "Firm",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_firm",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "godown",
+            "fieldtype": "Link",
+            "label": "Godown",
+            "options": "Godown",
+            "reqd": 1
+        },
+        {
+            "fieldname": "chamber_allocations",
+            "fieldtype": "Table",
+            "label": "Chamber Allocations",
+            "options": "Chamber Allocation",
+            "reqd": 1
+        },
+        {
+            "fieldname": "section_break_16",
+            "fieldtype": "Section Break",
+            "label": "Additional"
+        },
+        {
+            "fieldname": "notes",
+            "fieldtype": "Small Text",
+            "label": "Notes",
+            "options": "3"
+        },
+        {
+            "fieldname": "column_break_18",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "Draft",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Status",
+            "options": "Draft\nActive\nCompleted",
+            "reqd": 1
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "Inward Aawak",
+            "print_hide": 1,
+            "read_only": 1,
+            "search_index": 1
+        },
+        {
+            "fieldname": "column_break_wzcm",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "column_break_wtvz",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "section_break_mkdx",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "receiver_name",
+            "fieldtype": "Data",
+            "label": "Receiver Name"
+        },
+        {
+            "fieldname": "column_break_fqux",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "receiver_mobile_no",
+            "fieldtype": "Data",
+            "label": "Receiver Mobile No"
+        },
+        {
+            "fieldname": "section_break_anor",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "commodity_condition",
+            "fieldtype": "Data",
+            "label": "Commodity Condition"
+        },
+        {
+            "fieldname": "section_break_lcxu",
+            "fieldtype": "Section Break"
+        },
+        {
+            "fieldname": "column_break_eioe",
+            "fieldtype": "Column Break"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2025-12-17 18:13:11.557768",
+    "modified_by": "Administrator",
+    "module": "Warehouse Rent",
+    "name": "Inward Aawak",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Kisan Admin",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Kisan Accountant",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Kisan Operator",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "search_fields": "lot_number,firm,storage_customer,commodity,vehicle_number",
+    "sort_field": "aawak_date",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
 }

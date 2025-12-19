@@ -10,13 +10,15 @@
  "field_order": [
   "naming_series",
   "section_break_2",
-  "status",
-  "column_break_6",
+  "firm",
+  "column_break_firm",
   "godown_name",
-  "column_break_ttbz",
+  "column_break_6",
   "godown_code",
-  "column_break_hchx",
+  "column_break_ttbz",
   "total_area",
+  "column_break_hchx",
+  "status",
   "section_break_8",
   "address",
   "column_break_10",
@@ -44,6 +46,18 @@
    "fieldname": "section_break_2",
    "fieldtype": "Section Break",
    "label": "Godown Information"
+  },
+  {
+   "fieldname": "firm",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Firm",
+   "options": "Firm",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_firm",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "godown_name",
@@ -155,7 +169,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 18:24:15.722066",
+ "modified": "2025-12-17 17:55:06.371429",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Godown",
@@ -207,7 +221,7 @@
   }
  ],
  "row_format": "Dynamic",
- "search_fields": "godown_name,godown_code,city",
+ "search_fields": "firm,godown_name,godown_code,city",
  "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",

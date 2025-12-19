@@ -21,10 +21,10 @@
   "storage_customer",
   "godown",
   "column_break_11",
-  "commodity",
-  "floor",
+  "commodities",
   "column_break_14",
   "chamber",
+  "floor",
   "section_break_16",
   "jawak_bag_details",
   "section_break_18",
@@ -103,10 +103,10 @@
    "reqd": 1
   },
   {
-   "fieldname": "commodity",
-   "fieldtype": "Link",
-   "label": "Commodity",
-   "options": "Commodity",
+   "fieldname": "commodities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Commodities",
+   "options": "Inward Commodity",
    "reqd": 1
   },
   {
@@ -118,8 +118,7 @@
    "fieldname": "floor",
    "fieldtype": "Link",
    "label": "Floor",
-   "options": "Godown Floor",
-   "reqd": 1
+   "options": "Godown Floor"
   },
   {
    "fieldname": "column_break_14",
@@ -130,8 +129,7 @@
    "fieldname": "chamber",
    "fieldtype": "Link",
    "label": "Chamber",
-   "options": "Floor Chamber",
-   "reqd": 1
+   "options": "Floor Chamber"
   },
   {
    "fieldname": "section_break_16",
@@ -288,7 +286,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-06 17:36:31.468781",
+ "modified": "2025-12-18 10:35:36.691703",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Outward Jawak",
