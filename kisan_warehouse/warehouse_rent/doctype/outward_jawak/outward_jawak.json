@@ -9,13 +9,15 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "lot_number",
   "section_break_2",
-  "jawak_date",
+  "firm",
   "column_break_4",
-  "aawak_reference",
+  "inward_lot_no",
   "column_break_vkog",
-  "vehicle_number",
+  "jawak_date",
   "column_break_itcp",
+  "vehicle_number",
   "status",
   "section_break_8",
   "storage_customer",
@@ -42,6 +44,8 @@
   "discount",
   "column_break_jdbk",
   "additional_charges",
+  "column_break_inward",
+  "inward_charges",
   "section_break_30",
   "payment_method",
   "column_break_32",
@@ -60,6 +64,13 @@
    "label": "Naming Series",
    "options": "JAWAK-.YYYY.-.####",
    "reqd": 1
+  },
+  {
+   "fieldname": "lot_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lot Number",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_2",
@@ -83,11 +94,18 @@
    "label": "Vehicle Number"
   },
   {
-   "fieldname": "aawak_reference",
+   "fieldname": "firm",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Aawak Reference",
-   "options": "Inward Aawak",
+   "label": "Firm",
+   "options": "Firm",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inward_lot_no",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Inward Lot No",
    "reqd": 1
   },
   {
@@ -196,6 +214,17 @@
    "precision": "2"
   },
   {
+   "fieldname": "column_break_inward",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inward_charges",
+   "fieldtype": "Currency",
+   "label": "Inward Charges",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
    "fieldname": "column_break_27",
    "fieldtype": "Column Break"
   },
@@ -286,7 +315,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-18 10:35:36.691703",
+ "modified": "2025-12-22 17:03:41.782321",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Outward Jawak",

@@ -1,26 +1,84 @@
+// Helper function to setup read-only for Bag Details rate field
+function setupBagDetailsReadOnly(frm) {
+	if (!frm.fields_dict['bag_details'] || !frm.fields_dict['bag_details'].grid) {
+		console.log('Bag Details grid not available');
+		return;
+	}
+
+	const grid = frm.fields_dict['bag_details'].grid;
+
+	// Iterate through all visible grid rows
+	grid.grid_rows.forEach(grid_row => {
+		if (grid_row.doc && grid_row.doc.name) {
+			const row = grid_row.doc;
+			const is_auto = row.is_auto_populated ? 1 : 0;
+
+			console.log(`Row ${row.name}: is_auto_populated = ${is_auto}, rate will be ${is_auto ? 'read-only' : 'editable'}`);
+
+			// Auto rows locked, manual rows editable
+			let effective_read_only = is_auto ? 1 : 0;
+
+			// Find the rate field in docfields (grid header / inline editor)
+			const rate_field = grid_row.docfields.find(df => df.fieldname === 'rate');
+
+			if (rate_field) {
+				rate_field.read_only = effective_read_only;
+			}
+
+			// Also update the grid form if row is being edited (row popup)
+			if (grid_row.grid_form && grid_row.grid_form.fields_dict && grid_row.grid_form.fields_dict['rate']) {
+				grid_row.grid_form.fields_dict['rate'].df.read_only = effective_read_only;
+				grid_row.grid_form.fields_dict['rate'].refresh();
+			}
+		}
+	});
+
+	console.log('Bag Details read-only logic applied to', grid.grid_rows.length, 'rows');
+}
+
 // Copyright (c) 2025, Kisan Warehouse and contributors
 // For license information, please see license.txt
 
 frappe.ui.form.on('Inward Aawak', {
 	refresh: function (frm) {
-		// Set default values
-		if (frm.is_new()) {
+		console.log('Inward Aawak refresh event called');
+
+		// Set default Aawak date if not set
+		if (!frm.doc.aawak_date) {
+			frm.set_value('aawak_date', frappe.datetime.now_datetime());
+		}
+
+		// Set default status
+		if (!frm.doc.status) {
 			frm.set_value('status', 'Draft');
 		}
 
-		// Set up dynamic filtering for Firm → Godown → Floor → Chamber hierarchy
-		setupHierarchyFiltering(frm);
-
-		// Initialize bag details from Master if empty and new
-		// Check if table is empty OR has just one empty row (default behavior for required tables)
+		// Auto-populate Bag Configurations if the form is new and bag_details is empty or has default row
 		if (frm.is_new()) {
 			let is_empty = !frm.doc.bag_details || frm.doc.bag_details.length === 0;
-			let is_default_row = frm.doc.bag_details.length === 1 && !frm.doc.bag_details[0].bag_weight;
+			let is_default_row = frm.doc.bag_details && frm.doc.bag_details.length === 1 && !frm.doc.bag_details[0].bag_weight;
 
 			if (is_empty || is_default_row) {
 				populateBagConfigurations(frm);
 			}
 		}
+
+		// Setup hierarchy filtering
+		setupHierarchyFiltering(frm);
+
+		// Setup read-only for Bag Details Rate field (with delay to ensure grid is rendered)
+		setTimeout(() => setupBagDetailsReadOnly(frm), 300);
+
+		// Refresh all fields to ensure proper display
+		frm.refresh_field('aawak_date');
+		frm.refresh_field('status');
+		frm.refresh_field('bag_details');
+		frm.refresh_field('total_bags');
+		frm.refresh_field('total_weight');
+		frm.refresh_field('commodities');
+		frm.refresh_field('commodity_condition');
+
+		console.log('All fields refreshed');
 
 		// Ensure Validation Date is set for all allocations (e.g. default rows)
 		if (frm.doc.chamber_allocations) {
@@ -233,12 +291,44 @@ frappe.ui.form.on('Bag Details', {
 		calculateGrandTotals(frm);
 	},
 
-	bag_details_add: function (frm) {
+	bag_details_add: function (frm, cdt, cdn) {
 		// Set default values for new row
 		let new_row = frm.doc.bag_details[frm.doc.bag_details.length - 1];
 		if (new_row) {
 			frappe.model.set_value('Bag Details', new_row.name, 'number_of_bags', 0);
 			frappe.model.set_value('Bag Details', new_row.name, 'total_weight', 0);
+			// Manually added rows are NOT auto-populated
+			frappe.model.set_value('Bag Details', new_row.name, 'is_auto_populated', 0);
+		}
+	},
+
+	rate: function (frm, cdt, cdn) {
+		// Protect auto-populated rows from rate changes
+		let row = locals[cdt][cdn];
+
+		if (row.is_auto_populated) {
+			// Get original rate from before the change
+			if (row.__old_rate !== undefined) {
+				// Revert to original rate
+				frappe.model.set_value(cdt, cdn, 'rate', row.__old_rate);
+
+				frappe.msgprint({
+					title: __('Cannot Edit'),
+					message: __('Rate cannot be changed for auto-populated rows from Bag Configuration. Only manually added rows can have the rate edited.'),
+					indicator: 'orange'
+				});
+			}
+		} else {
+			// For manual rows, save the current rate as old rate for future protection
+			row.__old_rate = row.rate;
+		}
+	},
+
+	before_bag_details_save: function (frm, cdt, cdn) {
+		// Store original rate before any changes
+		let row = locals[cdt][cdn];
+		if (row.rate !== undefined && row.__old_rate === undefined) {
+			row.__old_rate = row.rate;
 		}
 	}
 });
@@ -352,12 +442,17 @@ function populateBagConfigurations(frm) {
 					// Set standalone values
 					frappe.model.set_value('Bag Details', new_row.name, 'bag_weight', config.bag_weight);
 					frappe.model.set_value('Bag Details', new_row.name, 'rate', config.rate_per_bag_per_day);
-
 					frappe.model.set_value('Bag Details', new_row.name, 'number_of_bags', 0);
 					frappe.model.set_value('Bag Details', new_row.name, 'total_weight', 0);
+
+					// Mark as auto-populated
+					frappe.model.set_value('Bag Details', new_row.name, 'is_auto_populated', 1);
 				});
 
 				frm.refresh_field('bag_details');
+
+				// Setup read-only logic for auto-populated rows
+				setTimeout(() => setupBagDetailsReadOnly(frm), 200);
 			} else {
 				frappe.msgprint({
 					title: __('No Bag Configurations'),

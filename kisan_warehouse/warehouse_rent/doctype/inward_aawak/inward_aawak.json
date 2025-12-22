@@ -28,6 +28,8 @@
         "bag_details",
         "section_break_anor",
         "commodity_condition",
+        "column_break_charges",
+        "charges",
         "section_break_10",
         "total_bags",
         "column_break_12",
@@ -236,6 +238,16 @@
             "fieldname": "commodity_condition",
             "fieldtype": "Data",
             "label": "Commodity Condition"
+        },
+        {
+            "fieldname": "column_break_charges",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "charges",
+            "fieldtype": "Currency",
+            "label": "Charges",
+            "precision": "2"
         },
         {
             "fieldname": "section_break_lcxu",
