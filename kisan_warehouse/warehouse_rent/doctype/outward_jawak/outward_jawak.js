@@ -1,46 +1,60 @@
 // Outward Jawak Client Script
-// Auto-population from Aawak Reference and Real-time Calculations
+// Auto-population from Inward Aawak using Firm + Inward Lot No and Real-time Calculations
 
 console.log('Outward Jawak client script loaded');
 
+let currentAawak = null;
+
 frappe.ui.form.on('Outward Jawak', {
-	onload: function(frm) {
+	onload: function (frm) {
 		console.log('Outward Jawak onload event called');
-		
+
 		// Ensure proper field display on form load
-		if (frm.doc.storage_customer || frm.doc.commodity || frm.doc.godown || frm.doc.floor || frm.doc.chamber) {
+		if (frm.doc.storage_customer || (frm.doc.commodities && frm.doc.commodities.length > 0) || frm.doc.godown || frm.doc.floor || frm.doc.chamber) {
 			// Refresh fields to show actual names instead of naming series
 			frm.refresh_field('storage_customer');
-			frm.refresh_field('commodity');
+			frm.refresh_field('commodities');
 			frm.refresh_field('godown');
 			frm.refresh_field('floor');
 			frm.refresh_field('chamber');
 		}
-		
+
 		// If form has data but amounts are not calculated, trigger calculation
-		if (frm.doc.jawak_bag_details && frm.doc.jawak_bag_details.length > 0 && 
+		if (frm.doc.jawak_bag_details && frm.doc.jawak_bag_details.length > 0 &&
 			(!frm.doc.total_amount || frm.doc.total_amount === 0)) {
 			console.log('Triggering calculation on form load');
 			recalculateAllAmounts(frm);
 		}
-		
+
 		// Apply bold styling to specific field labels
 		applyBoldLabels(frm);
+
+		// Auto-populate when Firm and Inward Lot No are already present
+		if (frm.doc.firm && frm.doc.inward_lot_no) {
+			console.log('Auto-populating from Firm and Inward Lot No on load');
+			fetchAawakByFirmAndLot(frm);
+		}
+
+		// Load lot options for selected firm on load
+		loadLotOptions(frm);
 	},
 
-	refresh: function(frm) {
+	refresh: function (frm) {
 		console.log('Outward Jawak refresh event called');
-		
-		// Initialize form
-		if (frm.doc.aawak_reference && !frm.doc.storage_customer) {
-			console.log('Auto-populating from Aawak reference');
-			populateFromAawak(frm);
+
+		// Initialize form using Firm + Inward Lot No
+		if (frm.doc.firm && frm.doc.inward_lot_no) {
+			console.log('Auto-populating from Firm and Inward Lot No on refresh');
+			fetchAawakByFirmAndLot(frm);
 		}
-		
+
+		// Refresh lot number options based on firm
+		loadLotOptions(frm);
+
 		// Ensure all fields are visible and refreshed with actual names
 		console.log('Refreshing all fields');
 		frm.refresh_field('storage_customer');
-		frm.refresh_field('commodity');
+		frm.refresh_field('commodities');
 		frm.refresh_field('godown');
 		frm.refresh_field('floor');
 		frm.refresh_field('chamber');
@@ -57,55 +71,59 @@ frappe.ui.form.on('Outward Jawak', {
 		frm.refresh_field('payment_reference');
 		frm.refresh_field('notes');
 		frm.refresh_field('status');
-		
+
 		// If form has data but amounts are not calculated, trigger calculation
-		if (frm.doc.jawak_bag_details && frm.doc.jawak_bag_details.length > 0 && 
+		if (frm.doc.jawak_bag_details && frm.doc.jawak_bag_details.length > 0 &&
 			(!frm.doc.total_amount || frm.doc.total_amount === 0)) {
 			console.log('Triggering calculation for existing data');
 			recalculateAllAmounts(frm);
 		}
-		
+
 		// Apply bold styling to specific field labels
 		applyBoldLabels(frm);
-		
+
 		console.log('All fields refreshed');
 	},
 
-	aawak_reference: function(frm) {
-		console.log('aawak_reference field changed to:', frm.doc.aawak_reference);
-		if (frm.doc.aawak_reference) {
-			console.log('Calling populateFromAawak');
-			populateFromAawak(frm);
-			
-			// Validate Jawak date against Aawak date after populating
-			validateJawakDate(frm);
-		} else {
-			console.log('Calling clearForm');
-			clearForm(frm);
-		}
+	firm: function (frm) {
+		console.log('firm field changed to:', frm.doc.firm);
+		onFirmOrLotChange(frm);
 	},
 
-	jawak_date: function(frm) {
+	inward_lot_no: function (frm) {
+		console.log('inward_lot_no field changed to:', frm.doc.inward_lot_no);
+		onFirmOrLotChange(frm);
+	},
+
+	jawak_date: function (frm) {
 		console.log('jawak_date changed to:', frm.doc.jawak_date);
-		
+
 		// Validate Jawak date against Aawak date
 		validateJawakDate(frm);
-		
+
 		// Recalculate all days and amounts when jawak date changes
-		recalculateAllAmounts(frm);
+		// Use setTimeout to ensure the form value is fully updated
+		setTimeout(() => {
+			recalculateAllAmounts(frm);
+		}, 100);
 	},
 
-	additional_charges: function(frm) {
+	additional_charges: function (frm) {
 		console.log('additional_charges changed to:', frm.doc.additional_charges);
 		calculateNetAmount(frm);
 	},
 
-	discount: function(frm) {
+	discount: function (frm) {
 		console.log('discount changed to:', frm.doc.discount);
 		calculateNetAmount(frm);
 	},
 
-	payment_method: function(frm) {
+	inward_charges: function (frm) {
+		console.log('inward_charges changed to:', frm.doc.inward_charges);
+		calculateNetAmount(frm);
+	},
+
+	payment_method: function (frm) {
 		console.log('payment_method changed to:', frm.doc.payment_method);
 		// Clear payment reference when payment method changes
 		if (frm.doc.payment_method === 'Cash') {
@@ -116,10 +134,10 @@ frappe.ui.form.on('Outward Jawak', {
 
 // Jawak Bag Detail child table events
 frappe.ui.form.on('Jawak Bag Detail', {
-	release_bags: function(frm, cdt, cdn) {
+	release_bags: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
 		console.log('release_bags changed to:', row.release_bags, 'for row:', row.name);
-		
+
 		// Validate release bags cannot exceed total bags
 		if (row.release_bags > row.total_bags) {
 			frappe.msgprint({
@@ -130,20 +148,20 @@ frappe.ui.form.on('Jawak Bag Detail', {
 			frappe.model.set_value(cdt, cdn, 'release_bags', row.total_bags);
 			return;
 		}
-		
+
 		// Calculate total amount for this row
 		calculateRowAmount(frm, cdt, cdn);
-		
+
 		// Recalculate parent totals
 		calculateParentTotals(frm);
 	},
 
-	jawak_bag_details_remove: function(frm) {
+	jawak_bag_details_remove: function (frm) {
 		console.log('Bag detail row removed');
 		calculateParentTotals(frm);
 	},
 
-	jawak_bag_details_add: function(frm) {
+	jawak_bag_details_add: function (frm) {
 		console.log('Bag detail row added');
 		// Set default release_bags = total_bags for new rows
 		let new_row = frm.doc.jawak_bag_details[frm.doc.jawak_bag_details.length - 1];
@@ -155,57 +173,115 @@ frappe.ui.form.on('Jawak Bag Detail', {
 
 // Helper Functions
 
-function populateFromAawak(frm) {
-	if (!frm.doc.aawak_reference) {
+function loadLotOptions(frm) {
+	// If no firm selected, clear options and value
+	if (!frm.doc.firm) {
+		frm.set_df_property('inward_lot_no', 'options', []);
+		frm.set_value('inward_lot_no', '');
 		return;
 	}
 
-	console.log('Fetching Aawak details for:', frm.doc.aawak_reference);
+	const firm = String(frm.doc.firm);
+
+	console.log('Loading lot options for firm:', firm);
 
 	frappe.call({
-		method: 'frappe.client.get',
+		method: 'frappe.client.get_list',
 		args: {
 			doctype: 'Inward Aawak',
-			name: frm.doc.aawak_reference
+			filters: {
+				firm: firm
+			},
+			fields: ['lot_number'],
+			order_by: 'lot_number asc',
+			limit_page_length: 500
 		},
-		callback: function(r) {
-			console.log('Aawak data received:', r.message);
-			
-			if (r.message) {
-				let aawak = r.message;
-				
-				// Populate basic fields
-				frm.set_value('storage_customer', aawak.storage_customer);
-				frm.set_value('commodity', aawak.commodity);
-				frm.set_value('godown', aawak.godown);
-				
-				// Get floor and chamber from chamber allocations
-				if (aawak.chamber_allocations && aawak.chamber_allocations.length > 0) {
-					let allocation = aawak.chamber_allocations[0];
-					frm.set_value('floor', allocation.floor);
-					frm.set_value('chamber', allocation.chamber);
+		callback: function (r) {
+			if (r.message && r.message.length > 0) {
+				// Collect unique lot numbers
+				const lots = [...new Set(r.message.map(row => row.lot_number).filter(Boolean))];
+				// Set options; ensure string values so they match stored lot_number
+				frm.set_df_property('inward_lot_no', 'options', lots);
+
+				// If current lot no is not in options, clear it
+				if (frm.doc.inward_lot_no && !lots.includes(frm.doc.inward_lot_no)) {
+					frm.set_value('inward_lot_no', '');
 				}
-				
-				// Populate bag details
-				populateBagDetails(frm, aawak);
-				
-				// Refresh all fields to ensure visibility and proper display of names
-				frm.refresh_field('storage_customer');
-				frm.refresh_field('commodity');
-				frm.refresh_field('godown');
-				frm.refresh_field('floor');
-				frm.refresh_field('chamber');
-				frm.refresh_field('jawak_bag_details');
-				
-				// frappe.msgprint({
-				// 	title: __('Aawak Details Loaded'),
-				// 	message: __('Form populated with Aawak details'),
-				// 	indicator: 'green'
-				// });
 			} else {
+				frm.set_df_property('inward_lot_no', 'options', []);
+				frm.set_value('inward_lot_no', '');
 				frappe.msgprint({
-					title: __('Error'),
-					message: __('Could not fetch Aawak details'),
+					title: __('No Lots Found'),
+					message: __('No Inward Aawak records found for Firm {0}.', [firm]),
+					indicator: 'orange'
+				});
+			}
+		}
+	});
+}
+
+function onFirmOrLotChange(frm) {
+	// Reset any previously fetched data to avoid stale values
+	currentAawak = null;
+
+	// Clear inward_charges first to ensure it doesn't retain old value
+	frm.set_value('inward_charges', 0);
+
+	// Clear all auto-populated fields to prevent partial data
+	clearForm(frm);
+
+	// Refresh lot options for the selected firm
+	loadLotOptions(frm);
+
+	// Only fetch when both Firm and Inward Lot No are present
+	if (frm.doc.firm && frm.doc.inward_lot_no) {
+		console.log('Attempting fetch using Firm and Inward Lot No');
+		fetchAawakByFirmAndLot(frm);
+	}
+}
+
+function fetchAawakByFirmAndLot(frm) {
+	const firm = frm.doc.firm;
+	const lotNo = frm.doc.inward_lot_no;
+
+	if (!firm || !lotNo) {
+		console.log('Firm or Inward Lot No missing; skipping fetch');
+		currentAawak = null;
+		return;
+	}
+
+	const firmFilter = String(firm);
+	const lotFilter = String(lotNo);
+
+	console.log('Fetching Inward Aawak using Firm and Inward Lot No:', firmFilter, lotFilter);
+
+	frappe.call({
+		method: 'frappe.client.get_list',
+		args: {
+			doctype: 'Inward Aawak',
+			filters: {
+				firm: firmFilter,
+				lot_number: lotFilter
+			},
+			fields: ['name'],
+			limit_page_length: 2
+		},
+		callback: function (r) {
+			if (r.message && r.message.length === 1) {
+				console.log('Unique Inward Aawak match found:', r.message[0].name);
+				fetchAawakRecord(frm, r.message[0].name);
+			} else if (r.message && r.message.length === 0) {
+				clearForm(frm);
+				frappe.msgprint({
+					title: __('Inward Aawak Not Found'),
+					message: __('No Inward Aawak found for Firm {0} and Inward Lot No {1}.', [firm, lotNo]),
+					indicator: 'red'
+				});
+			} else {
+				clearForm(frm);
+				frappe.msgprint({
+					title: __('Multiple Matches Found'),
+					message: __('Multiple Inward Aawak records found for Firm {0} and Inward Lot No {1}. Please resolve duplicates.', [firm, lotNo]),
 					indicator: 'red'
 				});
 			}
@@ -213,70 +289,166 @@ function populateFromAawak(frm) {
 	});
 }
 
-function populateBagDetails(frm, aawak) {
-	console.log('Populating bag details from Aawak:', aawak);
-	
-	// Clear existing bag details
-	frm.clear_table('jawak_bag_details');
-	
-	if (aawak.bag_details && aawak.bag_details.length > 0) {
-		console.log('Found bag details:', aawak.bag_details);
-		// Get commodity rates
+function fetchAawakRecord(frm, aawakName) {
+	frappe.call({
+		method: 'frappe.client.get',
+		args: {
+			doctype: 'Inward Aawak',
+			name: aawakName
+		},
+		callback: function (r) {
+			console.log('Inward Aawak data received:', r.message);
+
+			if (r.message) {
+				populateFromAawakData(frm, r.message);
+
+				// Validate Jawak date against Aawak date after populating
+				validateJawakDate(frm);
+			} else {
+				clearForm(frm);
+				frappe.msgprint({
+					title: __('Error'),
+					message: __('Could not fetch Inward Aawak details'),
+					indicator: 'red'
+				});
+			}
+		}
+	});
+}
+
+function populateFromAawakData(frm, aawak) {
+	if (!aawak) {
+		return;
+	}
+
+	console.log('Populating Outward Jawak from Inward Aawak:', aawak.name);
+
+	// Reset existing auto-populated data
+	clearForm(frm);
+
+	// Keep reference to current Inward Aawak for downstream calculations
+	currentAawak = aawak;
+
+	// Populate basic fields
+	frm.set_value('storage_customer', aawak.storage_customer);
+	frm.set_value('godown', aawak.godown);
+
+	// Get floor and chamber from chamber allocations
+	if (aawak.chamber_allocations && aawak.chamber_allocations.length > 0) {
+		let allocation = aawak.chamber_allocations[0];
+		frm.set_value('floor', allocation.floor);
+		frm.set_value('chamber', allocation.chamber);
+	}
+
+	// Populate commodities with names (async)
+	populateCommodities(frm, aawak.commodities);
+
+	// Populate bag details
+	populateBagDetails(frm, aawak);
+
+	// Auto-fetch inward charges
+	if (aawak.charges) {
+		frm.set_value('inward_charges', aawak.charges);
+	}
+
+	// Refresh all fields to ensure visibility and proper display of names
+	frm.refresh_field('storage_customer');
+	frm.refresh_field('godown');
+	frm.refresh_field('floor');
+	frm.refresh_field('chamber');
+	frm.refresh_field('jawak_bag_details');
+	frm.refresh_field('inward_charges');
+}
+
+function populateCommodities(frm, inward_commodities) {
+	frm.clear_table('commodities');
+
+	if (inward_commodities && inward_commodities.length > 0) {
+		let commodity_ids = inward_commodities.map(row => row.commodity);
+
+		// Fetch commodity names to prime the Link Title cache for display
 		frappe.call({
-			method: 'frappe.client.get',
+			method: 'frappe.client.get_list',
 			args: {
 				doctype: 'Commodity',
-				name: aawak.commodity
+				filters: [['name', 'in', commodity_ids]],
+				fields: ['name', 'commodity_name']
 			},
-			callback: function(r) {
-				if (r.message && r.message.bag_configurations) {
-					let commodity = r.message;
-					let rateMap = {};
-					
-					// Create rate map
-					commodity.bag_configurations.forEach(config => {
-						rateMap[config.bag_weight] = config.rate_per_bag_per_day || 0;
+			callback: function (r) {
+				if (r.message) {
+					// Prime the link title cache so the UI displays names instead of IDs
+					if (!frappe.boot.link_title) frappe.boot.link_title = {};
+					if (!frappe.boot.link_title['Commodity']) frappe.boot.link_title['Commodity'] = {};
+
+					r.message.forEach(c => {
+						// Update global link title cache
+						frappe.boot.link_title['Commodity'][c.name] = c.commodity_name;
+
+						// Also try adding to local link_titles if available (newer Frappe versions)
+						if (frappe.utils.add_link_title) {
+							frappe.utils.add_link_title('Commodity', c.name, c.commodity_name);
+						}
 					});
-					
-					console.log('Rate map created:', rateMap);
-					
-					// Populate bag details
-					aawak.bag_details.forEach(bagDetail => {
-						let new_row = frm.add_child('jawak_bag_details');
-						
-						// Set bag type as bag weight from inward (e.g., "5" for 5kg bags)
-						frappe.model.set_value('Jawak Bag Detail', new_row.name, 'bag_type', bagDetail.bag_weight);
-						frappe.model.set_value('Jawak Bag Detail', new_row.name, 'total_bags', bagDetail.number_of_bags);
-						frappe.model.set_value('Jawak Bag Detail', new_row.name, 'release_bags', bagDetail.number_of_bags);
-						frappe.model.set_value('Jawak Bag Detail', new_row.name, 'rate', rateMap[bagDetail.bag_weight] || 0);
-						
-						console.log('Added bag detail row:', {
-							bag_type: bagDetail.bag_weight,
-							total_bags: bagDetail.number_of_bags,
-							release_bags: bagDetail.number_of_bags,
-							rate: rateMap[bagDetail.bag_weight] || 0
-						});
+
+					// Add rows using set_value to trigger UI updates and proper rendering
+					inward_commodities.forEach(row => {
+						let child = frm.add_child('commodities');
+						frappe.model.set_value(child.doctype, child.name, 'commodity', row.commodity);
 					});
-					
-					frm.refresh_field('jawak_bag_details');
-					
-					// Calculate all amounts after populating bag details
-					recalculateAllAmounts(frm);
-					
-					// frappe.msgprint({
-					// 	title: __('Bag Details Loaded'),
-					// 	message: __('Bag details populated from Aawak reference'),
-					// 	indicator: 'green'
-					// });
-				} else {
-					frappe.msgprint({
-						title: __('No Commodity Configuration'),
-						message: __('Please configure bag rates for commodity: ' + aawak.commodity),
-						indicator: 'orange'
-					});
+
+					frm.refresh_field('commodities');
+
+					// Force grid refresh to ensure titles are picked up
+					if (frm.fields_dict['commodities'] && frm.fields_dict['commodities'].grid) {
+						frm.fields_dict['commodities'].grid.refresh();
+					}
+
+					console.log('Commodities populated and cache primed with names:', r.message);
 				}
 			}
 		});
+	} else {
+		frm.refresh_field('commodities');
+	}
+}
+
+function populateBagDetails(frm, aawak) {
+	console.log('Populating bag details from Aawak:', aawak);
+
+	// Clear existing bag details
+	frm.clear_table('jawak_bag_details');
+
+	if (aawak.bag_details && aawak.bag_details.length > 0) {
+		console.log('Found bag details:', aawak.bag_details);
+
+		// Directly use bag details from Inward Aawak
+		// This handles multiple commodities and their rates correctly
+		aawak.bag_details.forEach(bagDetail => {
+			let new_row = frm.add_child('jawak_bag_details');
+
+			// Set bag type as bag weight (e.g., "5" for 5kg bags)
+			frappe.model.set_value('Jawak Bag Detail', new_row.name, 'bag_type', bagDetail.bag_weight);
+			frappe.model.set_value('Jawak Bag Detail', new_row.name, 'total_bags', bagDetail.number_of_bags);
+			frappe.model.set_value('Jawak Bag Detail', new_row.name, 'release_bags', bagDetail.number_of_bags);
+
+			// Auto-populate rate from Inward Aawak's bag details
+			// This fixes the "Commodity not found" error and supports multiple commodities
+			let rate = bagDetail.rate || 0;
+			frappe.model.set_value('Jawak Bag Detail', new_row.name, 'rate', rate);
+
+			console.log('Added bag detail row:', {
+				bag_type: bagDetail.bag_weight,
+				total_bags: bagDetail.number_of_bags,
+				release_bags: bagDetail.number_of_bags,
+				rate: rate
+			});
+		});
+
+		frm.refresh_field('jawak_bag_details');
+
+		// Calculate all amounts after populating bag details
+		recalculateAllAmounts(frm);
+
 	} else {
 		frappe.msgprint({
 			title: __('No Bag Details Found'),
@@ -287,107 +459,125 @@ function populateBagDetails(frm, aawak) {
 }
 
 function recalculateAllAmounts(frm) {
-	if (!frm.doc.jawak_date || !frm.doc.aawak_reference) {
-		console.log('Cannot recalculate: missing jawak_date or aawak_reference');
+	if (!frm.doc.jawak_date || !currentAawak || !currentAawak.aawak_date) {
+		console.log('Cannot recalculate: missing jawak_date or Inward Aawak context');
 		return;
 	}
-	
+
 	console.log('Recalculating all amounts for jawak_date:', frm.doc.jawak_date);
-	
-	// Get aawak date for calculation
-	frappe.call({
-		method: 'frappe.client.get_value',
-		args: {
-			doctype: 'Inward Aawak',
-			filters: { name: frm.doc.aawak_reference },
-			fieldname: 'aawak_date'
-		},
-		callback: function(r) {
-			if (r.message && r.message.aawak_date) {
-				let aawakDate = new Date(r.message.aawak_date);
-				let jawakDate = new Date(frm.doc.jawak_date);
-				
-				// Calculate total days (round up)
-				let timeDiff = jawakDate.getTime() - aawakDate.getTime();
-				let totalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-				
-				console.log('Calculated total days:', totalDays, 'from', aawakDate, 'to', jawakDate);
-				
-				// Update all bag detail rows
-				frm.doc.jawak_bag_details.forEach(row => {
-					frappe.model.set_value('Jawak Bag Detail', row.name, 'total_days', totalDays);
-					calculateRowAmount(frm, 'Jawak Bag Detail', row.name);
-				});
-				
-				calculateParentTotals(frm);
-			}
-		}
-	});
+
+	// Trigger calculation for all bag detail rows
+	// Each row will calculate its own chargeable days and amount
+	if (frm.doc.jawak_bag_details) {
+		frm.doc.jawak_bag_details.forEach(row => {
+			calculateRowAmount(frm, 'Jawak Bag Detail', row.name);
+		});
+	}
+
+	// Recalculate parent totals after all rows are updated
+	setTimeout(() => {
+		calculateParentTotals(frm);
+	}, 200);
 }
 
 function calculateRowAmount(frm, cdt, cdn) {
 	let row = locals[cdt][cdn];
 	console.log('Calculating row amount for:', row.name, 'with data:', row);
-	
-	// Calculate total days if not already set
-	if (frm.doc.jawak_date && frm.doc.aawak_reference && !row.total_days) {
-		frappe.call({
-			method: 'frappe.client.get_value',
-			args: {
-				doctype: 'Inward Aawak',
-				filters: { name: frm.doc.aawak_reference },
-				fieldname: 'aawak_date'
-			},
-			callback: function(r) {
-				if (r.message && r.message.aawak_date) {
-					let aawakDate = new Date(r.message.aawak_date);
-					let jawakDate = new Date(frm.doc.jawak_date);
-					
-					// Calculate total days (round up)
-					let timeDiff = jawakDate.getTime() - aawakDate.getTime();
-					let totalDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-					
-					frappe.model.set_value(cdt, cdn, 'total_days', totalDays);
-					
-					// Now calculate amount
-					if (row.release_bags && row.rate) {
-						let totalAmount = row.release_bags * row.rate * totalDays;
-						totalAmount = Math.round(totalAmount * 100) / 100; // Round to 2 decimal places
-						frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
-						console.log('Calculated amount:', totalAmount, 'for', row.release_bags, 'bags at', row.rate, 'for', totalDays, 'days');
-					}
+
+	if (!frm.doc.jawak_date || !currentAawak || !currentAawak.aawak_date) {
+		console.log('Cannot calculate row amount: missing jawak_date or Inward Aawak context');
+		return;
+	}
+
+	let aawakDate = new Date(currentAawak.aawak_date);
+	let jawakDate = new Date(frm.doc.jawak_date);
+
+	// Calculate actual storage days by subtracting dates (not elapsed time)
+	// This gives us: Dec 18 - Dec 1 = 17 days (not 18)
+	// Strip time portion to get pure date difference
+	let aawakDay = new Date(aawakDate.getFullYear(), aawakDate.getMonth(), aawakDate.getDate());
+	let jawakDay = new Date(jawakDate.getFullYear(), jawakDate.getMonth(), jawakDate.getDate());
+	let actualDays = Math.round((jawakDay - aawakDay) / (1000 * 60 * 60 * 24));
+
+	// Fetch App Settings for rent calculation
+	frappe.call({
+		method: 'frappe.client.get',
+		args: {
+			doctype: 'App Settings',
+			name: 'App Settings'
+		},
+		callback: function (r) {
+			if (r.message) {
+				let settings = r.message;
+				let minDays = parseInt(settings.minimum_chargeable_days) || 15;
+				let extraDays = parseInt(settings.extra_days_after_minimum) || 2;
+				let daysPerMonth = parseInt(settings.days_per_month) || 30;
+
+				// Calculate chargeable days based on rules
+				let chargeableDays;
+				if (actualDays <= minDays) {
+					// Charge minimum days
+					chargeableDays = minDays;
+				} else {
+					// Charge actual + extra
+					chargeableDays = actualDays + extraDays;
+				}
+
+				console.log('Chargeable days calculation:', {
+					actualDays,
+					minDays,
+					extraDays,
+					chargeableDays
+				});
+
+				// Set total_days to chargeable days (for display)
+				frappe.model.set_value(cdt, cdn, 'total_days', chargeableDays);
+
+				// Calculate amount
+				if (row.release_bags && row.rate) {
+					// Convert monthly rate to daily rate
+					let dailyRate = row.rate / daysPerMonth;
+
+					// Calculate total: bags × daily_rate × chargeable_days
+					let totalAmount = row.release_bags * dailyRate * chargeableDays;
+					totalAmount = Math.round(totalAmount * 100) / 100; // Round to 2 decimal places
+
+					frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
+
+					console.log('Calculated amount:', {
+						bags: row.release_bags,
+						monthlyRate: row.rate,
+						daysPerMonth,
+						dailyRate,
+						chargeableDays,
+						totalAmount
+					});
 				}
 			}
-		});
-	} else if (row.release_bags && row.rate && row.total_days) {
-		let totalAmount = row.release_bags * row.rate * row.total_days;
-		totalAmount = Math.round(totalAmount * 100) / 100; // Round to 2 decimal places
-		
-		frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
-		console.log('Calculated amount:', totalAmount, 'for', row.release_bags, 'bags at', row.rate, 'for', row.total_days, 'days');
-	}
+		}
+	});
 }
 
 function calculateParentTotals(frm) {
 	console.log('Calculating parent totals');
-	
+
 	let totalBags = 0;
 	let releasedBags = 0;
 	let totalWeight = 0;
 	let releasedWeight = 0;
 	let totalAmount = 0;
-	
+
 	if (frm.doc.jawak_bag_details) {
 		frm.doc.jawak_bag_details.forEach(row => {
 			totalBags += row.total_bags || 0;
 			releasedBags += row.release_bags || 0;
-			
+
 			// bag_type contains the bag weight (e.g., "5" for 5kg bags)
 			let bagWeight = parseFloat(row.bag_type) || 0;
 			totalWeight += (row.total_bags || 0) * bagWeight;
 			releasedWeight += (row.release_bags || 0) * bagWeight;
 			totalAmount += row.total_amount || 0;
-			
+
 			console.log('Row totals:', {
 				totalBags: row.total_bags,
 				releasedBags: row.release_bags,
@@ -396,12 +586,12 @@ function calculateParentTotals(frm) {
 			});
 		});
 	}
-	
+
 	// Round weights to 2 decimal places
 	totalWeight = Math.round(totalWeight * 100) / 100;
 	releasedWeight = Math.round(releasedWeight * 100) / 100;
 	totalAmount = Math.round(totalAmount * 100) / 100;
-	
+
 	console.log('Parent totals calculated:', {
 		totalBags,
 		releasedBags,
@@ -409,42 +599,46 @@ function calculateParentTotals(frm) {
 		releasedWeight,
 		totalAmount
 	});
-	
+
 	frm.set_value('total_bags', totalBags);
 	frm.set_value('released_bags', releasedBags);
 	frm.set_value('total_weight', totalWeight);
 	frm.set_value('released_bag_weight', releasedWeight);
 	frm.set_value('total_amount', totalAmount);
-	
+
 	calculateNetAmount(frm);
 }
 
 function calculateNetAmount(frm) {
 	let totalAmount = frm.doc.total_amount || 0;
 	let additionalCharges = frm.doc.additional_charges || 0;
+	let inwardCharges = frm.doc.inward_charges || 0;
 	let discount = frm.doc.discount || 0;
-	
-	let netAmount = totalAmount + additionalCharges - discount;
+
+	let netAmount = totalAmount + additionalCharges + inwardCharges - discount;
 	netAmount = Math.round(netAmount * 100) / 100; // Round to 2 decimal places
-	
-	console.log('Net amount calculated:', netAmount, 'from total:', totalAmount, 'plus charges:', additionalCharges, 'minus discount:', discount);
-	
+
+	console.log('Net amount calculated:', netAmount, 'from total:', totalAmount, 'plus additional charges:', additionalCharges, 'plus inward charges:', inwardCharges, 'minus discount:', discount);
+
 	frm.set_value('net_amount', netAmount);
 }
 
 function clearForm(frm) {
 	console.log('Clearing form');
-	
+
+	// Reset cached Inward Aawak context to avoid stale calculations
+	currentAawak = null;
+
 	// Clear all auto-populated fields
 	frm.set_value('storage_customer', '');
-	frm.set_value('commodity', '');
+	frm.clear_table('commodities');
 	frm.set_value('godown', '');
 	frm.set_value('floor', '');
 	frm.set_value('chamber', '');
-	
+
 	// Clear bag details
 	frm.clear_table('jawak_bag_details');
-	
+
 	// Reset totals
 	frm.set_value('total_bags', 0);
 	frm.set_value('released_bags', 0);
@@ -456,55 +650,42 @@ function clearForm(frm) {
 
 function validateJawakDate(frm) {
 	// Only validate if both dates are present
-	if (!frm.doc.jawak_date || !frm.doc.aawak_reference) {
+	if (!frm.doc.jawak_date || !currentAawak || !currentAawak.aawak_date) {
 		return;
 	}
-	
+
 	console.log('Validating Jawak date against Aawak date');
-	
-	// Get Aawak date from the reference
-	frappe.call({
-		method: 'frappe.client.get_value',
-		args: {
-			doctype: 'Inward Aawak',
-			filters: { name: frm.doc.aawak_reference },
-			fieldname: 'aawak_date'
-		},
-		callback: function(r) {
-			if (r.message && r.message.aawak_date) {
-				let aawakDate = new Date(r.message.aawak_date);
-				let jawakDate = new Date(frm.doc.jawak_date);
-				
-				console.log('Comparing dates - Aawak:', aawakDate, 'Jawak:', jawakDate);
-				
-				// Check if Jawak date is after Aawak date
-				if (jawakDate <= aawakDate) {
-					// Clear the invalid Jawak date
-					frm.set_value('jawak_date', '');
-					
-					// Show error message
-					frappe.msgprint({
-						title: __('Invalid Jawak Date'),
-						message: __('Jawak Date must be after Aawak Date. Aawak Date is: ' + frappe.datetime.str_to_user(aawakDate) + '. Please enter a later date.'),
-						indicator: 'red'
-					});
-					
-					console.log('Date validation failed - Jawak date cleared');
-				} else {
-					console.log('Date validation passed');
-				}
-			}
-		}
-	});
+
+	let aawakDate = new Date(currentAawak.aawak_date);
+	let jawakDate = new Date(frm.doc.jawak_date);
+
+	console.log('Comparing dates - Aawak:', aawakDate, 'Jawak:', jawakDate);
+
+	// Check if Jawak date is after Aawak date
+	if (jawakDate <= aawakDate) {
+		// Clear the invalid Jawak date
+		frm.set_value('jawak_date', '');
+
+		// Show error message
+		frappe.msgprint({
+			title: __('Invalid Jawak Date'),
+			message: __('Jawak Date must be after Aawak Date. Aawak Date is: ' + frappe.datetime.str_to_user(aawakDate) + '. Please enter a later date.'),
+			indicator: 'red'
+		});
+
+		console.log('Date validation failed - Jawak date cleared');
+	} else {
+		console.log('Date validation passed');
+	}
 }
 
 function applyBoldLabels(frm) {
 	// Apply bold styling to specific field labels
 	const fieldsToBold = ['godown', 'floor', 'chamber'];
-	
-	fieldsToBold.forEach(function(fieldname) {
+
+	fieldsToBold.forEach(function (fieldname) {
 		// Use setTimeout to ensure DOM is ready
-		setTimeout(function() {
+		setTimeout(function () {
 			// Find the label element for the field
 			let fieldWrapper = frm.fields_dict[fieldname].$wrapper;
 			if (fieldWrapper && fieldWrapper.length) {

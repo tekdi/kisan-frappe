@@ -1,29 +1,102 @@
+// Helper function to setup read-only for Bag Details rate field
+function setupBagDetailsReadOnly(frm) {
+	if (!frm.fields_dict['bag_details'] || !frm.fields_dict['bag_details'].grid) {
+		console.log('Bag Details grid not available');
+		return;
+	}
+
+	const grid = frm.fields_dict['bag_details'].grid;
+
+	// Iterate through all visible grid rows
+	grid.grid_rows.forEach(grid_row => {
+		if (grid_row.doc && grid_row.doc.name) {
+			const row = grid_row.doc;
+			const is_auto = row.is_auto_populated ? 1 : 0;
+
+			console.log(`Row ${row.name}: is_auto_populated = ${is_auto}, rate will be ${is_auto ? 'read-only' : 'editable'}`);
+
+			// Auto rows locked, manual rows editable
+			let effective_read_only = is_auto ? 1 : 0;
+
+			// Find the rate field in docfields (grid header / inline editor)
+			const rate_field = grid_row.docfields.find(df => df.fieldname === 'rate');
+
+			if (rate_field) {
+				rate_field.read_only = effective_read_only;
+			}
+
+			// Also update the grid form if row is being edited (row popup)
+			if (grid_row.grid_form && grid_row.grid_form.fields_dict && grid_row.grid_form.fields_dict['rate']) {
+				grid_row.grid_form.fields_dict['rate'].df.read_only = effective_read_only;
+				grid_row.grid_form.fields_dict['rate'].refresh();
+			}
+		}
+	});
+
+	console.log('Bag Details read-only logic applied to', grid.grid_rows.length, 'rows');
+}
+
 // Copyright (c) 2025, Kisan Warehouse and contributors
 // For license information, please see license.txt
 
 frappe.ui.form.on('Inward Aawak', {
-	refresh: function(frm) {
-		// Set default values
-		if (frm.is_new()) {
+	refresh: function (frm) {
+		console.log('Inward Aawak refresh event called');
+
+		// Set default Aawak date if not set
+		if (!frm.doc.aawak_date) {
+			frm.set_value('aawak_date', frappe.datetime.now_datetime());
+		}
+
+		// Set default status
+		if (!frm.doc.status) {
 			frm.set_value('status', 'Draft');
 		}
-		
-		// Set up dynamic filtering for Godown → Floor → Chamber hierarchy
-		setupHierarchyFiltering(frm);
-		
-		// Initialize bag details if commodity is already selected
-		if (frm.doc.commodity && frm.doc.bag_details.length === 0) {
-			populateBagWeights(frm);
+
+		// Auto-populate Bag Configurations if the form is new and bag_details is empty or has default row
+		if (frm.is_new()) {
+			let is_empty = !frm.doc.bag_details || frm.doc.bag_details.length === 0;
+			let is_default_row = frm.doc.bag_details && frm.doc.bag_details.length === 1 && !frm.doc.bag_details[0].bag_weight;
+
+			if (is_empty || is_default_row) {
+				populateBagConfigurations(frm);
+			}
 		}
-		
-		// Ensure naming series is properly displayed
+
+		// Setup hierarchy filtering
+		setupHierarchyFiltering(frm);
+
+		// Setup read-only for Bag Details Rate field (with delay to ensure grid is rendered)
+		setTimeout(() => setupBagDetailsReadOnly(frm), 300);
+
+		// Refresh all fields to ensure proper display
+		frm.refresh_field('aawak_date');
+		frm.refresh_field('status');
+		frm.refresh_field('bag_details');
+		frm.refresh_field('total_bags');
+		frm.refresh_field('total_weight');
+		frm.refresh_field('commodities');
+		frm.refresh_field('commodity_condition');
+
+		console.log('All fields refreshed');
+
+		// Ensure Validation Date is set for all allocations (e.g. default rows)
+		if (frm.doc.chamber_allocations) {
+			frm.doc.chamber_allocations.forEach(function (row) {
+				if (row.allocation_date && !row.valid_to) {
+					let valid_to = frappe.datetime.add_months(row.allocation_date, 6);
+					frappe.model.set_value('Chamber Allocation', row.name, 'valid_to', valid_to);
+				}
+			});
+		}
+
+		// Ensure naming series is properly displayed to pattern
 		if (frm.doc.naming_series && frm.doc.naming_series.includes('YYYY')) {
-			// This is a pattern, not the actual name - refresh to get the real name
 			frm.refresh_field('naming_series');
 		}
 	},
 
-	validate: function(frm) {
+	validate: function (frm) {
 		// Validate required fields
 		if (!frm.doc.storage_customer) {
 			frappe.msgprint({
@@ -35,10 +108,10 @@ frappe.ui.form.on('Inward Aawak', {
 			return;
 		}
 
-		if (!frm.doc.commodity) {
+		if (!frm.doc.commodities || frm.doc.commodities.length === 0) {
 			frappe.msgprint({
 				title: __('Required Field Missing'),
-				message: __('Commodity is required'),
+				message: __('Please select at least one Commodity'),
 				indicator: 'red'
 			});
 			frappe.validated = false;
@@ -68,11 +141,11 @@ frappe.ui.form.on('Inward Aawak', {
 
 		// Validate each bag detail row
 		let hasValidRows = false;
-		frm.doc.bag_details.forEach(function(row, index) {
+		frm.doc.bag_details.forEach(function (row, index) {
 			if (!row.bag_weight) {
 				frappe.msgprint({
 					title: __('Bag Details Error'),
-					message: __('Row ' + (index + 1) + ': Please select bag weight'),
+					message: __('Row ' + (index + 1) + ': Bag weight is missing'),
 					indicator: 'red'
 				});
 				frappe.validated = false;
@@ -102,27 +175,27 @@ frappe.ui.form.on('Inward Aawak', {
 			let chamber_codes = [];
 			let duplicate_chambers = [];
 
-			frm.doc.chamber_allocations.forEach(function(allocation, index) {
+			frm.doc.chamber_allocations.forEach(function (allocation, index) {
 				// Validate required fields
-				if (!allocation.floor) {
-					frappe.msgprint({
-						title: __('Chamber Allocation Error'),
-						message: __('Floor is required for allocation ' + (index + 1)),
-						indicator: 'red'
-					});
-					frappe.validated = false;
-					return;
-				}
+				// if (!allocation.floor) {
+				// 	frappe.msgprint({
+				// 		title: __('Chamber Allocation Error'),
+				// 		message: __('Floor is required for allocation ' + (index + 1)),
+				// 		indicator: 'red'
+				// 	});
+				// 	frappe.validated = false;
+				// 	return;
+				// }
 
-				if (!allocation.chamber) {
-					frappe.msgprint({
-						title: __('Chamber Allocation Error'),
-						message: __('Chamber is required for allocation ' + (index + 1)),
-						indicator: 'red'
-					});
-					frappe.validated = false;
-					return;
-				}
+				// if (!allocation.chamber) {
+				// 	frappe.msgprint({
+				// 		title: __('Chamber Allocation Error'),
+				// 		message: __('Chamber is required for allocation ' + (index + 1)),
+				// 		indicator: 'red'
+				// 	});
+				// 	frappe.validated = false;
+				// 	return;
+				// }
 
 				if (!allocation.bags_allocated || allocation.bags_allocated <= 0) {
 					frappe.msgprint({
@@ -176,64 +249,102 @@ frappe.ui.form.on('Inward Aawak', {
 	},
 
 	// Field change handlers
-	commodity: function(frm) {
-		// Clear bag details and reset totals when commodity changes
-		frm.clear_table('bag_details');
-		frm.set_value('total_bags', 0);
-		frm.set_value('total_weight', 0);
-		frm.refresh_field('bag_details');
-		
-		// Populate bag weights for selected commodity
-		if (frm.doc.commodity) {
-			populateBagWeights(frm);
+	commodities: function (frm) {
+		// Triggered when the table changes (add/remove)
+		// Commodity selection no longer affects bag details
+	},
+
+	firm: function (frm) {
+		// Clear godown and chamber allocations when firm changes
+		if (frm.doc.godown) {
+			frm.set_value('godown', '');
+			frm.clear_table('chamber_allocations');
+			frm.refresh_field('chamber_allocations');
 		}
 	},
 
-	godown: function(frm) {
+	godown: function (frm) {
 		// Clear chamber allocations when godown changes
 		frm.clear_table('chamber_allocations');
 		frm.refresh_field('chamber_allocations');
 	}
 });
 
+// Inward Commodity child table triggers
+frappe.ui.form.on('Inward Commodity', {
+	// Triggers removed as bag details are independent
+});
+
 // Bag Details child table validations
 frappe.ui.form.on('Bag Details', {
-	bag_weight: function(frm, cdt, cdn) {
+	bag_weight: function (frm, cdt, cdn) {
 		calculateRowTotal(frm, cdt, cdn);
 		calculateGrandTotals(frm);
 	},
 
-	number_of_bags: function(frm, cdt, cdn) {
+	number_of_bags: function (frm, cdt, cdn) {
 		calculateRowTotal(frm, cdt, cdn);
 		calculateGrandTotals(frm);
 	},
 
-	bag_details_remove: function(frm) {
+	bag_details_remove: function (frm) {
 		calculateGrandTotals(frm);
 	},
 
-	bag_details_add: function(frm) {
+	bag_details_add: function (frm, cdt, cdn) {
 		// Set default values for new row
 		let new_row = frm.doc.bag_details[frm.doc.bag_details.length - 1];
 		if (new_row) {
 			frappe.model.set_value('Bag Details', new_row.name, 'number_of_bags', 0);
 			frappe.model.set_value('Bag Details', new_row.name, 'total_weight', 0);
+			// Manually added rows are NOT auto-populated
+			frappe.model.set_value('Bag Details', new_row.name, 'is_auto_populated', 0);
+		}
+	},
+
+	rate: function (frm, cdt, cdn) {
+		// Protect auto-populated rows from rate changes
+		let row = locals[cdt][cdn];
+
+		if (row.is_auto_populated) {
+			// Get original rate from before the change
+			if (row.__old_rate !== undefined) {
+				// Revert to original rate
+				frappe.model.set_value(cdt, cdn, 'rate', row.__old_rate);
+
+				frappe.msgprint({
+					title: __('Cannot Edit'),
+					message: __('Rate cannot be changed for auto-populated rows from Bag Configuration. Only manually added rows can have the rate edited.'),
+					indicator: 'orange'
+				});
+			}
+		} else {
+			// For manual rows, save the current rate as old rate for future protection
+			row.__old_rate = row.rate;
+		}
+	},
+
+	before_bag_details_save: function (frm, cdt, cdn) {
+		// Store original rate before any changes
+		let row = locals[cdt][cdn];
+		if (row.rate !== undefined && row.__old_rate === undefined) {
+			row.__old_rate = row.rate;
 		}
 	}
 });
 
 // Chamber Allocation child table validations
 frappe.ui.form.on('Chamber Allocation', {
-	floor: function(frm, cdt, cdn) {
+	floor: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
-		
+
 		// Clear chamber when floor changes
 		frappe.model.set_value(cdt, cdn, 'chamber', '');
 	},
 
-	chamber: function(frm, cdt, cdn) {
+	chamber: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
-		
+
 		// Get chamber capacity for validation
 		if (row.chamber) {
 			frappe.call({
@@ -245,7 +356,7 @@ frappe.ui.form.on('Chamber Allocation', {
 					},
 					fieldname: 'max_capacity'
 				},
-				callback: function(r) {
+				callback: function (r) {
 					if (r.message && r.message.max_capacity) {
 						// Store max capacity for validation
 						row.max_capacity = r.message.max_capacity;
@@ -255,9 +366,9 @@ frappe.ui.form.on('Chamber Allocation', {
 		}
 	},
 
-	bags_allocated: function(frm, cdt, cdn) {
+	bags_allocated: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
-		
+
 		// Validate against chamber capacity
 		if (row.bags_allocated && row.max_capacity && row.bags_allocated > row.max_capacity) {
 			frappe.msgprint({
@@ -267,76 +378,85 @@ frappe.ui.form.on('Chamber Allocation', {
 			});
 			frappe.set_value(cdt, cdn, 'bags_allocated', '');
 		}
-		
+
 		validateChamberAllocations(frm);
 	},
 
-	chamber_allocations_remove: function(frm) {
+	allocation_date: function (frm, cdt, cdn) {
+		let row = locals[cdt][cdn];
+		if (row.allocation_date) {
+			// Auto-calculate Valid To = Allocation Date + 6 months
+			let valid_to = frappe.datetime.add_months(row.allocation_date, 6);
+			frappe.model.set_value(cdt, cdn, 'valid_to', valid_to);
+		} else {
+			frappe.model.set_value(cdt, cdn, 'valid_to', null);
+		}
+	},
+
+	chamber_allocations_remove: function (frm) {
 		validateChamberAllocations(frm);
 	},
 
-	chamber_allocations_add: function(frm) {
-		// Set default allocation date
+	chamber_allocations_add: function (frm) {
+		// Set default allocation date and valid_to
 		let new_row = frm.doc.chamber_allocations[frm.doc.chamber_allocations.length - 1];
-		if (new_row && !new_row.allocation_date) {
-			frappe.model.set_value('Chamber Allocation', new_row.name, 'allocation_date', frappe.datetime.get_today());
+		if (new_row) {
+			// If default allocation_date is already set by DocType, use it. Otherwise use Today.
+			let ref_date = new_row.allocation_date || frappe.datetime.get_today();
+
+			if (!new_row.allocation_date) {
+				frappe.model.set_value('Chamber Allocation', new_row.name, 'allocation_date', ref_date);
+			}
+
+			// Always auto-set Valid To based on ref_date
+			let valid_to = frappe.datetime.add_months(ref_date, 6);
+			frappe.model.set_value('Chamber Allocation', new_row.name, 'valid_to', valid_to);
+
+			// Auto-populate bags_allocated with total_bags from parent
+			if (frm.doc.total_bags) {
+				frappe.model.set_value('Chamber Allocation', new_row.name, 'bags_allocated', frm.doc.total_bags);
+			}
 		}
 	}
 });
 
 // Helper functions
-function populateBagWeights(frm) {
-	if (!frm.doc.commodity) {
-		frappe.msgprint({
-			title: __('Commodity Required'),
-			message: __('Please select commodity first'),
-			indicator: 'red'
-		});
-		return;
-	}
-
-	// Get commodity details with bag configurations
+function populateBagConfigurations(frm) {
+	// Fetch all Bag Configurations from the master
 	frappe.call({
-		method: 'frappe.client.get',
+		method: 'frappe.client.get_list',
 		args: {
-			doctype: 'Commodity',
-			name: frm.doc.commodity
+			doctype: 'Bag Configuration',
+			fields: ['name', 'bag_weight', 'rate_per_bag_per_day'],
+			limit_page_length: 100
 		},
-		callback: function(r) {
-			if (r.message && r.message.bag_configurations && r.message.bag_configurations.length > 0) {
-				// Extract bag weights from commodity's bag configurations
-				let bagWeights = r.message.bag_configurations.map(config => config.bag_weight);
-				bagWeights.sort((a, b) => a - b); // Sort numerically
-				let optionsString = bagWeights.join('\n');
-				
-				// Update bag_weight field options in child table
-				frm.fields_dict.bag_details.grid.update_docfield_property('bag_weight', 'options', optionsString);
-				
+		callback: function (r) {
+			if (r.message && r.message.length > 0) {
 				// Clear existing rows
 				frm.clear_table('bag_details');
-				
+
 				// Create a row for EACH bag configuration
-				r.message.bag_configurations.forEach(function(config, index) {
+				r.message.forEach(function (config) {
 					let new_row = frm.add_child('bag_details');
-					
-					// Pre-fill with bag weight from configuration
+
+					// Set standalone values
 					frappe.model.set_value('Bag Details', new_row.name, 'bag_weight', config.bag_weight);
+					frappe.model.set_value('Bag Details', new_row.name, 'rate', config.rate_per_bag_per_day);
 					frappe.model.set_value('Bag Details', new_row.name, 'number_of_bags', 0);
 					frappe.model.set_value('Bag Details', new_row.name, 'total_weight', 0);
+
+					// Mark as auto-populated
+					frappe.model.set_value('Bag Details', new_row.name, 'is_auto_populated', 1);
 				});
-				
+
 				frm.refresh_field('bag_details');
-				
-				// Show success message
-				frappe.msgprint({
-					title: __('Bag Configurations Loaded'),
-					message: __('Pre-filled ' + r.message.bag_configurations.length + ' bag detail rows with weights: ' + bagWeights.join(', ') + ' kg'),
-					indicator: 'green'
-				});
+
+				// Setup read-only logic for auto-populated rows
+				setTimeout(() => setupBagDetailsReadOnly(frm), 200);
 			} else {
 				frappe.msgprint({
-					title: __('No Bag Weights Found'),
-					message: __('Please configure bag weights for commodity: ' + frm.doc.commodity),
+					title: __('No Bag Configurations'),
+					message: __('No Bag Configurations found. Please create them in the Bag Configuration master to proceed.'),
 					indicator: 'orange'
 				});
 			}
@@ -346,11 +466,11 @@ function populateBagWeights(frm) {
 
 function calculateRowTotal(frm, cdt, cdn) {
 	let row = locals[cdt][cdn];
-	
+
 	if (row.bag_weight && row.number_of_bags) {
 		let bagWeight = parseFloat(row.bag_weight);
 		let numberOfBags = parseInt(row.number_of_bags);
-		
+
 		if (!isNaN(bagWeight) && !isNaN(numberOfBags)) {
 			let totalWeight = bagWeight * numberOfBags;
 			// Round to 2 decimal places
@@ -365,9 +485,9 @@ function calculateRowTotal(frm, cdt, cdn) {
 function calculateGrandTotals(frm) {
 	let totalBags = 0;
 	let totalWeight = 0;
-	
+
 	if (frm.doc.bag_details) {
-		frm.doc.bag_details.forEach(function(row) {
+		frm.doc.bag_details.forEach(function (row) {
 			if (row.number_of_bags) {
 				totalBags += parseInt(row.number_of_bags) || 0;
 			}
@@ -376,13 +496,13 @@ function calculateGrandTotals(frm) {
 			}
 		});
 	}
-	
+
 	// Round total weight to 2 decimal places
 	totalWeight = Math.round(totalWeight * 100) / 100;
-	
+
 	frm.set_value('total_bags', totalBags);
 	frm.set_value('total_weight', totalWeight);
-	
+
 	// Update chamber allocation validation
 	validateChamberAllocations(frm);
 }
@@ -390,12 +510,12 @@ function calculateGrandTotals(frm) {
 function validateChamberAllocations(frm) {
 	if (frm.doc.chamber_allocations && frm.doc.chamber_allocations.length > 0) {
 		let total_allocated = 0;
-		frm.doc.chamber_allocations.forEach(function(allocation) {
+		frm.doc.chamber_allocations.forEach(function (allocation) {
 			if (allocation.bags_allocated) {
 				total_allocated += allocation.bags_allocated;
 			}
 		});
-		
+
 		// Show validation message if allocation doesn't match total bags
 		if (frm.doc.total_bags && total_allocated !== frm.doc.total_bags) {
 			frm.dashboard.add_comment(
@@ -409,10 +529,27 @@ function validateChamberAllocations(frm) {
 	}
 }
 
-// Generic function to set up Godown → Floor → Chamber filtering
+// Generic function to set up Firm → Godown → Floor → Chamber filtering
 function setupHierarchyFiltering(frm) {
+	// Filter godowns by selected firm
+	frm.set_query("godown", function () {
+		if (frm.doc.firm) {
+			return {
+				filters: {
+					firm: frm.doc.firm,
+					status: "Active"
+				}
+			};
+		}
+		return {
+			filters: {
+				status: "Active"
+			}
+		};
+	});
+
 	// Filter floors by selected godown
-	frm.set_query("floor", "chamber_allocations", function() {
+	frm.set_query("floor", "chamber_allocations", function () {
 		return {
 			filters: {
 				godown: frm.doc.godown,
@@ -422,7 +559,7 @@ function setupHierarchyFiltering(frm) {
 	});
 
 	// Filter chambers by selected floor
-	frm.set_query("chamber", "chamber_allocations", function(doc, cdt, cdn) {
+	frm.set_query("chamber", "chamber_allocations", function (doc, cdt, cdn) {
 		let row = locals[cdt][cdn];
 		return {
 			filters: {

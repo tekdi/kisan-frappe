@@ -9,22 +9,24 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "lot_number",
   "section_break_2",
-  "jawak_date",
+  "firm",
   "column_break_4",
-  "aawak_reference",
+  "inward_lot_no",
   "column_break_vkog",
-  "vehicle_number",
+  "jawak_date",
   "column_break_itcp",
+  "vehicle_number",
   "status",
   "section_break_8",
   "storage_customer",
   "godown",
   "column_break_11",
-  "commodity",
-  "floor",
+  "commodities",
   "column_break_14",
   "chamber",
+  "floor",
   "section_break_16",
   "jawak_bag_details",
   "section_break_18",
@@ -42,6 +44,8 @@
   "discount",
   "column_break_jdbk",
   "additional_charges",
+  "column_break_inward",
+  "inward_charges",
   "section_break_30",
   "payment_method",
   "column_break_32",
@@ -60,6 +64,13 @@
    "label": "Naming Series",
    "options": "JAWAK-.YYYY.-.####",
    "reqd": 1
+  },
+  {
+   "fieldname": "lot_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lot Number",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_2",
@@ -83,11 +94,18 @@
    "label": "Vehicle Number"
   },
   {
-   "fieldname": "aawak_reference",
+   "fieldname": "firm",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Aawak Reference",
-   "options": "Inward Aawak",
+   "label": "Firm",
+   "options": "Firm",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inward_lot_no",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Inward Lot No",
    "reqd": 1
   },
   {
@@ -103,10 +121,10 @@
    "reqd": 1
   },
   {
-   "fieldname": "commodity",
-   "fieldtype": "Link",
-   "label": "Commodity",
-   "options": "Commodity",
+   "fieldname": "commodities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Commodities",
+   "options": "Inward Commodity",
    "reqd": 1
   },
   {
@@ -118,8 +136,7 @@
    "fieldname": "floor",
    "fieldtype": "Link",
    "label": "Floor",
-   "options": "Godown Floor",
-   "reqd": 1
+   "options": "Godown Floor"
   },
   {
    "fieldname": "column_break_14",
@@ -130,8 +147,7 @@
    "fieldname": "chamber",
    "fieldtype": "Link",
    "label": "Chamber",
-   "options": "Floor Chamber",
-   "reqd": 1
+   "options": "Floor Chamber"
   },
   {
    "fieldname": "section_break_16",
@@ -196,6 +212,17 @@
    "fieldtype": "Currency",
    "label": "Additional Charges",
    "precision": "2"
+  },
+  {
+   "fieldname": "column_break_inward",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "inward_charges",
+   "fieldtype": "Currency",
+   "label": "Inward Charges",
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_27",
@@ -288,7 +315,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-06 17:36:31.468781",
+ "modified": "2025-12-22 17:03:41.782321",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Outward Jawak",

@@ -51,47 +51,6 @@ frappe.ui.form.on('Godown', {
 			return;
 		}
 
-		// Validate address fields
-		if (!frm.doc.address) {
-			frappe.msgprint({
-				title: __('Required Field Missing'),
-				message: __('Address is required'),
-				indicator: 'red'
-			});
-			frappe.validated = false;
-			return;
-		}
-
-		if (!frm.doc.city) {
-			frappe.msgprint({
-				title: __('Required Field Missing'),
-				message: __('City is required'),
-				indicator: 'red'
-			});
-			frappe.validated = false;
-			return;
-		}
-
-		if (!frm.doc.state) {
-			frappe.msgprint({
-				title: __('Required Field Missing'),
-				message: __('State is required'),
-				indicator: 'red'
-			});
-			frappe.validated = false;
-			return;
-		}
-
-		if (!frm.doc.zip) {
-			frappe.msgprint({
-				title: __('Required Field Missing'),
-				message: __('ZIP Code is required'),
-				indicator: 'red'
-			});
-			frappe.validated = false;
-			return;
-		}
-
 		// Validate ZIP code format
 		if (frm.doc.zip && !/^\d{6}$/.test(frm.doc.zip)) {
 			frappe.msgprint({

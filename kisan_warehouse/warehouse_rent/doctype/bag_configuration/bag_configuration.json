@@ -9,89 +9,57 @@
     "engine": "InnoDB",
     "field_order": [
         "naming_series",
-        "section_break_3",
-        "commodity_name",
-        "description",
-        "column_break_6",
-        "hsn_code",
-        "column_break_hrks",
-        "status",
-        "column_break_vmly",
-        "category"
+        "bag_weight",
+        "column_break_5",
+        "rate_per_bag_per_day",
+        "section_break_7",
+        "description"
     ],
     "fields": [
         {
-            "default": "COMM-.YYYY.-.####",
+            "default": "BAG-.####",
             "fieldname": "naming_series",
             "fieldtype": "Select",
             "hidden": 1,
             "label": "Naming Series",
-            "options": "COMM-.YYYY.-.####",
+            "options": "BAG-.####",
             "reqd": 1
         },
         {
-            "fieldname": "section_break_3",
-            "fieldtype": "Section Break",
-            "label": "Commodity Information"
-        },
-        {
-            "fieldname": "commodity_name",
-            "fieldtype": "Data",
+            "fieldname": "bag_weight",
+            "fieldtype": "Int",
             "in_list_view": 1,
-            "label": "Commodity Name",
-            "length": 140,
+            "label": "Bag Weight (Kg)",
             "reqd": 1
+        },
+        {
+            "fieldname": "column_break_5",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "rate_per_bag_per_day",
+            "fieldtype": "Currency",
+            "in_list_view": 1,
+            "label": "Rate per Bag per Day (\u20b9)",
+            "reqd": 1
+        },
+        {
+            "fieldname": "section_break_7",
+            "fieldtype": "Section Break",
+            "label": "Description"
         },
         {
             "fieldname": "description",
             "fieldtype": "Small Text",
-            "hidden": 1,
-            "label": "Description",
-            "options": "3"
-        },
-        {
-            "fieldname": "column_break_6",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "hsn_code",
-            "fieldtype": "Data",
-            "in_list_view": 1,
-            "label": "HSN Code",
-            "length": 8
-        },
-        {
-            "fieldname": "category",
-            "fieldtype": "Select",
-            "hidden": 1,
-            "in_list_view": 1,
-            "label": "Category",
-            "options": "Grains\nPulses\nSeeds\nOther"
-        },
-        {
-            "default": "Active",
-            "fieldname": "status",
-            "fieldtype": "Select",
-            "in_list_view": 1,
-            "label": "Status",
-            "options": "Active\nInactive",
-            "reqd": 1
-        },
-        {
-            "fieldname": "column_break_hrks",
-            "fieldtype": "Column Break"
-        },
-        {
-            "fieldname": "column_break_vmly",
-            "fieldtype": "Column Break"
+            "label": "Description"
         }
     ],
     "index_web_pages_for_search": 1,
     "links": [],
-    "modified": "2025-12-17 16:28:12.086858",
+    "modified": "2025-12-17 19:00:00",
     "modified_by": "Administrator",
     "module": "Warehouse Rent",
-    "name": "Commodity",
+    "name": "Bag Configuration",
     "naming_rule": "By \"Naming Series\" field",
     "owner": "Administrator",
     "permissions": [
@@ -139,11 +107,11 @@
         }
     ],
     "row_format": "Dynamic",
-    "search_fields": "commodity_name,hsn_code,category",
+    "search_fields": "bag_weight",
     "show_title_field_in_link": 1,
     "sort_field": "modified",
     "sort_order": "DESC",
     "states": [],
-    "title_field": "commodity_name",
+    "title_field": "bag_weight",
     "track_changes": 1
 }
