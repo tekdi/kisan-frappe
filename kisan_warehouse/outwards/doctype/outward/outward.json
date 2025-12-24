@@ -133,9 +133,8 @@
   },
   {
    "fieldname": "vehicle",
-   "fieldtype": "Link",
-   "label": "Vehicle",
-   "options": "Vehicle",
+   "fieldtype": "Data",
+   "label": "Vehicle Number",
    "reqd": 1
   },
   {
