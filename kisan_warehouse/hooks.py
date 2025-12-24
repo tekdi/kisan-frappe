@@ -92,7 +92,7 @@ fixtures = [
 	"filters": [
 		    ["doc_type", "in", [
 		        "Company", "Customer", "Product", "Broker", "Warehouse", "Vehicle", 
-		        "Sauda", "Inward", "App Settings", "Outward"
+		        "Sauda", "Inward", "App Settings", "Outward","Inward Aawak","Outward Jawak"
 		    ]]
 		]
 	},
