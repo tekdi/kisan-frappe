@@ -17,23 +17,21 @@
   "section_break_name",
   "first_name",
   "column_break_middle",
-  "middle_name",
+  "care_of_co",
   "column_break_last",
   "last_name",
+  "section_break_17",
+  "address",
+  "column_break_19",
+  "state",
+  "column_break_22",
+  "column_break_hbtn",
   "section_break_11",
   "mobile",
   "column_break_13",
   "alternate_mobile",
   "column_break_15",
-  "email",
-  "section_break_17",
-  "address",
-  "column_break_19",
-  "city",
-  "column_break_22",
-  "state",
-  "column_break_hbtn",
-  "zip"
+  "email"
  ],
  "fields": [
   {
@@ -82,7 +80,7 @@
    "fieldname": "first_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "First Name",
+   "label": "Party Name",
    "length": 100,
    "reqd": 1
   },
@@ -91,22 +89,16 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "middle_name",
-   "fieldtype": "Data",
-   "label": "Middle Name",
-   "length": 100
-  },
-  {
    "fieldname": "column_break_last",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Last Name",
-   "length": 100,
-   "reqd": 1
+   "length": 100
   },
   {
    "fieldname": "section_break_11",
@@ -158,13 +150,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "city",
-   "fieldtype": "Data",
-   "label": "City",
-   "length": 100,
-   "reqd": 1
-  },
-  {
    "fieldname": "state",
    "fieldtype": "Data",
    "label": "State",
@@ -176,20 +161,18 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "zip",
-   "fieldtype": "Data",
-   "label": "ZIP Code",
-   "length": 6,
-   "reqd": 1
-  },
-  {
    "fieldname": "column_break_hbtn",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "care_of_co",
+   "fieldtype": "Data",
+   "label": "Care Of (C/O)"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-07 16:53:46.699372",
+ "modified": "2025-12-17 16:01:43.337350",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Storage Customer",

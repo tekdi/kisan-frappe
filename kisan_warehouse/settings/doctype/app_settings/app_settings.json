@@ -1,114 +1,154 @@
 {
- "actions": [],
- "allow_rename": 1,
- "creation": "2025-10-07 07:01:59.317589",
- "custom": 1,
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "default_deduction_types",
-  "default_bag_types",
-  "deduction_tier_range",
-  "debit_note_cgst_rate",
-  "debit_note_sgst_rate",
-  "debit_note_igst_rate"
- ],
- "fields": [
-  {
-   "fieldname": "default_deduction_types",
-   "fieldtype": "Table",
-   "label": "Default Deduction Types",
-   "options": "Settings Deduction Type"
-  },
-  {
-   "fieldname": "default_bag_types",
-   "fieldtype": "Table",
-   "label": "Default Bag Types",
-   "options": "Settings Bag Type"
-  },
-  {
-   "fieldname": "deduction_tier_range",
-   "fieldtype": "Table",
-   "label": "Deduction Tier Range",
-   "options": "Deduction Tier Range"
-  },
-  {
-   "default": "2.5",
-   "fieldname": "debit_note_cgst_rate",
-   "fieldtype": "Float",
-   "label": "Debit Note CGST Rate (%)",
-   "options": "Deduction Tier Range",
-   "precision": "2"
-  },
-  {
-   "default": "2.5",
-   "fieldname": "debit_note_sgst_rate",
-   "fieldtype": "Float",
-   "label": "Debit Note SGST Rate (%)",
-   "precision": "2"
-  },
-  {
-   "default": "5.0",
-   "fieldname": "debit_note_igst_rate",
-   "fieldtype": "Float",
-   "label": "Debit Note IGST Rate (%)",
-   "precision": "2"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "issingle": 1,
- "links": [],
- "modified": "2025-10-07 07:09:44.564186",
- "modified_by": "Administrator",
- "module": "settings",
- "name": "App Settings",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
-   "role": "Kisan Admin",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
-   "role": "Kisan Accountant",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
-   "role": "Kisan Operator",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2025-10-07 07:01:59.317589",
+    "custom": 1,
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "rent_calculation_section",
+        "minimum_chargeable_days",
+        "column_break_rent",
+        "extra_days_after_minimum",
+        "column_break_rent2",
+        "days_per_month",
+        "default_deduction_types",
+        "default_bag_types",
+        "deduction_tier_range",
+        "debit_note_cgst_rate",
+        "debit_note_sgst_rate",
+        "debit_note_igst_rate"
+    ],
+    "fields": [
+        {
+            "fieldname": "rent_calculation_section",
+            "fieldtype": "Section Break",
+            "label": "Rent Calculation Settings"
+        },
+        {
+            "default": "15",
+            "fieldname": "minimum_chargeable_days",
+            "fieldtype": "Int",
+            "label": "Minimum Chargeable Days",
+            "description": "Minimum days to charge for storage (even if actual days are less)"
+        },
+        {
+            "fieldname": "column_break_rent",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "2",
+            "fieldname": "extra_days_after_minimum",
+            "fieldtype": "Int",
+            "label": "Extra Days After Minimum",
+            "description": "Extra days to add when storage exceeds minimum days"
+        },
+        {
+            "fieldname": "column_break_rent2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "30",
+            "fieldname": "days_per_month",
+            "fieldtype": "Int",
+            "label": "Days Per Month",
+            "description": "Number of days in a month for rent calculation (used to convert monthly rate to daily)"
+        },
+        {
+            "fieldname": "default_deduction_types",
+            "fieldtype": "Table",
+            "label": "Default Deduction Types",
+            "options": "Settings Deduction Type"
+        },
+        {
+            "fieldname": "default_bag_types",
+            "fieldtype": "Table",
+            "label": "Default Bag Types",
+            "options": "Settings Bag Type"
+        },
+        {
+            "fieldname": "deduction_tier_range",
+            "fieldtype": "Table",
+            "label": "Deduction Tier Range",
+            "options": "Deduction Tier Range"
+        },
+        {
+            "default": "2.5",
+            "fieldname": "debit_note_cgst_rate",
+            "fieldtype": "Float",
+            "label": "Debit Note CGST Rate (%)",
+            "options": "Deduction Tier Range",
+            "precision": "2"
+        },
+        {
+            "default": "2.5",
+            "fieldname": "debit_note_sgst_rate",
+            "fieldtype": "Float",
+            "label": "Debit Note SGST Rate (%)",
+            "precision": "2"
+        },
+        {
+            "default": "5.0",
+            "fieldname": "debit_note_igst_rate",
+            "fieldtype": "Float",
+            "label": "Debit Note IGST Rate (%)",
+            "precision": "2"
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "issingle": 1,
+    "links": [],
+    "modified": "2025-10-07 07:09:44.564186",
+    "modified_by": "Administrator",
+    "module": "settings",
+    "name": "App Settings",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "Kisan Admin",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "Kisan Accountant",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "Kisan Operator",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
 }

@@ -10,7 +10,8 @@
   "floor",
   "chamber",
   "bags_allocated",
-  "allocation_date"
+  "allocation_date",
+  "valid_to"
  ],
  "fields": [
   {
@@ -18,16 +19,14 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Floor",
-   "options": "Godown Floor",
-   "reqd": 1
+   "options": "Godown Floor"
   },
   {
    "fieldname": "chamber",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Chamber",
-   "options": "Floor Chamber",
-   "reqd": 1
+   "options": "Floor Chamber"
   },
   {
    "fieldname": "bags_allocated",
@@ -43,12 +42,19 @@
    "in_list_view": 1,
    "label": "Allocation Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "valid_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Valid To",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-10-03 18:25:01.257434",
+ "modified": "2025-12-18 10:05:41.525923",
  "modified_by": "Administrator",
  "module": "Warehouse Rent",
  "name": "Chamber Allocation",
