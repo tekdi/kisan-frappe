@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2025-12-15 22:41:36.796386",
+ "creation": "2025-12-24 16:37:09.302614",
  "custom": 1,
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -332,8 +332,7 @@
   {
    "fieldname": "gstin",
    "fieldtype": "Data",
-   "label": "GSTIN",
-   "reqd": 1
+   "label": "GSTIN"
   },
   {
    "fieldname": "column_break_grgk",
@@ -454,7 +453,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-17 14:31:41.471955",
+ "modified": "2025-12-24 16:39:35.130253",
  "modified_by": "Administrator",
  "module": "customers",
  "name": "Customer",
