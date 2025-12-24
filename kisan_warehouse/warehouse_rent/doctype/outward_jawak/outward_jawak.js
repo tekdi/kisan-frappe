@@ -149,11 +149,9 @@ frappe.ui.form.on('Jawak Bag Detail', {
 			return;
 		}
 
-		// Calculate total amount for this row
-		calculateRowAmount(frm, cdt, cdn);
-
-		// Recalculate parent totals
-		calculateParentTotals(frm);
+		// Calculate total amount for this row and then update parent
+		// Passing true to indicate we want to update parent totals after this row update
+		calculateRowAmount(frm, cdt, cdn, true);
 	},
 
 	jawak_bag_details_remove: function (frm) {
@@ -466,40 +464,7 @@ function recalculateAllAmounts(frm) {
 
 	console.log('Recalculating all amounts for jawak_date:', frm.doc.jawak_date);
 
-	// Trigger calculation for all bag detail rows
-	// Each row will calculate its own chargeable days and amount
-	if (frm.doc.jawak_bag_details) {
-		frm.doc.jawak_bag_details.forEach(row => {
-			calculateRowAmount(frm, 'Jawak Bag Detail', row.name);
-		});
-	}
-
-	// Recalculate parent totals after all rows are updated
-	setTimeout(() => {
-		calculateParentTotals(frm);
-	}, 200);
-}
-
-function calculateRowAmount(frm, cdt, cdn) {
-	let row = locals[cdt][cdn];
-	console.log('Calculating row amount for:', row.name, 'with data:', row);
-
-	if (!frm.doc.jawak_date || !currentAawak || !currentAawak.aawak_date) {
-		console.log('Cannot calculate row amount: missing jawak_date or Inward Aawak context');
-		return;
-	}
-
-	let aawakDate = new Date(currentAawak.aawak_date);
-	let jawakDate = new Date(frm.doc.jawak_date);
-
-	// Calculate actual storage days by subtracting dates (not elapsed time)
-	// This gives us: Dec 18 - Dec 1 = 17 days (not 18)
-	// Strip time portion to get pure date difference
-	let aawakDay = new Date(aawakDate.getFullYear(), aawakDate.getMonth(), aawakDate.getDate());
-	let jawakDay = new Date(jawakDate.getFullYear(), jawakDate.getMonth(), jawakDate.getDate());
-	let actualDays = Math.round((jawakDay - aawakDay) / (1000 * 60 * 60 * 24));
-
-	// Fetch App Settings for rent calculation
+	// Fetch settings ONCE to avoid N+1 queries and race conditions
 	frappe.call({
 		method: 'frappe.client.get',
 		args: {
@@ -509,53 +474,77 @@ function calculateRowAmount(frm, cdt, cdn) {
 		callback: function (r) {
 			if (r.message) {
 				let settings = r.message;
-				let minDays = parseInt(settings.minimum_chargeable_days) || 15;
-				let extraDays = parseInt(settings.extra_days_after_minimum) || 2;
-				let daysPerMonth = parseInt(settings.days_per_month) || 30;
 
-				// Calculate chargeable days based on rules
-				let chargeableDays;
-				if (actualDays <= minDays) {
-					// Charge minimum days
-					chargeableDays = minDays;
-				} else {
-					// Charge actual + extra
-					chargeableDays = actualDays + extraDays;
+				if (frm.doc.jawak_bag_details) {
+					// Iterate and calculate synchronously
+					frm.doc.jawak_bag_details.forEach(row => {
+						performRowCalculation(frm, 'Jawak Bag Detail', row.name, settings);
+					});
 				}
 
-				console.log('Chargeable days calculation:', {
-					actualDays,
-					minDays,
-					extraDays,
-					chargeableDays
-				});
+				// Refresh grid to show updates
+				frm.refresh_field('jawak_bag_details');
 
-				// Set total_days to chargeable days (for display)
-				frappe.model.set_value(cdt, cdn, 'total_days', chargeableDays);
+				// Now calculate parent totals immediately as rows are updated
+				calculateParentTotals(frm);
+			}
+		}
+	});
+}
 
-				// Calculate amount
-				if (row.release_bags && row.rate) {
-					// Convert monthly rate to daily rate
-					let dailyRate = row.rate / daysPerMonth;
-
-					// Calculate total: bags × daily_rate × chargeable_days
-					let totalAmount = row.release_bags * dailyRate * chargeableDays;
-					totalAmount = Math.round(totalAmount * 100) / 100; // Round to 2 decimal places
-
-					frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
-
-					console.log('Calculated amount:', {
-						bags: row.release_bags,
-						monthlyRate: row.rate,
-						daysPerMonth,
-						dailyRate,
-						chargeableDays,
-						totalAmount
-					});
+function calculateRowAmount(frm, cdt, cdn, updateParent = false) {
+	// Fetch settings for single row calculation
+	frappe.call({
+		method: 'frappe.client.get',
+		args: {
+			doctype: 'App Settings',
+			name: 'App Settings'
+		},
+		callback: function (r) {
+			if (r.message) {
+				performRowCalculation(frm, cdt, cdn, r.message);
+				if (updateParent) {
+					calculateParentTotals(frm);
 				}
 			}
 		}
 	});
+}
+
+function performRowCalculation(frm, cdt, cdn, settings) {
+	let row = locals[cdt][cdn];
+	if (!frm.doc.jawak_date || !currentAawak || !currentAawak.aawak_date) return;
+
+	let aawakDate = new Date(currentAawak.aawak_date);
+	let jawakDate = new Date(frm.doc.jawak_date);
+
+	let aawakDay = new Date(aawakDate.getFullYear(), aawakDate.getMonth(), aawakDate.getDate());
+	let jawakDay = new Date(jawakDate.getFullYear(), jawakDate.getMonth(), jawakDate.getDate());
+	let actualDays = Math.round((jawakDay - aawakDay) / (1000 * 60 * 60 * 24));
+
+	let minDays = parseInt(settings.minimum_chargeable_days) || 15;
+	let extraDays = parseInt(settings.extra_days_after_minimum) || 2;
+	let daysPerMonth = parseInt(settings.days_per_month) || 30;
+
+	// Calculate chargeable days
+	let chargeableDays;
+	if (actualDays <= minDays) {
+		chargeableDays = minDays;
+	} else {
+		chargeableDays = actualDays + extraDays;
+	}
+
+	// Update total days
+	frappe.model.set_value(cdt, cdn, 'total_days', chargeableDays);
+
+	// Calculate amount
+	if (row.release_bags && row.rate) {
+		let dailyRate = row.rate / daysPerMonth;
+		let totalAmount = row.release_bags * dailyRate * chargeableDays;
+		totalAmount = Math.round(totalAmount * 100) / 100;
+
+		frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
+	}
 }
 
 function calculateParentTotals(frm) {
