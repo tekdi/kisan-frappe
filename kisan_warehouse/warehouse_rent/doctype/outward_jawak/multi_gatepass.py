@@ -43,6 +43,7 @@ def generate_multi_gatepass(doc_ids):
             'doc': docs[0],  # First doc for backward compatibility
             'all_docs': docs,  # All documents for multi-record mode
             'is_multi': len(docs) > 1,
+            'jawak_date': docs[0].jawak_date,  # Single jawak_date (all records share same date)
             'frappe': frappe,
             'utils': frappe.utils,
             '_': _,
