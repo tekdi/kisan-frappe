@@ -154,6 +154,22 @@ frappe.ui.form.on('Jawak Bag Detail', {
 		calculateRowAmount(frm, cdt, cdn, true);
 	},
 
+	add_amount: function (frm, cdt, cdn) {
+		let row = locals[cdt][cdn];
+		console.log('add_amount changed to:', row.add_amount, 'for row:', row.name);
+
+		// Recalculate total_amount when add_amount changes
+		// Use base_total_amount + add_amount, rounded to nearest whole number
+		let baseAmount = row.base_total_amount || 0;
+		let addAmount = row.add_amount || 0;
+		let totalAmount = Math.round(baseAmount + addAmount);
+
+		frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
+
+		// Update parent totals
+		calculateParentTotals(frm);
+	},
+
 	jawak_bag_details_remove: function (frm) {
 		console.log('Bag detail row removed');
 		calculateParentTotals(frm);
@@ -537,11 +553,18 @@ function performRowCalculation(frm, cdt, cdn, settings) {
 	// Update total days
 	frappe.model.set_value(cdt, cdn, 'total_days', chargeableDays);
 
-	// Calculate amount
+	// Calculate base amount (before add_amount)
 	if (row.release_bags && row.rate) {
 		let dailyRate = row.rate / daysPerMonth;
-		let totalAmount = row.release_bags * dailyRate * chargeableDays;
-		totalAmount = Math.round(totalAmount * 100) / 100;
+		let baseAmount = row.release_bags * dailyRate * chargeableDays;
+		baseAmount = Math.round(baseAmount * 100) / 100; // Keep 2 decimal precision for base
+
+		// Store base amount for use when add_amount changes
+		frappe.model.set_value(cdt, cdn, 'base_total_amount', baseAmount);
+
+		// Calculate total_amount = base_total_amount + add_amount, rounded to nearest whole number
+		let addAmount = row.add_amount || 0;
+		let totalAmount = Math.round(baseAmount + addAmount);
 
 		frappe.model.set_value(cdt, cdn, 'total_amount', totalAmount);
 	}
